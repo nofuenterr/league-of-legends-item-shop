@@ -5,7 +5,6 @@ import './styles/reset.css'
 import './styles/modern-normalize.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import routes from './routes'
-import './test'
 
 const router = createBrowserRouter(routes)
 
