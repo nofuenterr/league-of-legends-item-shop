@@ -1,7 +1,7 @@
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import Footer from '../Footer/Footer'
-
+import itemsClass from "../../items";
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
@@ -19,7 +19,7 @@ const getRequestWithNativeFetch = async (
 }
 
 const useItems = () => {
-  const [items, setItems] = useState(null);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -37,12 +37,14 @@ const useItems = () => {
           `https://ddragon.leagueoflegends.com/cdn/${latest}/data/en_US/item.json`,
           controller.signal
         );
+        const noImageItems = ['3005', '3173', '3174', '3170', '4402', '4004', '4010']
         const completeItems = Object.entries(itemsData.data)
-          .filter(([_, item]) => (
+          .filter(([id, item]) => (
               (!item.into || item.into.length === 0) 
               && item.gold.purchasable 
               && item.plaintext
               && item.gold.total
+              && !noImageItems.includes(id)
             )
           )
           .map(([id,item]) => ({
@@ -54,7 +56,8 @@ const useItems = () => {
             tags: item.tags,
             image: `https://leagueofitems.com/images/items/256/${id}.webp`,
           }))
-        setItems(completeItems);
+        setData(true)
+        itemsClass.setItems(completeItems)
         console.log(completeItems)
         setError(null)
       } catch (err) {
@@ -63,28 +66,31 @@ const useItems = () => {
           return;
         }
         setError(err.message);
-        setItems(null);
+        setData(null)
+        itemsClass.setItems(null)
       } finally {
         setLoading(false);
       }
     };
 
-    fetchItems();
+    setTimeout(() => {
+      fetchItems();
+    }, 3000);
 
     return () => controller.abort();
   }, [])
 
-  return { items, error, loading }
+  return { data, error, loading }
 }
 
 function App() {
-  const { items, error, loading } = useItems()
+  const { data, error, loading } = useItems()
 
   return (
     <>
       <Header />
       <Main>
-        <Outlet />
+        <Outlet context={[data, error, loading]} />
       </Main>
       <Footer />
     </>
