@@ -1,7 +1,9 @@
-import itemsClass from "../../items";
-import { useNavigate, useParams, useOutletContext } from "react-router-dom"
+import { useState } from 'react';
+import itemsClass from '../../items';
+import { useNavigate, useParams, useOutletContext, Form } from 'react-router-dom'
 
 function SelectedItem() {
+  const [quantity, setQuantity] = useState(1)
   const [data, error, loading ] = useOutletContext()
   const params = useParams()
   const navigate = useNavigate()
@@ -13,7 +15,7 @@ function SelectedItem() {
     return (
       <>
         <div>
-          <button type="button" onClick={() => navigate(-1)}>Back</button>
+          <button type='button' onClick={() => navigate(-1)}>Back</button>
           <div>
             <img src={item.image} alt={item.name + ' image'} />
           </div>
@@ -21,6 +23,51 @@ function SelectedItem() {
           <p>{item.name}</p>
           <p>{item.description}</p>
           <p>{item.buyCost} Gold</p>
+          <Form method='post'>
+            <p>
+              <button 
+                type='button' 
+                onClick={() => {
+                  if (quantity > 1) setQuantity((qty) => qty - 1)
+                }}
+              >-</button>
+              <input
+                name='qty'
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) {
+                    setQuantity(value);
+                  }
+                }}
+                defaultValue={1}
+                value={quantity}
+                type='text'
+                inputMode='numeric'
+                pattern='[0-9]*'
+                />
+              <button 
+                type='button' 
+                onClick={() => setQuantity((qty) => qty + 1)}
+              >+</button>
+            </p>
+            <button 
+              type='submit' 
+              name='intent'
+              value='add'
+              /* onClick={() => setQuantity(1)} */
+            >
+              Add to cart
+            </button>
+
+            <button 
+              type='submit' 
+              name='intent'
+              value='buy'
+              /* onClick={() => setQuantity(1)} */
+            >
+              Buy it now
+            </button>
+          </Form>
         </div>
       </>
     )
