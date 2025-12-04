@@ -85,7 +85,7 @@ const useItems = () => {
 
 function App() {
   const { data, error, loading } = useItems()
-  const [query, setQuery] = useState()
+  const [query, setQuery] = useState('')
   const totalQty = useLoaderData()
   const navigate = useNavigate()
 
@@ -98,8 +98,9 @@ function App() {
             id='search'
             name='search'
             placeholder='Search item...'
+            value={query}
             onChange={(e) => {
-              setQuery(() => e.target.value)
+              setQuery(e.target.value)
             }}
             onClick={() => {
               navigate('/shop')
@@ -108,7 +109,7 @@ function App() {
         </Form>
       </Header>
       <Main>
-        <Outlet context={[data, error, loading, query]} />
+        <Outlet context={[data, error, loading, query, setQuery]} />
       </Main>
       <Footer />
     </>

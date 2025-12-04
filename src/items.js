@@ -1,20 +1,47 @@
+import splitPascalCase from "./util/split-pascal-case";
 import { matchSorter } from "match-sorter";
 
 class Items {
   constructor() {
     this.itemsList = null
+    this.tags = []
+    this.tagFilter = []
     this.cart = []
   }
 
 
   setItems(items) {
     this.itemsList = items
+    const tags = []
+    items.forEach(item => {
+      item.tags.forEach(t => {
+        const tag = splitPascalCase(t)
+        if (!tags.includes(tag)) tags.push(tag)
+      })
+    })
+    this.tags = tags
   }
 
   getItems(query) {
+    const tagFilter = this.getTagFilter()
     let items = [...this.itemsList]
     if (query) {
       items = matchSorter(items, query, { keys: ["name"] });
+    }
+    if (tagFilter.length > 0) {
+      items = items.filter(item => {
+        let matchedTags = 0
+        item.tags.forEach(t => {
+          const tag = splitPascalCase(t)
+          if (tagFilter.includes(tag)) {
+            matchedTags += 1
+          }
+        })
+        if (matchedTags === tagFilter.length) {
+          return true;
+        }
+        return false
+      })
     }
     console.log(items)
     return items
@@ -31,9 +58,23 @@ class Items {
     return item
   }
 
+  getTags() {
+    return [...this.tags]
+  }
+
+  setTagFilter(tag) {
+    const isTagOnFilter = this.tagFilter.find(t => t === tag)
+    isTagOnFilter
+      ? this.tagFilter = this.tagFilter.filter(t => t !== tag)
+      : this.tagFilter.push(tag)
+  }
+
+  getTagFilter() {
+    return [...this.tagFilter]
+  }
+
   addToCart(id, qty) {
     const index = this.cart.findIndex(cartItem => cartItem.item.id === id)
-    console.log(index)
     if (index >= 0) {
       this.cart[index].qty += qty
     } else {
