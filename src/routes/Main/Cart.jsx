@@ -1,7 +1,7 @@
 import { useLoaderData, Link, Form } from 'react-router-dom'
 
 function Cart() {
-  const cartItems = useLoaderData()
+  const [subtotal, totalQty, vat, total, cartItems] = useLoaderData()
 
   if (cartItems.length === 0) return <>No items in cart...</>
   return (
@@ -32,6 +32,24 @@ function Cart() {
           )
         })}
       </ul>
+      <div>
+        <h2>Order Summary</h2>
+        <h3>{total}</h3>
+        <p>
+          <span>Subtotal {totalQty} {totalQty > 1 ? 'items' : 'item'}</span>
+          <span>{subtotal} Gold</span>
+        </p>
+        <p>
+          <span>VAT (12%)</span>
+          <span>{vat} Gold</span>
+        </p>
+        <hr />
+        <p>
+          <span>Total</span>
+          <span>{total} Gold</span>
+        </p>
+        <button>Checkout</button>
+      </div>
     </>
   )
 }

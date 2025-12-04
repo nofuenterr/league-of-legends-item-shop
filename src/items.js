@@ -51,6 +51,19 @@ class Items {
     }, 0)
     return totalQty
   }
+
+  getOrderSummary() {
+    const cart = this.getCart()
+    let totalQty = 0
+    let subtotal = 0
+    cart.forEach(currCartItem => {
+      subtotal += (currCartItem.item.buyCost * currCartItem.qty)
+      totalQty += currCartItem.qty
+    })
+    const vat = subtotal * 0.12
+    const total = subtotal + vat
+    return [subtotal, totalQty, vat, total]
+  }
 }
 
 export default new Items()
