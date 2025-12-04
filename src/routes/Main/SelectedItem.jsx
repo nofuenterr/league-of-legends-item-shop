@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import itemsClass from '../../items';
+import splitPascalCase from '../../util/split-pascal-case';
 import { useNavigate, useParams, useOutletContext, Form } from 'react-router-dom'
+
 
 function SelectedItem() {
   const [quantity, setQuantity] = useState(1)
@@ -23,6 +25,15 @@ function SelectedItem() {
           <p>{item.name}</p>
           <p>{item.description}</p>
           <p>{item.buyCost} Gold</p>
+          <ul>
+            {item.tags.map(tag => {
+              return (
+                <li key={tag}>
+                  {splitPascalCase(tag)}
+                </li>
+              )
+            })}
+          </ul>
           <Form method='post'>
             <p>
               <button 

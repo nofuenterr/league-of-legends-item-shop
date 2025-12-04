@@ -45,7 +45,7 @@ Product data were retrieved from Data Dragon - Riot Developer Portal [(link to d
 ## Priority: High
 - [x] Increment, decrement, and input value on cart items.
 - [x] CTA to Shop on: Home and Cart (if not empty, then under Checkout button)
-- [] Item tags display
+- [x] Item tags display
 - [] Filter by: search, tags, gold (shop currency), Recommended, Favorites
 - [] Filter tags display (cancellable/removable)
 - [] Sort by: Alphabetical order (A-Z & Z-A), Gold (from highest or lowest), Recommended
