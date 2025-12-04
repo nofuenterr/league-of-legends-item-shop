@@ -39,6 +39,13 @@ class Items {
   getCart() {
     return [...this.cart]
   }
+
+  getTotalQuantity() {
+    const totalQty = this.cart.reduce((totalQty, currCartItem) => {
+      return totalQty += currCartItem.qty
+    }, 0)
+    return totalQty
+  }
 }
 
 export default new Items()

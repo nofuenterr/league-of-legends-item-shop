@@ -3,7 +3,7 @@ import Main from '../Main/Main'
 import Footer from '../Footer/Footer'
 import itemsClass from "../../items";
 import { useState, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLoaderData } from 'react-router-dom'
 
 const getRequestWithNativeFetch = async (
   url,
@@ -22,7 +22,7 @@ const useItems = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const controller = new AbortController();
 
@@ -85,10 +85,11 @@ const useItems = () => {
 
 function App() {
   const { data, error, loading } = useItems()
+  const totalQty = useLoaderData()
 
   return (
     <>
-      <Header />
+      <Header totalQty={totalQty} />
       <Main>
         <Outlet context={[data, error, loading]} />
       </Main>

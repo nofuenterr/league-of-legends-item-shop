@@ -1,4 +1,5 @@
 import App from './routes/App/App'
+import { loader as appLoader } from './routes/App/AppLoader'
 import Home from './routes/Main/Home';
 import Shop from './routes/Main/Shop';
 import SelectedItem from './routes/Main/SelectedItem';
@@ -17,6 +18,7 @@ const routes = createRoutesFromElements(
     path='/'
     element={<App />}
     errorElement={<ErrorPage />}
+    loader={appLoader}
   >
     <Route errorElement={<ErrorPage />}>
       <Route index={true} element={<Home />} />

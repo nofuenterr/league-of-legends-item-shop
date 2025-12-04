@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-function Header() {
+function Header({ totalQty }) {
 
   return (
     <header>
@@ -18,7 +18,7 @@ function Header() {
         />
         <ul>
           <li><NavLink to='/shop'>❤{/* temporary icon */}</NavLink></li>
-          <li><NavLink to='/cart'>🛒{/* temporary icon */}</NavLink></li>
+          <li><NavLink to='/cart'>🛒{/* temporary icon */}{totalQty}</NavLink></li>
         </ul>
       </nav>
     </header>
