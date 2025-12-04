@@ -50,7 +50,6 @@ function SelectedItem() {
                     setQuantity(value);
                   }
                 }}
-                defaultValue={1}
                 value={quantity}
                 type='text'
                 inputMode='numeric'
