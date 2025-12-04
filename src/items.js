@@ -36,6 +36,11 @@ class Items {
     console.log(this.cart)
   }
 
+  removeFromCart(id) {
+    this.cart = this.cart.filter(cartItem => cartItem.item.id !== id)
+    console.log(this.cart)
+  }
+
   getCart() {
     return [...this.cart]
   }

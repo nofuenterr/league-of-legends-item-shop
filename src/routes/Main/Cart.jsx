@@ -1,4 +1,4 @@
-import { useLoaderData, Link } from 'react-router-dom'
+import { useLoaderData, Link, Form } from 'react-router-dom'
 
 function Cart() {
   const cartItems = useLoaderData()
@@ -21,6 +21,13 @@ function Cart() {
               <p>{ci.item.buyCost} Gold</p>
               <p>Qty: {ci.qty}</p>
               <p>Total: {ci.qty * ci.item.buyCost} Gold</p>
+              <Form method='post'>
+                <button 
+                  type='submit'
+                  name='itemId'
+                  value={ci.item.id}
+                >🗑️</button>
+              </Form>
             </li>
           )
         })}
