@@ -1,3 +1,5 @@
+import { matchSorter } from "match-sorter";
+
 class Items {
   constructor() {
     this.itemsList = null
@@ -9,8 +11,13 @@ class Items {
     this.itemsList = items
   }
 
-  getItems() {
-    return [...this.itemsList]
+  getItems(query) {
+    let items = [...this.itemsList]
+    if (query) {
+      items = matchSorter(items, query, { keys: ["name"] });
+    }
+    console.log(items)
+    return items
   }
   
   getItem(id) {

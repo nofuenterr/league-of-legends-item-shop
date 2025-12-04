@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-function Header({ totalQty }) {
+function Header({ totalQty, children }) {
 
   return (
     <header>
@@ -10,12 +10,7 @@ function Header({ totalQty }) {
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/shop'>Shop</NavLink></li>
         </ul>
-        <input 
-          type='search' 
-          id='search'
-          name='search'
-          placeholder='Search item...'
-        />
+        {children}
         <ul>
           <li><NavLink to='/shop'>❤{/* temporary icon */}</NavLink></li>
           <li><NavLink to='/cart'>🛒{/* temporary icon */}{totalQty}</NavLink></li>

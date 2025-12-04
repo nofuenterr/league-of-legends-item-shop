@@ -3,7 +3,7 @@ import Main from '../Main/Main'
 import Footer from '../Footer/Footer'
 import itemsClass from "../../items";
 import { useState, useEffect } from 'react'
-import { Outlet, useLoaderData } from 'react-router-dom'
+import { Outlet, useLoaderData, Form, useNavigate } from 'react-router-dom'
 
 const getRequestWithNativeFetch = async (
   url,
@@ -85,13 +85,30 @@ const useItems = () => {
 
 function App() {
   const { data, error, loading } = useItems()
+  const [query, setQuery] = useState()
   const totalQty = useLoaderData()
+  const navigate = useNavigate()
 
   return (
     <>
-      <Header totalQty={totalQty} />
+      <Header totalQty={totalQty} >
+        <Form role='search'>
+          <input 
+            type='search' 
+            id='search'
+            name='search'
+            placeholder='Search item...'
+            onChange={(e) => {
+              setQuery(() => e.target.value)
+            }}
+            onClick={() => {
+              navigate('/shop')
+            }}
+          />
+        </Form>
+      </Header>
       <Main>
-        <Outlet context={[data, error, loading]} />
+        <Outlet context={[data, error, loading, query]} />
       </Main>
       <Footer />
     </>
