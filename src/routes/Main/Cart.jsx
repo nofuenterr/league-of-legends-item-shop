@@ -4,7 +4,12 @@ function Cart() {
   const [subtotal, totalQty, vat, total, cartItems] = useLoaderData()
   const submit = useSubmit()
 
-  if (cartItems.length === 0) return <>No items in cart...</>
+  if (cartItems.length === 0) return (
+    <>
+      Your cart is empty
+      <Link to={'/shop'}>Shop Now</Link>
+    </>
+  )
   return (
     <>
       <ul>
@@ -91,6 +96,7 @@ function Cart() {
           <span>{total} Gold</span>
         </p>
         <button>Checkout</button>
+        <Link to={'/shop'}>Continue Shopping</Link>
       </div>
     </>
   )
