@@ -2,10 +2,11 @@ import { Link } from "react-router-dom"
 
 function Home() {
   return (
-    <>
-      Currently at Home
+    <div>
+      <p>Welcome to Summoner's Shop</p>
+      <p>Insert description here...</p>
       <Link to={'/shop'}>Shop Now</Link>
-    </>
+    </div>
   )
 }
 

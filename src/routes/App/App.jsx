@@ -27,18 +27,25 @@ const useItems = () => {
     const controller = new AbortController();
 
     const fetchItems = async () => {
-      try {
+      const getLatest = async () => {
         const versions = await getRequestWithNativeFetch(
           'https://ddragon.leagueoflegends.com/api/versions.json',
           controller.signal
         );
-        const latest = versions[0]
-        const itemsData = await getRequestWithNativeFetch(
+        return versions[0]
+      }
+
+      const getItems = async (latest) => {
+        return await getRequestWithNativeFetch(
           `https://ddragon.leagueoflegends.com/cdn/${latest}/data/en_US/item.json`,
           controller.signal
         );
+      }
+
+      const getCompleteItems = (items) => {
         const noImageItems = ['3005', '3173', '3174', '3170', '4402', '4004', '4010']
-        const completeItems = Object.entries(itemsData.data)
+
+        return Object.entries(items.data)
           .filter(([id, item]) => (
               (!item.into || item.into.length === 0) 
               && item.gold.purchasable 
@@ -56,18 +63,23 @@ const useItems = () => {
             tags: item.tags,
             image: `https://leagueofitems.com/images/items/256/${id}.webp`,
           }))
-        setData(true)
+      }
+
+      try {
+        const latest = await getLatest()
+        const items = await getItems(latest)
+        const completeItems = getCompleteItems(items)
         itemsClass.setItems(completeItems)
-        console.log(completeItems)
+        setData(true)
         setError(null)
       } catch (err) {
         if (err.name === 'AbortError') {
           console.log('Aborted');
           return;
         }
-        setError(err.message);
-        setData(null)
         itemsClass.setItems(null)
+        setData(null)
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -109,7 +121,7 @@ function App() {
         </Form>
       </Header>
       <Main>
-        <Outlet context={[data, error, loading, query, setQuery]} />
+        <Outlet context={{data, error, loading, query, setQuery}} />
       </Main>
       <Footer />
     </>
