@@ -43,26 +43,26 @@ Product data were retrieved from Data Dragon - Riot Developer Portal [(link to d
 
 ### To-do
 ## Priority: High
-1. Increment, decrement, and input value on cart items.
-2. CTA to Shop on: Home and Cart (if not empty, then under Checkout button)
-3. Item tags display
-4. Filter by: search, tags, gold (shop currency), Recommended, Favorites
-5. Filter tags display (cancellable/removable)
-6. Sort by: Alphabetical order (A-Z & Z-A), Gold (from highest or lowest), Recommended
+- [x] Increment, decrement, and input value on cart items.
+- [] CTA to Shop on: Home and Cart (if not empty, then under Checkout button)
+- [] Item tags display
+- [] Filter by: search, tags, gold (shop currency), Recommended, Favorites
+- [] Filter tags display (cancellable/removable)
+- [] Sort by: Alphabetical order (A-Z & Z-A), Gold (from highest or lowest), Recommended
 ## Priority: Medium
-7. Layout by: Gallery, List
-8. Favorites feature
-9. Stocks feature (random)
-10. Discount feature
-11. Shipping feature
+- [] Layout by: Gallery, List
+- [] Favorites feature
+- [] Stocks feature (random)
+- [] Discount feature
+- [] Shipping feature
 ## Priority: Low
-12. Profile feature (gold, inventory, stats)
-13. Owned gold feature (profile)
-14. Inventory feature (checked out items) (profile)
-15. Selling feature
-16. Item stats display
-17. Total stats feature (profile)
-18. Farm gold feature
+- [] Profile feature (gold, inventory, stats)
+- [] Owned gold feature (profile)
+- [] Inventory feature (checked out items) (profile)
+- [] Selling feature
+- [] Item stats display
+- [] Total stats feature (profile)
+- [] Farm gold feature
 
 ---
 

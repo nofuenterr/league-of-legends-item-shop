@@ -1,7 +1,8 @@
-import { useLoaderData, Link, Form } from 'react-router-dom'
+import { useLoaderData, Link, Form, useSubmit } from 'react-router-dom'
 
 function Cart() {
   const [subtotal, totalQty, vat, total, cartItems] = useLoaderData()
+  const submit = useSubmit()
 
   if (cartItems.length === 0) return <>No items in cart...</>
   return (
@@ -19,7 +20,43 @@ function Cart() {
               <p>{ci.item.name}</p>
               <p>{ci.item.description}</p>
               <p>{ci.item.buyCost} Gold</p>
-              <p>Qty: {ci.qty}</p>
+              <Form method='post'>
+                <p>
+                  <button 
+                    type='submit'
+                    name='button'
+                    value='decrement'
+                  >-</button>
+                  <input
+                    name='qty'
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (/^\d*$/.test(value)) {
+                        submit(e.currentTarget.form)
+                      }
+                    }}
+                    value={ci.qty}
+                    type='text'
+                    inputMode='numeric'
+                    pattern='[0-9]*'
+                  />
+                  <input 
+                    type="hidden"
+                    name='itemId'
+                    value={ci.item.id}
+                  />
+                  <input 
+                    type="hidden"
+                    name='action'
+                    value='edit'
+                  />
+                  <button 
+                    type='submit'
+                    name='button'
+                    value='increment'
+                  >+</button>
+                </p>
+              </Form>
               <p>Total: {ci.qty * ci.item.buyCost} Gold</p>
               <Form method='post'>
                 <button 
@@ -27,6 +64,11 @@ function Cart() {
                   name='itemId'
                   value={ci.item.id}
                 >🗑️</button>
+                <input 
+                  type="hidden"
+                  name='action'
+                  value='delete'
+                />
               </Form>
             </li>
           )

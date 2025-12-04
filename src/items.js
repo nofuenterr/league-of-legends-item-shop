@@ -14,7 +14,7 @@ class Items {
   }
   
   getItem(id) {
-    const item = this.itemsList.find(item => id === item.id)
+    const item = this.itemsList.find(item => item.id === id)
     if (!item) {
       throw new Response('', {
         status: 404,
@@ -63,6 +63,23 @@ class Items {
     const vat = subtotal * 0.12
     const total = subtotal + vat
     return [subtotal, totalQty, vat, total]
+  }
+
+  getCartItemIndex(id) {
+    const index = this.cart.findIndex(cartItem => cartItem.item.id === id)
+    if (index < 0) {
+      throw new Response('', {
+        status: 404,
+        statusText: 'Not Found',
+      });
+    }
+    return index
+  }
+
+  setCartItem(id, qty) {
+    const index = this.getCartItemIndex(id)
+    this.cart[index].qty = qty
+    console.log(this.cart[index])
   }
 }
 
