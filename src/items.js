@@ -1,6 +1,7 @@
 import splitPascalCase from "./util/split-pascal-case";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
+import addDiscount from "./util/add-discount";
 
 class Items {
   constructor() {
@@ -14,7 +15,7 @@ class Items {
   }
 
   setItems(items) {
-    this.itemsList = items
+    this.itemsList = addDiscount(items)
     console.log(`[App] Added ${items.length} items`)
     this.setTags(items)
   }
@@ -218,8 +219,9 @@ class Items {
       subtotal += (currCartItem.item.buyCost * currCartItem.qty)
       totalQty += currCartItem.qty
     })
-    const vat = subtotal * 0.12
-    const total = subtotal + vat
+    const vat = parseFloat((subtotal * 0.12).toFixed(2))
+    const total = parseFloat((subtotal + vat).toFixed(2))
+    subtotal = parseFloat(subtotal.toFixed(2))
     console.log(`[Order Summary] Total: ${total}`)
     return {subtotal, totalQty, vat, total}
   }

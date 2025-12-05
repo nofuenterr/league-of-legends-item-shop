@@ -50,7 +50,9 @@ function Info({ item }) {
       <p>ID: {item.id}</p>
       <p>{item.name}</p>
       <p>{item.description}</p>
-      <p>{item.buyCost} Gold</p>
+      {item.discountPercent && <p>{item.discountPercent}% Off</p>}
+      {item.oldPrice && <p style={{textDecoration: 'line-through'}}>Old Price: {item.oldPrice} Gold</p>}
+      <p>Price: {item.buyCost} Gold</p>
     </div>
   )
 }
