@@ -43,34 +43,34 @@ In development...
 
 ### To-do
 ## Priority: High
-[x] Increment, decrement, and input value on cart items.
-[x] CTA to Shop on: Home and Cart (if not empty, then under Checkout button)
-[x] Item tags display
-Filter by: 
-- [x] search
-- [x] tags
-- [x] gold (shop currency)
-- [ ] favorites
-- [ ] recommended
-[x] Filter tags display (cancellable/removable)
-Sort by: <!-- npm install sort-by return contacts.sort(sortBy("last", "createdAt")) -->
-- [x] alphabetical order (A-Z & Z-A)
-- [x] gold (from highest or lowest)
-- [ ] recommended
+- [x] Increment, decrement, and input value on cart items.
+- [x] CTA to Shop on: Home and Cart (if not empty, then under Checkout button)
+- [x] Item tags display
+- Filter by: 
+  - [x] search
+  - [x] tags
+  - [x] gold (shop currency)
+  - [ ] favorites
+  - [ ] recommended
+- [x] Filter tags display (cancellable/removable)
+- Sort by:
+  - [x] alphabetical order (A-Z & Z-A)
+  - [x] gold (from highest or lowest)
+  - [ ] recommended
 ## Priority: Medium
-[ ] Layout by: Gallery, List
-[ ] Favorites feature
-[x] Stocks feature (random)
-[x] Discount feature
-[ ] Shipping feature
+- [ ] Layout by: Gallery, List
+- [ ] Favorites feature
+- [x] Stocks feature (random)
+- [x] Discount feature
+- [ ] Shipping feature
 ## Priority: Low
-[ ] Profile feature (gold, inventory, stats)
-[ ] Owned gold feature (profile)
-[ ] Inventory feature (checked out items) (profile)
-[ ] Selling feature
-[ ] Item stats display
-[ ] Total stats feature (profile)
-[ ] Farm gold feature
+- [ ] Profile feature (gold, inventory, stats)
+- [ ] Owned gold feature (profile)
+- [ ] Inventory feature (checked out items) (profile)
+- [ ] Selling feature
+- [ ] Item stats display
+- [ ] Total stats feature (profile)
+- [ ] Farm gold feature
 
 ---
 
