@@ -3,15 +3,18 @@ import { redirect } from 'react-router-dom';
 
 export async function action({ request, params }) {
   const formData = await request.formData()
-  const quantity = +formData.get('qty')
-  const intent = formData.get('intent');
+  const quantity = parseInt(formData.get('qty'))
+  const addToCart = formData.get('addToCart');
 
-  if (intent === 'add') {
-    return itemClass.addToCart(params.itemId, quantity)
-  }
-
-  if (intent === 'buy') {
-    itemClass.addToCart(params.itemId, quantity)
-    return redirect('/cart');
+  if (addToCart) {
+    const available = formData.get('available');
+    const cartQty = formData.get('cartQty');
+    if (available === 'true') {
+      itemClass.addToCart(params.itemId, quantity)
+      const buy = formData.get('buy');
+      if (buy) return redirect('/cart');
+    } else {
+      alert(`You already have ${cartQty} quantity in cart. Unable to add selected quantity to cart as it would exceed your purchase limit.`)
+    }
   }
 }

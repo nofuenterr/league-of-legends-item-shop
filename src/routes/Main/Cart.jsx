@@ -1,3 +1,4 @@
+/* import { useState } from 'react' */
 import { useLoaderData, Link, Form, useSubmit } from 'react-router-dom'
 
 function Cart() {
@@ -26,29 +27,31 @@ function EmptyCart() {
 function CartItems({ cartItems }) {
   return (
     <ul>
-      {cartItems.map(ci => {
+      {cartItems.map(item => {
         return (
-          <CartItem ci={ci} key={ci.item.id} />
+          <CartItem item={item} key={item.id} />
         )
       })}
     </ul>
   )
 }
 
-function CartItem({ ci }) {
+function CartItem({ item }) {
   const submit = useSubmit()
 
   return (
     <li>
-      <Link to={`/shop/${ci.item.id}`}>
+      {!item.stock && <p>Sold Out</p>}
+      <Link to={`/shop/${item.id}`}>
         <div>
-          <img src={ci.item.image} alt={ci.item.name + ' image'} />
+          <img src={item.image} alt={item.name + ' image'} />
         </div>
       </Link>
-      <p>ID: {ci.item.id}</p>
-      <p>{ci.item.name}</p>
-      <p>{ci.item.description}</p>
-      <p>{ci.item.buyCost} Gold</p>
+      <p>ID: {item.id}</p>
+      <p>{item.name}</p>
+      <p>{item.description}</p>
+      <p>{item.buyCost} Gold</p>
+      <p>Stock: {item.stock}</p>
       <Form method='post'>
         <p>
           <button 
@@ -64,15 +67,20 @@ function CartItem({ ci }) {
                 submit(e.currentTarget.form)
               }
             }}
-            value={ci.qty}
+            value={item.qty}
             type='text'
             inputMode='numeric'
             pattern='[0-9]*'
           />
           <input 
             type="hidden"
+            name='stock'
+            value={item.stock}
+          />
+          <input 
+            type="hidden"
             name='itemId'
-            value={ci.item.id}
+            value={item.id}
           />
           <input 
             type="hidden"
@@ -86,12 +94,12 @@ function CartItem({ ci }) {
           >+</button>
         </p>
       </Form>
-      <p>Total: {ci.qty * ci.item.buyCost} Gold</p>
+      <p>Total: {item.qty * item.buyCost} Gold</p>
       <Form method='post'>
         <button 
           type='submit'
           name='itemId'
-          value={ci.item.id}
+          value={item.id}
         >🗑️</button>
         <input 
           type="hidden"

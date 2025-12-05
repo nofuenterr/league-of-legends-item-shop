@@ -1,7 +1,7 @@
 import splitPascalCase from "./util/split-pascal-case";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
-import addDiscount from "./util/add-discount";
+import addDiscountAndStock from "./util/add-discount-and-stock";
 
 class Items {
   constructor() {
@@ -14,8 +14,10 @@ class Items {
     this.cart = []
   }
 
+  /* Items */
+
   setItems(items) {
-    this.itemsList = addDiscount(items)
+    this.itemsList = addDiscountAndStock(items)
     console.log(`[App] Added ${items.length} items`)
     this.setTags(items)
   }
@@ -35,6 +37,19 @@ class Items {
     console.log(`[Shop] Retrieved ${items.length} items`)
     return items
   }
+
+  getItem(id) {
+    const item = this.itemsList.find(item => item.id === id)
+    if (!item) {
+      throw new Response('', {
+        status: 404,
+        statusText: 'Not Found',
+      });
+    }
+    return item
+  }
+
+  /* Filter and Sort Systems */
 
   sortItems(items, sort) {
     switch(sort) {
@@ -97,16 +112,7 @@ class Items {
     })
   }
   
-  getItem(id) {
-    const item = this.itemsList.find(item => item.id === id)
-    if (!item) {
-      throw new Response('', {
-        status: 404,
-        statusText: 'Not Found',
-      });
-    }
-    return item
-  }
+  /* Filter and Sort */
 
   setSort(sort = 'default') {
     this.sort = sort
@@ -173,20 +179,22 @@ class Items {
     return [...this.priceFilter]
   }
 
+  /* Cart */
+
   addToCart(id, qty) {
-    const index = this.cart.findIndex(cartItem => cartItem.item.id === id)
-    const isItemInCart = index >= 0
+    const item = this.getItem(id)
+    const isItemInCart = item.qty > 0
+
     if (isItemInCart) {
-      const itemName = this.cart[index].item.name
-      const prevQty = this.cart[index].qty
-      this.cart[index].qty += qty
-      const newQty = this.cart[index].qty
+      const prevQty = item.qty
+      item.qty += qty
+      const newQty = item.qty
       console.log(
-        `[Cart] Updated ${itemName}: ${prevQty} → ${newQty} (added ${qty}x)`
+        `[Cart] Updated ${item.name}: ${prevQty} → ${newQty} (added ${qty}x)`
       )
     } else {
-      const item = this.getItem(id)
-      this.cart.push({ item, qty })
+      item.qty = qty
+      this.cart.push(item)
       console.log(
         `[Cart] Added ${item.name}: ${qty}`
       )
@@ -194,8 +202,9 @@ class Items {
   }
 
   removeFromCart(id) {
-    this.cart = this.cart.filter(cartItem => cartItem.item.id !== id)
+    this.cart = this.cart.filter(item => item.id !== id)
     const item = this.getItem(id)
+    item.qty = 0
     console.log(
       `[Cart] Removed ${item.name}`
     )
@@ -206,8 +215,8 @@ class Items {
   }
 
   getTotalQuantity() {
-    return this.cart.reduce((totalQty, currCartItem) => {
-      return totalQty += currCartItem.qty
+    return this.cart.reduce((totalQty, item) => {
+      return totalQty += item.qty
     }, 0)
   }
 
@@ -215,9 +224,9 @@ class Items {
     const cart = this.getCart()
     let totalQty = 0
     let subtotal = 0
-    cart.forEach(currCartItem => {
-      subtotal += (currCartItem.item.buyCost * currCartItem.qty)
-      totalQty += currCartItem.qty
+    cart.forEach(item => {
+      subtotal += (item.buyCost * item.qty)
+      totalQty += item.qty
     })
     const vat = parseFloat((subtotal * 0.12).toFixed(2))
     const total = parseFloat((subtotal + vat).toFixed(2))
@@ -226,28 +235,27 @@ class Items {
     return {subtotal, totalQty, vat, total}
   }
 
-  getCartItemIndex(id) {
-    const index = this.cart.findIndex(cartItem => cartItem.item.id === id)
-    const isItemInCart = index >= 0
+  getCartItem(id) {
+    const item = this.cart.find(item => item.id === id)
+    const isItemInCart = item
     if (!isItemInCart) {
       throw new Response('', {
         status: 404,
         statusText: 'Not Found',
       });
     }
-    return index
+    return item
   }
 
-  setCartItem(id, qty) {
-    const index = this.getCartItemIndex(id)
-    const itemName = this.cart[index].item.name
-    const prevQty = this.cart[index].qty
-    this.cart[index].qty = qty
-    const newQty = this.cart[index].qty
+  setCartItem(id, qty = 1) {
+    const item = this.getCartItem(id)
+    const prevQty = item.qty
+    item.qty = qty
+    const newQty = item.qty
     const qtyDifference = Math.abs(newQty - prevQty)
     const operation = newQty > prevQty ? 'added' : 'subtracted'
     console.log(
-      `[Cart] Updated ${itemName}: ${prevQty} → ${newQty} (${operation} ${qtyDifference}x)`
+      `[Cart] Updated ${item.name}: ${prevQty} → ${newQty} (${operation} ${qtyDifference}x)`
     )
   }
 }

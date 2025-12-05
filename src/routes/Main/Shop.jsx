@@ -224,6 +224,7 @@ function Item({ item }) {
   return (
     <li>
       <Link to={`/shop/${item.id}`}>
+        {!item.stock && <p>Sold Out</p>}
         <div>
           <img src={item.image} alt={item.name + ' image'} />
         </div>
@@ -233,6 +234,7 @@ function Item({ item }) {
         {item.discountPercent && <p>{item.discountPercent}% Off</p>}
         {item.oldPrice && <p style={{textDecoration: 'line-through'}}>Old Price: {item.oldPrice} Gold</p>}
         <p>Price: {item.buyCost} Gold</p>
+        <p>Stock: {item.stock}</p>
       </Link>
     </li>
   )
