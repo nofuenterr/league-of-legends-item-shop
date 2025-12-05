@@ -5,7 +5,9 @@ class Items {
   constructor() {
     this.itemsList = null
     this.tags = []
+    this.queryFilter = ''
     this.tagFilter = []
+    this.priceFilter = [null, null]
     this.cart = []
   }
 
@@ -15,11 +17,16 @@ class Items {
     this.setTags(items)
   }
 
-  getItems(query) {
+  getItems() {
+    const query = this.getQuery()
     const tagFilter = this.getTagFilter()
+    const [min, max] = this.getPriceFilter()
     let items = [...this.itemsList]
+
     if (query) items = this.filterItemsByQuery(items, query)
     if (tagFilter.length > 0) items = this.filterItemsByTags(items, tagFilter)
+    if (min || max) items = this.filterItemsByPrice(items, min, max)
+      
     console.log(`[Shop] Retrieved ${items.length} items`)
     return items
   }
@@ -39,6 +46,29 @@ class Items {
       const doesItemSatisfyTagFilter = matchedTags === tagFilter.length
       if (doesItemSatisfyTagFilter) return true
       return false
+    })
+  }
+
+  filterItemsByPrice(items, min, max) {
+    return items.filter(item => {
+      let filtered = true
+      switch(true) {
+        case !!(min && max):
+          if (item.buyCost >= min && item.buyCost <= max) filtered = false
+          break;
+        case !!min:
+          if (item.buyCost >= min) filtered = false
+          break;
+        case !!max:
+          if (item.buyCost <= max) filtered = false
+          break;
+        default:
+          filtered = false
+      }
+      if (filtered) {
+        return false
+      }
+      return true
     })
   }
   
@@ -69,19 +99,45 @@ class Items {
     return [...this.tags]
   }
 
+  setQuery(query = '') {
+    this.queryFilter = query
+  }
+
+  getQuery() {
+    return this.queryFilter
+  }
+
   setTagFilter(tag) {
-    const isTagOnFilter = this.tagFilter.find(t => t === tag)
-    if (isTagOnFilter) {
-      this.tagFilter = this.tagFilter.filter(t => t !== tag)
-      console.log(`[Filter - Tag] Removed ${tag}`)
-    } else {
-      this.tagFilter.push(tag)
-      console.log(`[Filter - Tag] Added ${tag}`)
+    if (tag) {
+      const isTagOnFilter = this.tagFilter.find(t => t === tag)
+      if (isTagOnFilter) {
+        this.tagFilter = this.tagFilter.filter(t => t !== tag)
+        console.log(`[Filter - Tag] Removed ${tag}`)
+      } else {
+        this.tagFilter.push(tag)
+        console.log(`[Filter - Tag] Added ${tag}`)
+      }
     }
   }
 
   getTagFilter() {
     return [...this.tagFilter]
+  }
+
+  setPriceFilter(min, max) {
+    if (!min) min = null
+    if (!max) max = null
+    this.priceFilter = [min, max]
+    if (min && max) {
+      console.log(`[Filter - Price] Min: ${min} gold - Max: ${max} gold`)
+    } else {
+      if (min) console.log(`[Filter - Price] Min: ${min} gold`)
+      if (max) console.log(`[Filter - Price] Max: ${max} gold`)
+    }
+  }
+
+  getPriceFilter() {
+    return [...this.priceFilter]
   }
 
   addToCart(id, qty) {

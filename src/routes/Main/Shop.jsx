@@ -1,8 +1,8 @@
-import itemsClass from "../../items";
-import { Form, useOutletContext, useSubmit, Link } from 'react-router-dom';
+import itemClass from "../../items";
+import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
 
 function Shop() {
-  const {data, error, loading} = useOutletContext()
+  const { data, error, loading } = useOutletContext()
 
   if (error) return <>{error}</>
   if (loading) return <Loading />
@@ -27,13 +27,55 @@ function Loading() {
 function Filters() {
   return (
     <div>
+      <Price />
       <Tags />
     </div>
   )
 }
 
+function Price() {
+  const { minPrice, maxPrice } = useLoaderData()
+
+  return (
+    <div>
+      <p>Price</p>
+      <div>
+        <Form method="post">
+          <input
+            name='minPrice'
+            defaultValue={minPrice}
+            type='text'
+            inputMode='numeric'
+            pattern='[0-9]*'
+            placeholder="MIN"
+          />
+          <span> - </span>
+          <input
+            name='maxPrice'
+            defaultValue={maxPrice}
+            type='text'
+            inputMode='numeric'
+            pattern='[0-9]*'
+            placeholder="MAX"
+          />
+          <button 
+            type="submit"
+            name="priceFilter"
+            value={true}
+            onClick={() => {
+              if (maxPrice && minPrice > maxPrice) {
+                alert('Minimum price must be smaller than maximum price!')
+              }
+            }}
+          >Apply</button>
+        </Form>
+      </div>
+    </div>
+  )
+}
+
 function Tags() {
-  const tags = itemsClass.getTags()
+  const tags = itemClass.getTags()
 
   return (
     <div>
@@ -50,8 +92,8 @@ function Tags() {
 }
 
 function Tag({ tag }) {
+  const { tagFilter } = useLoaderData()
   const submit = useSubmit()
-  const tagFilter = itemsClass.getTagFilter()
 
   return (
     <li>
@@ -77,27 +119,38 @@ function Tag({ tag }) {
 }
 
 function Items() {
-  const {query, setQuery} = useOutletContext()
-  const items = itemsClass.getItems(query)
+  const { query } = useOutletContext()
+  const items = itemClass.getItems()
 
   return (
     <div>
-      <Info items={items} query={query} setQuery={setQuery} />
+      <Info items={items} query={query} />
       <ItemsList items={items} />
     </div>
   )
 }
 
-function Info({ items, query, setQuery }) {
+function Info({ items, query }) {
+  const { tagFilter } = useLoaderData()
   const submit = useSubmit()
-  const tagFilter = itemsClass.getTagFilter()
 
   return (
     <div>
       <p>Items ({items.length})</p>
       <div>
         {query 
-          ? <div><span>"{query}"</span><button onClick={() => setQuery('')}>x</button></div> 
+          ? (
+            <div>
+              <span>"{query}"</span>
+              <Form method="post">
+                <button 
+                  type="submit"
+                  name="removeQuery"
+                  value={true}
+                >x</button>
+              </Form>
+            </div>
+          ) 
           : null}
         {tagFilter.length > 0 
           ? tagFilter.map(tag => {
