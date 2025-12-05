@@ -1,4 +1,5 @@
 import itemClass from "../../items";
+import { useState } from "react";
 import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
 
 function Shop() {
@@ -75,18 +76,19 @@ function Price() {
 }
 
 function Tags() {
+  const [activeTags, setActiveTags] = useState(true) 
   const tags = itemClass.getTags()
 
   return (
     <div>
-      <p>Tags</p>
-      <ul>
+      <p onClick={() => setActiveTags(!activeTags)}>Tags</p>
+      {activeTags && <ul>
         {tags.map(tag => {
           return (
             <Tag key={tag} tag={tag} />
           )
         })}
-      </ul>
+      </ul>}
     </div>
   )
 }
