@@ -49,7 +49,6 @@ function Tags() {
   )
 }
 
-
 function Tag({ tag }) {
   const submit = useSubmit()
   const tagFilter = itemsClass.getTagFilter()
@@ -83,17 +82,56 @@ function Items() {
 
   return (
     <div>
-      <div>
-        <p>Items ({items.length})</p>
-        {query ? <p>"{query}"<span onClick={() => setQuery('')}>x</span></p> : null}
-        {query && items.length === 0 ? <p>No items match the current filters.</p> : null}
-      </div>
-      <ul>
-        {items.map(item => {
-          return <Item key={item.id} item={item} />
-        })}
-      </ul>
+      <Info items={items} query={query} setQuery={setQuery} />
+      <ItemsList items={items} />
     </div>
+  )
+}
+
+function Info({ items, query, setQuery }) {
+  const submit = useSubmit()
+  const tagFilter = itemsClass.getTagFilter()
+
+  return (
+    <div>
+      <p>Items ({items.length})</p>
+      <div>
+        {query 
+          ? <div><span>"{query}"</span><button onClick={() => setQuery('')}>x</button></div> 
+          : null}
+        {tagFilter.length > 0 
+          ? tagFilter.map(tag => {
+            return (
+              <div key={tag}>
+                <span>{tag}</span>
+                <Form method='post'>
+                  <button 
+                    name='tag'
+                    value={tag}
+                    onChange={(e) => {
+                      submit(e.currentTarget.form)
+                    }}
+                  >x</button>
+                </Form>
+              </div>
+            )
+          })
+          : null}
+      </div>
+      {query && items.length === 0 
+        ? <p>No items match the current filters.</p> 
+        : null}
+    </div>
+  )
+}
+
+function ItemsList({ items }) {
+  return (
+    <ul>
+      {items.map(item => {
+        return <Item key={item.id} item={item} />
+      })}
+    </ul>
   )
 }
 
