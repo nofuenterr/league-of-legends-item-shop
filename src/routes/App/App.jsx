@@ -110,7 +110,7 @@ function App() {
             id='search'
             name='search'
             placeholder='Search item...'
-            defaultValue={query}
+            value={query}
             onChange={(e) => {
               submit(e.currentTarget.form)
             }}
