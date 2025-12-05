@@ -1,7 +1,7 @@
 ## The Odin Project
 
 # Summoner's Shop
-[In development...]
+In development...
 
 An E-commerce website inspired by Riot Game's League of Legends. The products are based on the game's in-game items.
 
@@ -19,16 +19,16 @@ An E-commerce website inspired by Riot Game's League of Legends. The products ar
 ### Getting Started
 In order to setup and work on this project on your own, you will need to:
 
-Clone this project:
+Clone this project:<br>
 `git clone https://github.com/nofuenterr/league-of-legends-item-shop.git`
 
-Once you have cloned this project, you can install the required dependencies by using:
+Once you have cloned this project, you can install the required dependencies by using:<br>
 `npm install`
 
-A live demo of the project can be started by using:
+A live demo of the project can be started by using:<br>
 `npm run preview`
 
-Distribution files can be produced using:
+Distribution files can be produced using:<br>
 `npm run build`
 
 ### Credits/Acknowledgments
@@ -39,7 +39,7 @@ The product images used are from [League of Items](https://leagueofitems.com/).
 Product data were retrieved from Data Dragon - Riot Developer Portal [(link to docs)](https://developer.riotgames.com/docs/lol).
 
 ### Display
-[In development...]
+In development...
 
 ### To-do
 ## Priority: High
