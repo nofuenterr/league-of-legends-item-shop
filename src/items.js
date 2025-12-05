@@ -1,10 +1,12 @@
 import splitPascalCase from "./util/split-pascal-case";
 import { matchSorter } from "match-sorter";
+import sortBy from "sort-by";
 
 class Items {
   constructor() {
     this.itemsList = null
     this.tags = []
+    this.sort = 'default'
     this.queryFilter = ''
     this.tagFilter = []
     this.priceFilter = [null, null]
@@ -18,17 +20,39 @@ class Items {
   }
 
   getItems() {
+    const sort = this.getSort()
     const query = this.getQuery()
     const tagFilter = this.getTagFilter()
     const [min, max] = this.getPriceFilter()
     let items = [...this.itemsList]
 
+    items = this.sortItems(items, sort)
     if (query) items = this.filterItemsByQuery(items, query)
     if (tagFilter.length > 0) items = this.filterItemsByTags(items, tagFilter)
     if (min || max) items = this.filterItemsByPrice(items, min, max)
-      
+
     console.log(`[Shop] Retrieved ${items.length} items`)
     return items
+  }
+
+  sortItems(items, sort) {
+    switch(sort) {
+      case 'a-z':
+        console.log(`[Sort] Alphabetically: A-Z`)
+        return items.sort(sortBy("name", "id"))
+      case 'z-a':
+        console.log(`[Sort] Alphabetically: Z-A`)
+        return items.sort(sortBy("name", "id")).reverse()
+      case 'low-high':
+        console.log(`[Sort] Price: Low to High`)
+        return items.sort(sortBy("buyCost", "id"))
+      case 'high-low':
+        console.log(`[Sort] Price: High to Low`)
+        return items.sort(sortBy("buyCost", "id")).reverse()
+      default:
+        console.log(`[Sort] Default`)
+        return items
+    }
   }
 
   filterItemsByQuery(items, query) {
@@ -81,6 +105,14 @@ class Items {
       });
     }
     return item
+  }
+
+  setSort(sort = 'default') {
+    this.sort = sort
+  }
+
+  getSort() {
+    return this.sort
   }
 
   setTags(items) {

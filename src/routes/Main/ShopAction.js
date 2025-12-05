@@ -2,10 +2,12 @@ import itemClass from '../../items';
 
 export async function action({ request }) {
   const formData = await request.formData()
+  const sort = formData.get('sort')
   const removeQuery = formData.get('removeQuery')
   const tag = formData.get('tag')
   const priceFilter = formData.get('priceFilter')
-  
+
+  if (sort) itemClass.setSort(sort)
   if (removeQuery) itemClass.setQuery('')
   if (tag) itemClass.setTagFilter(tag)
   if (priceFilter) {

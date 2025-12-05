@@ -136,44 +136,74 @@ function Info({ items, query }) {
 
   return (
     <div>
-      <p>Items ({items.length})</p>
       <div>
-        {query 
-          ? (
-            <div>
-              <span>"{query}"</span>
-              <Form method="post">
-                <button 
-                  type="submit"
-                  name="removeQuery"
-                  value={true}
-                >x</button>
-              </Form>
-            </div>
-          ) 
-          : null}
-        {tagFilter.length > 0 
-          ? tagFilter.map(tag => {
-            return (
-              <div key={tag}>
-                <span>{tag}</span>
-                <Form method='post'>
+        <p>Items ({items.length})</p>
+        <div>
+          {query 
+            ? (
+              <div>
+                <span>"{query}"</span>
+                <Form method="post">
                   <button 
-                    name='tag'
-                    value={tag}
-                    onChange={(e) => {
-                      submit(e.currentTarget.form)
-                    }}
+                    type="submit"
+                    name="removeQuery"
+                    value={true}
                   >x</button>
                 </Form>
               </div>
-            )
-          })
+            ) 
+            : null}
+          {tagFilter.length > 0 
+            ? tagFilter.map(tag => {
+              return (
+                <div key={tag}>
+                  <span>{tag}</span>
+                  <Form method='post'>
+                    <button 
+                      name='tag'
+                      value={tag}
+                      onChange={(e) => {
+                        submit(e.currentTarget.form)
+                      }}
+                    >x</button>
+                  </Form>
+                </div>
+              )
+            })
+            : null}
+        </div>
+        {query && items.length === 0 
+          ? <p>No items match the current filters.</p> 
           : null}
       </div>
-      {query && items.length === 0 
-        ? <p>No items match the current filters.</p> 
-        : null}
+      <Sort />
+    </div>
+  )
+}
+
+function Sort() {
+  const { sort } = useLoaderData()
+  const submit = useSubmit()
+
+  return (
+    <div>
+      <Form method="post">
+        <label>
+          Sort by: 
+          <select
+            defaultValue={sort}
+            name="sort"
+            id="sort"
+            onChange={(e) => submit(e.currentTarget.form)}
+          >
+            <option value="default">Default</option>
+            <option value="a-z">Alphabetically: A-Z</option>
+            <option value="z-a">Alphabetically: Z-A</option>
+            <option value="low-high">Price: Low to High </option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </label>
+      </Form>
     </div>
   )
 }
