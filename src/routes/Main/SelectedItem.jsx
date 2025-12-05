@@ -3,10 +3,8 @@ import itemsClass from '../../items';
 import splitPascalCase from '../../util/split-pascal-case';
 import { useNavigate, useParams, useOutletContext, Form } from 'react-router-dom'
 
-
 function SelectedItem() {
-  const [data, error, loading ] = useOutletContext()
-  
+  const {data, error, loading} = useOutletContext()
   const navigate = useNavigate()
 
   if (error) return <>{error}</>
