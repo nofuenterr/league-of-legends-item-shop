@@ -26,6 +26,7 @@ function App() {
             onClick={() => {
               navigate('/shop')
             }}
+            aria-label='search items'
           />
         </Form>
       </Header>

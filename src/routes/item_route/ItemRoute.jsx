@@ -13,7 +13,7 @@ function ItemRoute() {
   if (data) {
     return (
       <div>
-        <button type='button' onClick={() => navigate(-1)}>Back</button>
+        <button aria-label='back' type='button' onClick={() => navigate(-1)}>Back</button>
         <Item />
       </div>
     )
@@ -40,7 +40,7 @@ function Item() {
 function Image({ image, name }) {
   return (
     <div>
-      <img src={image} alt={name + ' image'} />
+      <img src={image} alt={name + ' image'} title={name} />
     </div>
   )
 }
@@ -90,6 +90,7 @@ function Input({ stock, cartQty }) {
               setQtyInput(1)
             }
           }}
+          aria-label='decrement'
         >-</button>
         <input
           type="hidden"
@@ -119,6 +120,7 @@ function Input({ stock, cartQty }) {
           onClick={() => {
             setQtyInput((q) => q + 1)
           }}
+          aria-label='increment'
         >+</button>
       </p>
       {!available 
@@ -138,6 +140,7 @@ function CallToActions() {
       />
       <button 
         type='submit' 
+        aria-label='add to cart'
         /* onClick={() => setQuantity(1)} */
       >
         Add to cart
@@ -146,6 +149,7 @@ function CallToActions() {
         type='submit' 
         name='buy'
         value={true}
+        aria-label='buy it now'
       >
         Buy it now
       </button>

@@ -18,7 +18,7 @@ function EmptyCart() {
   return (
     <div>
       Your cart is empty
-      <Link to={'/shop'}>Shop Now</Link>
+      <Link to={'/shop'} aria-label='shop now'>Shop Now</Link>
     </div>
   )
 }
@@ -39,7 +39,7 @@ function CartItem({ item }) {
   const submit = useSubmit()
 
   return (
-    <li>
+    <li title={item.name + ': ' + item.qty * item.buyCost + ' total gold'}>
       {!item.stock && <p>Sold Out</p>}
       <Link to={`/shop/${item.id}`}>
         <div>
@@ -57,6 +57,7 @@ function CartItem({ item }) {
             type='submit'
             name='button'
             value='decrement'
+            aria-label='decrement'
           >-</button>
           <input
             name='qty'
@@ -90,6 +91,7 @@ function CartItem({ item }) {
             type='submit'
             name='button'
             value='increment'
+            aria-label='increment'
           >+</button>
         </p>
       </Form>
@@ -99,6 +101,7 @@ function CartItem({ item }) {
           type='submit'
           name='itemId'
           value={item.id}
+          aria-label='remove from cart'
         >🗑️</button>
         <input 
           type="hidden"
@@ -130,8 +133,8 @@ function OrderSummary({ orderSummary }) {
         <span>Total</span>
         <span>{total} Gold</span>
       </p>
-      <button>Checkout</button>
-      <Link to={'/shop'}>Continue Shopping</Link>
+      <button aria-label='checkout'>Checkout</button>
+      <Link to={'/shop'} aria-label='continue shopping'>Continue Shopping</Link>
     </div>
   )
 }

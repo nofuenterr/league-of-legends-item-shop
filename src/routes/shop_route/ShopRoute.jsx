@@ -43,6 +43,7 @@ function Price() {
             inputMode='numeric'
             pattern='[0-9]*'
             placeholder="MIN"
+            aria-label='min price'
           />
           <span> - </span>
           <input
@@ -52,6 +53,7 @@ function Price() {
             inputMode='numeric'
             pattern='[0-9]*'
             placeholder="MAX"
+            aria-label='max price'
           />
           <button 
             type="submit"
@@ -62,6 +64,7 @@ function Price() {
                 alert('Minimum price must be smaller than maximum price!')
               }
             }}
+            aria-label='apply price filter'
           >Apply</button>
         </Form>
       </div>
@@ -75,7 +78,7 @@ function Tags() {
 
   return (
     <div>
-      <p onClick={() => setActiveTags(!activeTags)}>Tags</p>
+      <p onClick={() => setActiveTags(!activeTags)} aria-expanded={activeTags}>Tags</p>
       {activeTags && <ul>
         {tagsList.map(tag => {
           return (
@@ -133,7 +136,7 @@ function Info({ items, query }) {
   return (
     <div>
       <div>
-        <p>Items ({items.length})</p>
+        <p aria-live='polite' aria-label={items.length + ' items'}>Items ({items.length})</p>
         <div>
           {query 
             ? (
@@ -216,7 +219,7 @@ function ItemsList({ items }) {
 
 function Item({ item }) {
   return (
-    <li>
+    <li title={item.name + ': ' + item.buyCost + ' gold'}>
       <Link to={`/shop/${item.id}`}>
         {!item.stock && <p>Sold Out</p>}
         <div>

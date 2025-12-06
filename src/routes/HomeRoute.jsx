@@ -5,7 +5,7 @@ function Home() {
     <div>
       <p>Welcome to Summoner's Shop</p>
       <p>Insert description here...</p>
-      <Link to={'/shop'}>Shop Now</Link>
+      <Link to={'/shop'} aria-label="shop now">Shop Now</Link>
     </div>
   )
 }
