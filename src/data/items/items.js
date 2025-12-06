@@ -21,16 +21,16 @@ class Items {
   }
 
   getItems() {
-    const sortBy = sort.getSort()
     const query = filter.getQuery()
     const tags = filter.getTags()
     const [min, max] = filter.getPrice()
+    const sortBy = sort.getSort()
     let items = [...this.itemsList]
 
-    items = sortItems(items, sortBy)
     if (query) items = filterItemsByQuery(items, query)
     if (tags.length > 0) items = filterItemsByTags(items, tags)
     if (min || max) items = filterItemsByPrice(items, min, max)
+    items = sortItems(items, sortBy)
 
     console.log(`[Shop] Retrieved ${items.length} items`)
     return items
