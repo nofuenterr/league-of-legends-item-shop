@@ -37,7 +37,7 @@ function App() {
     show: { 
       opacity: 1,
       visibility: 'visible',
-      transition: { duration: 0.3 },
+      transition: { duration: 0.3, timingFunction: 'ease-out' },
     },
     hide: { 
       opacity: 0,

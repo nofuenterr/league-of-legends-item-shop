@@ -1,9 +1,11 @@
 .searchWrapper {
-  --expand-search-width: var(--size-scale-250);
+  --expand-search-width: var(--size-scale-300);
   --remove-search-width: var(--size-scale-375);
   background-color: var(--color-background-search-dark);
   color: var(--color-text-search-on-dark);
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .searchInput {
@@ -13,6 +15,7 @@
   padding-inline-start: var(--expand-search-width);
   padding-inline-end: var(--remove-search-width);
   border-radius: 16px;
+  border: none;
 }
 
 .expandSearch {
@@ -25,6 +28,7 @@
   cursor: pointer;
   display: grid;
   place-content: center;
+  border: none;
 }
 
 .removeSearch {
@@ -38,4 +42,5 @@
   cursor: pointer;
   display: grid;
   place-content: center;
+  border: none;
 }
