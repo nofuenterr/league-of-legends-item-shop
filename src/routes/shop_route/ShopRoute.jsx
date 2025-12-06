@@ -1,8 +1,10 @@
-import itemClass from "../../items";
-import { useState } from "react";
+import Loading from '../../components/Loading';
+import items from '../../data/items/items';
+import tags from '../../data/items/tags';
+import { useState } from 'react';
 import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
 
-function Shop() {
+function ShopRoute() {
   const { data, error, loading } = useOutletContext()
 
   if (error) return <>{error}</>
@@ -15,14 +17,6 @@ function Shop() {
       </div>
     )
   }
-}
-
-function Loading() {
-  return (
-    <div>
-      <p>Loading items...</p>
-    </div>
-  )
 }
 
 function Filters() {
@@ -77,13 +71,13 @@ function Price() {
 
 function Tags() {
   const [activeTags, setActiveTags] = useState(true) 
-  const tags = itemClass.getTags()
+  const tagsList = tags.getTags()
 
   return (
     <div>
       <p onClick={() => setActiveTags(!activeTags)}>Tags</p>
       {activeTags && <ul>
-        {tags.map(tag => {
+        {tagsList.map(tag => {
           return (
             <Tag key={tag} tag={tag} />
           )
@@ -122,12 +116,12 @@ function Tag({ tag }) {
 
 function Items() {
   const { query } = useOutletContext()
-  const items = itemClass.getItems()
+  const itemsList = items.getItems()
 
   return (
     <div>
-      <Info items={items} query={query} />
-      <ItemsList items={items} />
+      <Info items={itemsList} query={query} />
+      <ItemsList items={itemsList} />
     </div>
   )
 }
@@ -184,7 +178,7 @@ function Info({ items, query }) {
 }
 
 function Sort() {
-  const { sort } = useLoaderData()
+  const { sortBy } = useLoaderData()
   const submit = useSubmit()
 
   return (
@@ -193,9 +187,9 @@ function Sort() {
         <label>
           Sort by: 
           <select
-            defaultValue={sort}
-            name="sort"
-            id="sort"
+            defaultValue={sortBy}
+            name="sortBy"
+            id="sortBy"
             onChange={(e) => submit(e.currentTarget.form)}
           >
             <option value="default">Default</option>
@@ -240,4 +234,4 @@ function Item({ item }) {
   )
 }
 
-export default Shop
+export default ShopRoute

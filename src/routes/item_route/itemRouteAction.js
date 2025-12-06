@@ -1,4 +1,4 @@
-import itemClass from '../../items';
+import cart from '../../data/items/cart';
 import { redirect } from 'react-router-dom';
 
 export async function action({ request, params }) {
@@ -10,7 +10,7 @@ export async function action({ request, params }) {
     const available = formData.get('available');
     const cartQty = formData.get('cartQty');
     if (available === 'true') {
-      itemClass.addToCart(params.itemId, quantity)
+      cart.addToCart(params.itemId, quantity)
       const buy = formData.get('buy');
       if (buy) return redirect('/cart');
     } else {

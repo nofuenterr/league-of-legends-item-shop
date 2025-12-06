@@ -1,4 +1,4 @@
-import itemClass from '../../items';
+import cart from '../../data/items/cart';
 
 export async function action({ request }) {
   const formData = await request.formData()
@@ -15,13 +15,13 @@ export async function action({ request }) {
 
   if (action === 'edit' && qty) {
     if (qty <= stock) {
-      return itemClass.setCartItem(itemId, qty)
+      return cart.setCartItem(itemId, qty)
     } else {
       alert(`Sorry, you can only buy max ${stock} in one checkout`)
     }
   }
 
   if (action === 'delete') {
-    return itemClass.removeFromCart(itemId)
+    return cart.removeFromCart(itemId)
   }
 }

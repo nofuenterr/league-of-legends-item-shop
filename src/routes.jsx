@@ -1,16 +1,16 @@
-import App from './routes/App/App'
-import { loader as appLoader } from './routes/App/AppLoader'
-import { action as appAction } from './routes/App/AppAction'
-import Home from './routes/Main/Home';
-import Shop from './routes/Main/Shop';
-import { loader as shopLoader } from './routes/Main/ShopLoader'
-import { action as shopAction } from './routes/Main/ShopAction'
-import SelectedItem from './routes/Main/SelectedItem';
-import { action as selectedItemAction } from './routes/Main/SelectedItemAction'
-import Cart from './routes/Main/Cart';
-import { loader as cartLoader } from './routes/Main/CartLoader'
-import { action as cartAction } from './routes/Main/CartAction'
-import ErrorPage from './error-page';
+import App from './App/App'
+import { loader as appLoader } from './app/appLoader'
+import { action as appAction } from './app/appAction'
+import Home from './routes/HomeRoute';
+import Shop from './routes/shop_route/ShopRoute';
+import { loader as shopLoader } from './routes/shop_route/shopRouteLoader'
+import { action as shopAction } from './routes/shop_route/shopRouteAction'
+import Product from './routes/item_route/ItemRoute';
+import { action as productAction } from './routes/item_route/itemRouteAction'
+import Cart from './routes/cart_route/CartRoute';
+import { loader as cartLoader } from './routes/cart_route/cartRouteLoader'
+import { action as cartAction } from './routes/cart_route/cartRouteAction'
+import Error from './routes/ErrorRoute';
 
 import {
   createRoutesFromElements,
@@ -21,11 +21,11 @@ const routes = createRoutesFromElements(
   <Route
     path='/'
     element={<App />}
-    errorElement={<ErrorPage />}
+    errorElement={<Error />}
     loader={appLoader}
     action={appAction}
   >
-    <Route errorElement={<ErrorPage />}>
+    <Route errorElement={<Error />}>
       <Route 
         index={true} 
         element={<Home />}
@@ -38,8 +38,8 @@ const routes = createRoutesFromElements(
       />
       <Route
         path='/shop/:itemId'
-        element={<SelectedItem />}
-        action={selectedItemAction}
+        element={<Product />}
+        action={productAction}
       />
       <Route
         path='/cart'

@@ -1,7 +1,6 @@
-/* import { useState } from 'react' */
 import { useLoaderData, Link, Form, useSubmit } from 'react-router-dom'
 
-function Cart() {
+function CartRoute() {
   const [orderSummary, cartItems] = useLoaderData()
 
   const isCartEmpty = cartItems.length === 0
@@ -137,4 +136,4 @@ function OrderSummary({ orderSummary }) {
   )
 }
 
-export default Cart
+export default CartRoute

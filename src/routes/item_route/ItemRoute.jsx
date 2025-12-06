@@ -1,9 +1,10 @@
+import Loading from '../../components/Loading';
+import items from '../../data/items/items';
+import splitPascalCase from '../../util/splitPascalCase';
 import { useState } from 'react';
-import itemsClass from '../../items';
-import splitPascalCase from '../../util/split-pascal-case';
 import { useNavigate, useParams, useOutletContext, Form } from 'react-router-dom'
 
-function SelectedItem() {
+function ItemRoute() {
   const {data, error, loading} = useOutletContext()
   const navigate = useNavigate()
 
@@ -21,7 +22,7 @@ function SelectedItem() {
 
 function Item() {
   const params = useParams()
-  const item = itemsClass.getItem(params.itemId)
+  const item = items.getItem(params.itemId)
 
   return (
     <div>
@@ -152,12 +153,4 @@ function CallToActions() {
   )
 }
 
-function Loading() {
-  return (
-    <div>
-      <p>Loading items...</p>
-    </div>
-  )
-}
-
-export default SelectedItem
+export default ItemRoute
