@@ -1,0 +1,41 @@
+.searchWrapper {
+  --expand-search-width: var(--size-scale-250);
+  --remove-search-width: var(--size-scale-375);
+  background-color: var(--color-background-search-dark);
+  color: var(--color-text-search-on-dark);
+  position: relative;
+}
+
+.searchInput {
+  background-color: transparent;
+  color: inherit;
+  padding-block: var(--size-scale-75);
+  padding-inline-start: var(--expand-search-width);
+  padding-inline-end: var(--remove-search-width);
+  border-radius: 16px;
+}
+
+.expandSearch {
+  position: absolute;
+  background-color: transparent;
+  inset-inline-start: 0;
+  width: var(--expand-search-width);
+  border-radius: 16px;
+  height: 100%;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}
+
+.removeSearch {
+  position: absolute;
+  background-color: transparent;
+  inset-inline-end: 0;
+  inset-block-start: 0;
+  width: var(--remove-search-width);
+  border-radius: 16px;
+  height: 100%;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}

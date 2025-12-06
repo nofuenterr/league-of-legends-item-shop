@@ -1,20 +1,41 @@
 import { NavLink } from 'react-router-dom'
+import styles from './Header.module.css'
+import lolIconFlatWhite from '../assets/images/LoL_Icon_Flat_WHITE.png'
+import ShoppingCart from '../../public/ShoppingCart'
 
 function Header({ totalQty, children }) {
 
   return (
-    <header>
-      <nav>
-        <h1><NavLink to='/' title="Summoner's Shop">Summoner's Shop</NavLink></h1>
-        <ul>
-          <li><NavLink to='/' aria-label='home'>Home</NavLink></li>
-          <li><NavLink to='/shop' aria-label='shop'>Shop</NavLink></li>
-        </ul>
-        {children}
-        <ul>
-          <li><NavLink to='/shop' aria-label='favorites'>❤{/* temporary icon */}</NavLink></li>
-          <li><NavLink to='/cart' aria-label='cart'>🛒{/* temporary icon */}{totalQty}</NavLink></li>
-        </ul>
+    <header className={`${styles.header}`}>
+      <nav className={styles.nav}>
+        <div className={styles.navWrapper}>
+          <NavLink to='/' title="Summoner's Shop">
+            <div className={styles.brand}>
+              <div className={styles.brandImage}>
+                <img src={lolIconFlatWhite} alt="LoL icon" />
+              </div>
+              <div>
+                <p>Summoner's</p>
+                <p>Shop</p>
+              </div>
+            </div>
+          </NavLink>
+          <div className={styles.navWrapperCenter}>
+            <ul className={styles.navLinkList}>
+              <li><NavLink to='/' aria-label='home'>Home</NavLink></li>
+              <li><NavLink to='/shop' aria-label='shop'>Shop</NavLink></li>
+            </ul>
+            {children}
+          </div>
+          <div>
+            <NavLink to='/cart' aria-label='cart' className={styles.cartWrapper}>
+              <ShoppingCart />
+              <div className={styles.cartQuantity}>
+                {totalQty}
+              </div>
+            </NavLink>
+          </div>
+        </div>
       </nav>
     </header>
   )

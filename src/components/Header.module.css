@@ -1,0 +1,92 @@
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: var(--color-background-dark);
+  color: var(--color-text-on-dark);
+  display: grid;
+}
+
+.nav {
+  display: grid;
+}
+
+.navWrapper {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding-inline: var(--size-scale-200);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-25);
+  font-family: var(--font-brand-family);
+  font-size: var(--font-brand-size);
+  font-weight: var(--font-brand-weight);
+}
+
+.brandImage {
+  width: var(--image-brand-width);
+}
+
+.navWrapperCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: var(--size-scale-200);
+}
+
+.navLinkList {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-200);
+  padding-inline: var(--size-scale-200);
+  font-weight: var(--font-navlist-weight);
+  text-transform: uppercase;
+}
+
+.navLinkList a {
+  padding-block: var(--size-scale-50);
+  padding-inline: var(--size-scale-100);
+  border-radius: 8px;
+  position: relative;
+}
+
+.navLinkList a:hover {
+  color: var(--color-text-navlist-hover);
+  background-color: rgb(128 128 128 / 30%);
+  transition: color 0.1s ease-out;
+}
+
+.navLinkList a:hover::before {
+  content: '';
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background-color: var(--color-secondary);
+  border-radius: 8px;
+  inset-inline-start: 0;
+  inset-block-end: calc( var(--size-scale-75) * -1);
+}
+
+.cartWrapper {
+  --cart-icon-size: 24px;
+  position: relative;
+  display: grid;
+  width: var(--cart-icon-size);
+  height: var(--cart-icon-size);
+}
+
+.cartQuantity {
+  --cart-quantity-size: 24px;
+  position: absolute;
+  background-color: var(--color-brand-primary);
+  width: var(--cart-quantity-size);
+  height: var(--cart-quantity-size);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  inset-inline-end: calc(var(--cart-quantity-size) * -0.583);
+  inset-block-start: calc(var(--cart-quantity-size) * -0.583);
+}

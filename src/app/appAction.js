@@ -3,7 +3,13 @@ import filter from "../data/items/filter";
 
 export async function action({ request }) {
   const formData = await request.formData()
+  const removeSearach = formData.get('removeSearch')
   const query = formData.get('search')
-  filter.setQuery(query)
+  
+  if (removeSearach) {
+    filter.setQuery('')
+  } else {
+    filter.setQuery(query)
+  }
   return redirect('/shop')
 }
