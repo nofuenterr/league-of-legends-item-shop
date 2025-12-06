@@ -4,6 +4,6 @@ import cart, {
 
 export async function loader() {
   const cartItems = cart.getCart()
-  const orderSummary = getOrderSummary()
+  const orderSummary = getOrderSummary(cartItems)
   return [orderSummary, cartItems]
 }

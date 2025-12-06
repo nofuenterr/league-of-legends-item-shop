@@ -63,13 +63,10 @@ class Cart {
   }
 }
 
-const cart = new Cart()
-
-export const getOrderSummary = () => {
-  const cartItems = cart.getCart()
+export const getOrderSummary = (cart) => {
   let totalQty = 0
   let subtotal = 0
-  cartItems.forEach(item => {
+  cart.forEach(item => {
     subtotal += (item.buyCost * item.qty)
     totalQty += item.qty
   })
@@ -80,9 +77,8 @@ export const getOrderSummary = () => {
   return {subtotal, totalQty, vat, total}
 }
 
-export const getTotalQuantity = () => {
-  const cartItems = cart.getCart()
-  return cartItems.reduce((totalQty, item) => {
+export const getTotalQuantity = (art) => {
+  return art.reduce((totalQty, item) => {
     return totalQty += item.qty
   }, 0)
 }
