@@ -24,6 +24,15 @@
   display: flex;
 }
 
+.breadcrumbsList > * {
+  padding-bottom: 2px;
+  margin-right: 4px;
+}
+
+.breadcrumbsList a:hover {
+  border-bottom: 2px solid #000000;
+}
+
 .breadcrumbsCurrent {
   font-weight: var(--font-weight-bold);
 }
