@@ -45,15 +45,42 @@
 }
 
 .imageWrapper {
+  position: relative;
   place-self: center;
   width: 100%;
   padding-block: var(--size-scale-400);
   padding-inline: var(--size-scale-200);
 }
 
+.imageBackground1 {
+  background: url('https://cdn.sanity.io/images/dsfx7636/consumer_products/b8551562d7525bee89839714bb667923f7515d6e-2176x1912.webp') no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: top;
+  background-size: cover;
+  z-index: -1;
+}
+
+.imageBackground2 {
+  position: absolute;
+  background: url('https://cdn.sanity.io/images/dsfx7636/consumer_products/2ed0b8698a386ef2ceaf35a679ddf0fa2c93f917-2176x814.webp') no-repeat;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  background-position: bottom;
+  background-size: cover;
+  clip-path: polygon(0 0, 100% 8vw, 100% 100%, 0 100%);
+  z-index: -1;
+}
+
 .image {
   width: clamp(200px, 100%, 450px);
   margin: auto;
+  border-radius: 1rem;
 }
 
 .itemDetails {

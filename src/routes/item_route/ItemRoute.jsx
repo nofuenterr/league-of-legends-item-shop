@@ -66,7 +66,17 @@ function Item() {
 function Image({ image, name }) {
   return (
     <div className={styles.imageWrapper}>
-      <img className={styles.image} src={image} alt={name + ' image'} title={name} />
+      <img 
+        className={styles.image} 
+        src={image} 
+        alt={name + ' image'} 
+        title={name}
+        loading='lazy'
+        width={450}
+        height={450}
+      />
+      <div className={styles.imageBackground1}></div>
+      <div className={styles.imageBackground2}></div>
     </div>
   )
 }
