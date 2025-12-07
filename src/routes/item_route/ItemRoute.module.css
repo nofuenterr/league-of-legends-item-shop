@@ -71,6 +71,7 @@
   font-weight: var(--font-tag-weight);
   letter-spacing: calc(var(--font-tag-letter-spacing)* 1em);
   line-height: calc(var(--font-tag-line-height)* 1em);
+  color: var(--color-brand-neutral-dark);
 }
 
 .itemName {
