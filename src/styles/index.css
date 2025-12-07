@@ -55,6 +55,8 @@
 
   --color-text-error: #eb0029;
   
+  --color-icon-delete: #eb0029;
+  
   --ff-default: 'Beaufort for LOL';
 
   --font-weight-regular: 400;
@@ -113,7 +115,8 @@
   --font-heading-sm-letter-spacing-min: 0;
   --font-heading-sm-letter-spacing-max: -0.01;
 
-  --font-heading-xs-size: 1rem;
+  --font-heading-xs-size-min: 1rem;
+  --font-heading-xs-size-max: 1.25rem;
   --font-heading-xs-line-height: 1.125;
   --font-heading-xxs-size: 0.75rem;
   --font-heading-xxs-line-height: 1.2;

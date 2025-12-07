@@ -1,0 +1,196 @@
+.cartRouteWrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--size-scale-300);
+  padding: var(--size-scale-200);
+}
+
+.cartWrapper {
+  /* max-width: 800px; */
+}
+
+.cartHeading {
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  padding-bottom: var(--size-scale-200);
+}
+
+.cartItemsQuantity {
+  font-size: 0.8em;
+}
+
+.cartItemsWrapper {
+  display: grid;
+  gap: var(--size-scale-200);
+  padding-block: var(--size-scale-200);
+}
+
+.cartItemWrapper {
+  --cart-image-size: var(--size-scale-800);
+  display: grid;
+  grid-template-columns: var(--cart-image-size) 1fr;
+  grid-template-rows: var(--cart-image-size);
+  gap: var(--size-scale-100);
+}
+
+/* can put image background or make image round */
+/* .cartImageWrapper {
+  
+} */
+
+.cartDetailsWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cartItemName {
+  font-size: var(--font-heading-xs-size-max);
+}
+
+.cartItemPrices {
+  display: flex;
+  gap: var(--size-scale-25);
+  font-weight: var(--font-weight-bold);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: var(--color-brand-neutral-dark);
+}
+
+:is(.cartItemName, .stockValue, .cartItemTotal) {
+  font-weight: var(--font-weight-bold);
+}
+
+.cartItemRemove {
+  justify-self: end;
+}
+
+.cartItemRemove button {
+  background-color: transparent;
+  cursor: pointer;
+  width: var(--size-scale-150);
+  height: var(--size-scale-150);
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-brand-neutral-light);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cartItemRemove button:hover {
+  background-color: #e1e1e1;
+}
+
+.cartItemRemove button:active {
+  scale: 0.95;
+}
+
+.cartItemRemove svg {
+  stroke: var(--color-icon-delete);
+}
+
+.cartItemTotal {
+  align-self: flex-end;
+}
+
+.cartItemQuantityWrapper {
+  align-self: flex-end;
+  justify-self: flex-end;
+}
+
+.cartItemQuantityInputWrapper {
+  display: grid;
+  grid-template-columns: var(--size-scale-150) var(--size-scale-200) var(--size-scale-150);
+  grid-template-rows: var(--size-scale-150);
+  gap: var(--size-scale-25);
+}
+
+.cartItemQuantityInputWrapper > button {
+  border: none;
+  cursor: pointer;
+}
+
+.cartItemQuantityInput {
+  text-align: center;
+  padding: var(--size-scale-25);
+}
+
+.cartItemQuantityDecrement {
+  background-color: var(--color-background-quantity-decrement);
+}
+
+.cartItemQuantityIncrement {
+  background-color: var(--color-background-quantity-increment);
+}
+
+/* Order Summary (separate into its own module) */
+
+.orderSummaryWrapper {
+  align-self: flex-start;
+  padding: var(--size-scale-300);
+  border: 1px solid var(--color-brand-neutral-dark);
+  border-radius: 8px;
+  /* width: 400px; */
+  width: 100%;
+  display: grid;
+  gap: var(--size-scale-175);
+}
+
+.orderSummaryHeading {
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.orderSummaryDetailWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.orderSummaryTotal {
+  font-weight: var(--font-weight-bold);
+}
+
+h3.orderSummaryTotal {
+  font-size: var(--size-scale-150);
+  text-transform: uppercase;
+}
+
+.orderSummaryWrapper > :is(button, div:has(a[aria-label='continue shopping'])) {
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  text-align: center;
+}
+
+.checkout {
+  color: var(--color-text-on-primary);
+  background-color: var(--color-primary);
+}
+
+.checkout:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.checkout:active {
+  background-color: var(--color-cta-primary-active);
+}
+
+.continueShopping {
+  color: var(--color-text-on-secondary);
+  background-color: var(--color-secondary);
+}
+
+.continueShopping:hover {
+  background-color: var(--color-cta-secondary-hover);
+}
+
+.continueShopping:active {
+  background-color: var(--color-cta-secondary-active);
+}

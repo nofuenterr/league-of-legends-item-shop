@@ -1,4 +1,6 @@
 import { useLoaderData, Link, Form, useSubmit } from 'react-router-dom'
+import styles from './CartRoute.module.css'
+import RemoveCartItem from '../../../public/Trash'
 
 function CartRoute() {
   const [orderSummary, cartItems] = useLoaderData()
@@ -7,7 +9,7 @@ function CartRoute() {
   if (isCartEmpty) return <EmptyCart />
 
   return (
-    <div>
+    <div className={styles.cartRouteWrapper}>
       <CartItems cartItems={cartItems} />
       <OrderSummary orderSummary={orderSummary} />
     </div>
@@ -25,13 +27,31 @@ function EmptyCart() {
 
 function CartItems({ cartItems }) {
   return (
-    <ul>
-      {cartItems.map(item => {
-        return (
-          <CartItem item={item} key={item.id} />
-        )
-      })}
-    </ul>
+    <div className={styles.cartWrapper}>
+      <h2 
+        className={styles.cartHeading}
+      >
+        Cart
+        <sup>
+          <span 
+            className={styles.cartItemsQuantity}
+          >
+            ({cartItems.length})
+          </span>
+        </sup>
+      </h2>
+      <hr />
+      <ul className={styles.cartItemsWrapper}>
+        {cartItems.map(item => {
+          return (
+            <>
+              <CartItem item={item} key={item.id} />
+              <hr />
+            </>
+          )
+        })}
+      </ul>
+    </div>
   )
 }
 
@@ -39,76 +59,88 @@ function CartItem({ item }) {
   const submit = useSubmit()
 
   return (
-    <li title={item.name + ': ' + item.qty * item.buyCost + ' total gold'}>
+    <li>
       {!item.stock && <p>Sold Out</p>}
-      <Link to={`/shop/${item.id}`}>
-        <div>
-          <img src={item.image} alt={item.name + ' image'} />
+      <div className={styles.cartItemWrapper}>
+        <Link to={`/shop/${item.id}`}>
+          <div>
+            <img title={item.name} src={item.image} alt={item.name + ' image'} />
+          </div>
+        </Link>
+        <div className={styles.cartDetailsWrapper}>
+          <div>
+            <h3 className={styles.cartItemName}>{item.name}</h3>
+            <div className={styles.cartItemPrices}>
+              {item.oldPrice && <p className={styles.oldPrice}>{item.oldPrice} gold</p>}
+              <p>{item.buyCost} gold</p>
+            </div>
+            <p>Stock: <span className={styles.stockValue}>{item.stock}</span></p>
+          </div>
+          <Form method='post' className={styles.cartItemRemove}>
+            <button 
+              type='submit'
+              name='itemId'
+              value={item.id}
+              aria-label='remove from cart'
+            >
+              <RemoveCartItem />
+            </button>
+            <input 
+              type="hidden"
+              name='action'
+              value='delete'
+            />
+          </Form>
+          <p className={styles.cartItemTotal}>Total: {item.qty * item.buyCost} gold</p>
+          <Form method='post' className={styles.cartItemQuantityWrapper}>
+            <p className={styles.cartItemQuantityInputWrapper}>
+              <button 
+                className={styles.cartItemQuantityDecrement}
+                type='submit'
+                name='button'
+                value='decrement'
+                aria-label='decrement'
+              >-</button>
+              <input
+                className={styles.cartItemQuantityInput}
+                name='qty'
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) {
+                    submit(e.currentTarget.form)
+                  }
+                }}
+                value={item.qty}
+                type='text'
+                inputMode='numeric'
+                pattern='[0-9]*'
+              />
+              <input 
+                type="hidden"
+                name='stock'
+                value={item.stock}
+              />
+              <input 
+                type="hidden"
+                name='itemId'
+                value={item.id}
+              />
+              <input 
+                type="hidden"
+                name='action'
+                value='edit'
+              />
+              <button 
+                className={styles.cartItemQuantityIncrement}
+                type='submit'
+                name='button'
+                value='increment'
+                aria-label='increment'
+              >+</button>
+            </p>
+          </Form>
         </div>
-      </Link>
-      <p>ID: {item.id}</p>
-      <p>{item.name}</p>
-      <p>{item.description}</p>
-      <p>{item.buyCost} Gold</p>
-      <p>Stock: {item.stock}</p>
-      <Form method='post'>
-        <p>
-          <button 
-            type='submit'
-            name='button'
-            value='decrement'
-            aria-label='decrement'
-          >-</button>
-          <input
-            name='qty'
-            onChange={(e) => {
-              const value = e.target.value;
-              if (/^\d*$/.test(value)) {
-                submit(e.currentTarget.form)
-              }
-            }}
-            value={item.qty}
-            type='text'
-            inputMode='numeric'
-            pattern='[0-9]*'
-          />
-          <input 
-            type="hidden"
-            name='stock'
-            value={item.stock}
-          />
-          <input 
-            type="hidden"
-            name='itemId'
-            value={item.id}
-          />
-          <input 
-            type="hidden"
-            name='action'
-            value='edit'
-          />
-          <button 
-            type='submit'
-            name='button'
-            value='increment'
-            aria-label='increment'
-          >+</button>
-        </p>
-      </Form>
-      <p>Total: {item.qty * item.buyCost} Gold</p>
-      <Form method='post'>
-        <button 
-          type='submit'
-          name='itemId'
-          value={item.id}
-          aria-label='remove from cart'
-        >🗑️</button>
-        <input 
-          type="hidden"
-          name='action'
-          value='delete'
-        />
-      </Form>
+      </div>
     </li>
   )
 }
@@ -117,24 +149,26 @@ function OrderSummary({ orderSummary }) {
   const {subtotal, totalQty, vat, total} = orderSummary
 
   return (
-    <div>
-      <h2>Order Summary</h2>
-      <h3>{total}</h3>
-      <p>
-        <span>Subtotal {totalQty} {totalQty > 1 ? 'items' : 'item'}</span>
-        <span>{subtotal} Gold</span>
-      </p>
-      <p>
-        <span>VAT (12%)</span>
-        <span>{vat} Gold</span>
-      </p>
+    <div className={styles.orderSummaryWrapper}>
+      <h2 className={styles.orderSummaryHeading}>Order Summary</h2>
+      <h3 className={styles.orderSummaryTotal}>{total} gold</h3>
+      <div className={styles.orderSummaryDetailWrapper}>
+        <h3>Subtotal ({totalQty} {totalQty > 1 ? 'items' : 'item'})</h3>
+        <span>{subtotal} gold</span>
+      </div>
+      <div className={styles.orderSummaryDetailWrapper}>
+        <h3>VAT (12%)</h3>
+        <span>{vat} gold</span>
+      </div>
       <hr />
-      <p>
-        <span>Total</span>
-        <span>{total} Gold</span>
-      </p>
-      <button aria-label='checkout'>Checkout</button>
-      <Link to={'/shop'} aria-label='continue shopping'>Continue Shopping</Link>
+      <div className={`${styles.orderSummaryDetailWrapper} ${styles.orderSummaryTotal}`}>
+        <h3>Total</h3>
+        <span>{total} gold</span>
+      </div>
+      <button className={styles.checkout} aria-label='checkout'>Checkout</button>
+      <div className={styles.continueShopping}>
+        <Link to={'/shop'} aria-label='continue shopping'>Continue Shopping</Link>
+      </div>
     </div>
   )
 }
