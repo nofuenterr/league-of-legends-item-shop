@@ -18,6 +18,7 @@
   position: absolute;
   inset-inline-start: var(--size-scale-200);
   inset-block-start: var(--size-scale-100);
+  z-index: 1;
 }
 
 .breadcrumbsList {
