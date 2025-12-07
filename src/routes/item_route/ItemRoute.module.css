@@ -82,6 +82,11 @@
   width: clamp(200px, 100%, 450px);
   margin: auto;
   border-radius: 1rem;
+  transition: scale 0.4s ease-in-out;
+}
+
+.imageWrapper:hover .image {
+  scale: 1.05;
 }
 
 .itemDetails {
