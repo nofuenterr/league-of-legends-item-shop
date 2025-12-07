@@ -39,10 +39,12 @@
   --color-primary: #c8aa6e;
   --color-text-on-primary: #0A1428;
   --color-cta-primary-hover: #d3bb8b;
+  --color-cta-primary-active: #d5b678;
 
   --color-secondary: #59C1DE;
   --color-text-on-secondary: #0A1428;
   --color-cta-secondary-hover: #7acde4;
+  --color-cta-secondary-active: #5ec7e4;
 
   --color-brand-primary: #eb0029;
   --color-brand-neutral-light: #888888;

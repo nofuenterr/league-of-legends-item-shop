@@ -172,6 +172,10 @@
   background-color: var(--color-cta-primary-hover);
 }
 
+.addToCart:active {
+  background-color: var(--color-cta-primary-active);
+}
+
 .buyItNow {
   color: var(--color-text-on-secondary);
   background-color: var(--color-secondary);
@@ -179,6 +183,10 @@
 
 .buyItNow:hover {
   background-color: var(--color-cta-secondary-hover);
+}
+
+.buyItNow:active {
+  background-color: var(--color-cta-secondary-active);
 }
 
 .descriptionWrapper {
