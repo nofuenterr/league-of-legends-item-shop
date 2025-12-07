@@ -2,75 +2,106 @@ import Loading from '../../components/Loading';
 import items from '../../data/items/items';
 import splitPascalCase from '../../util/splitPascalCase';
 import { useState } from 'react';
-import { useNavigate, useParams, useOutletContext, Form } from 'react-router-dom'
+import { useParams, useOutletContext, Form, Link } from 'react-router-dom'
+import styles from './ItemRoute.module.css'
 
 function ItemRoute() {
   const {data, error, loading} = useOutletContext()
-  const navigate = useNavigate()
 
   if (error) return <>{error}</>
   if (loading) return <Loading />
   if (data) {
     return (
-      <div>
-        <button aria-label='back' type='button' onClick={() => navigate(-1)}>Back</button>
+      <div className={styles.itemRouteWrapper}>
+        <Breadcrumbs />
         <Item />
       </div>
     )
   }
 }
 
-function Item() {
+function Breadcrumbs() {
   const params = useParams()
   const item = items.getItem(params.itemId)
 
   return (
-    <div>
+    <div className={styles.breadcrumbsWrapper}>
+      <nav>
+        <ol className={styles.breadcrumbsList}>
+          <li>
+            <Link to='/'>Home</Link> /
+          </li>
+          <li>
+            <Link to='/shop'>Shop</Link> /
+          </li>
+          <li className={styles.breadcrumbsCurrent}>
+            {item.name}
+          </li>
+        </ol>
+      </nav>
+    </div>
+  )
+}
+
+function Item() {
+  const params = useParams()
+  const item = items.getItem(params.itemId)
+  
+  return (
+    <div className={styles.itemWrapper}>
       <Image image={item.image} name={item.name} />
-      <Info item={item} />
-      <Tags tags={item.tags} />
-      <Form method='post'>
-        <Input stock={item.stock} cartQty={item.qty} />
-        <CallToActions stock={item.stock} />
-      </Form>
+      <div className={styles.itemDetails}>
+        <Tags tags={item.tags} />
+        <Info item={item} />
+        <Form method='post'>
+          <Input stock={item.stock} cartQty={item.qty} />
+          <CallToActions stock={item.stock} />
+        </Form>
+        <Description description={item.description} />
+      </div>
     </div>
   )
 }
 
 function Image({ image, name }) {
   return (
-    <div>
-      <img src={image} alt={name + ' image'} title={name} />
-    </div>
-  )
-}
-
-function Info({ item }) {
-  return (
-    <div>
-      {!item.stock && <p>Sold Out</p>}
-      <p>ID: {item.id}</p>
-      <p>{item.name}</p>
-      <p>{item.description}</p>
-      {item.discountPercent && <p>{item.discountPercent}% Off</p>}
-      {item.oldPrice && <p style={{textDecoration: 'line-through'}}>Old Price: {item.oldPrice} Gold</p>}
-      <p>Price: {item.buyCost} Gold</p>
-      <p>Stock: {item.stock}</p>
+    <div className={styles.imageWrapper}>
+      <img className={styles.image} src={image} alt={name + ' image'} title={name} />
     </div>
   )
 }
 
 function Tags({ tags }) {
   return (
-    <ul>
-      {tags.map(tag => {
+    <ul className={styles.tagsList}>
+      {tags.map((tag, index) => {
         return (
           <li key={tag}>
-            {splitPascalCase(tag)}
+            {splitPascalCase(tag) + (index === tags.length - 1 ? '' : ' |')}
           </li>
         )
       })}
     </ul>
+  )
+}
+
+function Info({ item }) {
+  return (
+    <div>
+      <h1 className={styles.itemName}>{item.name}</h1>
+      <div className={styles.itemStatusTags}>
+        {!item.stock && <div>
+          <span>Sold Out</span>
+        </div>}
+        {item.discountPercent && <div className={styles.discountTag}>
+          <span>-{item.discountPercent}%</span>
+        </div>}
+      </div>
+      <div className={styles.itemPrices}>
+        {item.oldPrice && <p className={styles.oldPrice}>{item.oldPrice} gold</p>}
+        <p>{item.buyCost} gold</p>
+      </div>
+    </div>
   )
 }
 
@@ -79,9 +110,12 @@ function Input({ stock, cartQty }) {
   const available = (cartQty + qtyInput) <= stock
 
   return (
-    <div>
-      <p>
+    <div className={styles.quantityInfoWrapper}>
+      <p>Stock: <span className={styles.stockValue}>{stock}</span></p>
+      <p className={styles.quantityInputWrapper}>
         <button 
+          className={`${styles.quantityDecrement}` 
+            + (qtyInput == 1 ? ` ${styles.quantityChangeInvalid}` : '')}
           type='button' 
           onClick={() => {
             if (qtyInput > 1) {
@@ -103,6 +137,7 @@ function Input({ stock, cartQty }) {
           value={cartQty}
         />
         <input
+          className={styles.quantityInput}
           name='qty'
           onChange={(e) => {
             const value = parseInt(e.target.value);
@@ -115,7 +150,9 @@ function Input({ stock, cartQty }) {
           inputMode='numeric'
           pattern='[0-9]*'
           />
-        <button 
+        <button
+          className={`${styles.quantityIncrement}` 
+            + (!available ? ` ${styles.quantityChangeInvalid}` : '')}
           type='button' 
           onClick={() => {
             setQtyInput((q) => q + 1)
@@ -124,7 +161,7 @@ function Input({ stock, cartQty }) {
         >+</button>
       </p>
       {!available 
-        ? <p>You have reached the maximum quantity available for this item</p> 
+        ? <p className={styles.addToCartError}>You have reached the maximum quantity available for this item!</p> 
         : null}
     </div>
   )
@@ -132,13 +169,14 @@ function Input({ stock, cartQty }) {
 
 function CallToActions() {
   return (
-    <div>
+    <div className={styles.callToActionsWrapper}>
       <input
         type="hidden"
         name='addToCart'
         value={true}
       />
       <button 
+        className={styles.addToCart}
         type='submit' 
         aria-label='add to cart'
         /* onClick={() => setQuantity(1)} */
@@ -146,6 +184,7 @@ function CallToActions() {
         Add to cart
       </button>
       <button 
+        className={styles.buyItNow}
         type='submit' 
         name='buy'
         value={true}
@@ -155,6 +194,16 @@ function CallToActions() {
       </button>
     </div>
   )
+}
+
+function Description({ description }) {
+    return (
+      <div className={styles.descriptionWrapper}>
+        <p className={styles.descriptionHeader}>Description</p>
+        <p>{description}</p>
+        {/* Features / Stats */}
+      </div>
+    )
 }
 
 export default ItemRoute

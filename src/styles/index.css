@@ -32,29 +32,26 @@
   -moz-osx-font-smoothing: grayscale;
 
   --color-background-light: #ffffff;
-  --color-background-dark: #111;
-  --color-background-neutral-light: #B7B9BE;
-  --color-background-neutral-dark: #6B6E76;
-  --color-text-on-light: #111;
+  --color-background-dark: #000000;
+  --color-text-on-light: #000000;
   --color-text-on-dark: #ffffff;
+
   --color-primary: #c8aa6e;
-  --color-secondary: #0bc4e2;
+  --color-text-on-primary: #0A1428;
+  --color-cta-primary-hover: #d3bb8b;
+
+  --color-secondary: #59C1DE;
+  --color-text-on-secondary: #0A1428;
+  --color-cta-secondary-hover: #7acde4;
+
   --color-brand-primary: #eb0029;
+  --color-brand-neutral-light: #888888;
+  --color-brand-neutral-dark: #666666;
+
   --color-background-search-dark: #2b2a29;
   --color-text-search-on-dark: #f9f9f9;
-  
-  --neutral-0: #FFFFFF;
-  --neutral-100: #F8F8F8;
-  --neutral-200: #f0f1f2;
-  --neutral-300: #DDDEE1;
-  --neutral-400: #B7B9BE;
-  --neutral-500: #8C8F97;
-  --neutral-600: #7D818A;
-  --neutral-700: #6B6E76;
-  --neutral-800: #505258;
-  --neutral-900: #3B3D42;
-  --neutral-1000: #292A2E;
-  --neutral-1100: #1E1F21;
+
+  --color-text-error: #eb0029;
   
   --ff-default: 'Beaufort for LOL';
 
@@ -65,6 +62,7 @@
   --size-scale-50: 0.5rem;
   --size-scale-75: 0.75rem;
   --size-scale-100: 1rem;
+  --size-scale-112: 1.12rem;
   --size-scale-125: 1.25rem;
   --size-scale-150: 1.5rem;
   --size-scale-175: 1.75rem;
@@ -94,8 +92,8 @@
 
   --font-heading-lg-size-min: 2.375rem;
   --font-heading-lg-size-max: 3rem;
-  --font-heading-lg-line-height-min: 1.1;
-  --font-heading-lg-line-height-max: 1.1;
+  --font-heading-lg-line-height-min: 1.15;
+  --font-heading-lg-line-height-max: 1.3;
   --font-heading-lg-letter-spacing-min: -0.02;
   --font-heading-lg-letter-spacing-max: -0.03;
 
@@ -136,14 +134,22 @@
   --font-body-sm-line-height: 1.25;
   --font-body-sm-weight: var(--font-weight-regular);
 
+  --font-button-size: 1rem;
+  --font-button-line-height: 1.125;
+  --font-button-letter-spacing: 0.02;
+
+  --space-button-padding-block: var(--size-scale-112);
+  --space-button-padding-inline: var(--size-scale-200);
+
+  /* more to appropriate module */
   --font-brand-family: 'League', Helvetica, Arial, sans-serif;
   --font-brand-size: 1rem;
   --font-brand-line-height: 1.25;
   --font-brand-weight: var(--font-weight-bold);
   --image-brand-width: 36px;
 
-  --font-navlist-weight: var(--font-weight-bold);
-  --color-text-navlist-hover: var(--color-primary);
+  --font-navlist-weight: var(--font-weight-bold); /* move to appropriate module */
+  --color-text-navlist-hover: var(--color-primary); /* move to appropriate module */
 }
 
 body {

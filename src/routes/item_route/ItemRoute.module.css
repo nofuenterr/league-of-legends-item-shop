@@ -1,0 +1,184 @@
+:root {
+  --font-tag-size: 0.75rem;
+  --font-tag-line-height: 1.25;
+  --font-tag-weight: 600;
+  --font-tag-letter-spacing: 0.02;
+  --font-prices-size: 1.75rem;
+  --color-background-status-tag-green: #8cd50b;
+  --color-text-status-tag-green: ##000000;
+  --color-background-quantity-decrement: #f2efee;
+  --color-background-quantity-increment: #d3c7c3;
+}
+
+.itemRouteWrapper {
+  position: relative;
+}
+
+.breadcrumbsWrapper {
+  position: absolute;
+  inset-inline-start: var(--size-scale-200);
+  inset-block-start: var(--size-scale-100);
+}
+
+.breadcrumbsList {
+  display: flex;
+}
+
+.breadcrumbsCurrent {
+  font-weight: var(--font-weight-bold);
+}
+
+.itemWrapper {
+  --item-details-width: 600px;
+  display: grid;
+  grid-template-columns: 1fr var(--item-details-width);
+  margin-inline: auto;
+}
+
+.imageWrapper {
+  place-self: center;
+  width: 100%;
+  padding-block: var(--size-scale-400);
+  padding-inline: var(--size-scale-200);
+}
+
+.image {
+  width: clamp(200px, 100%, 450px);
+  margin: auto;
+}
+
+.itemDetails {
+  padding: var(--size-scale-250);
+}
+
+.tagsList {
+  display: flex;
+  gap: var(--size-scale-25);
+  margin-bottom: var(--size-scale-100);
+  flex-wrap: wrap;
+  text-wrap: nowrap;
+  text-transform: uppercase;
+  font-size: var(--font-tag-size);
+  font-weight: var(--font-tag-weight);
+  letter-spacing: calc(var(--font-tag-letter-spacing)* 1em);
+  line-height: calc(var(--font-tag-line-height)* 1em);
+}
+
+.itemName {
+  font-size: var(--font-heading-lg-size-max);
+  line-height: var(--font-heading-lg-line-height-max);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.itemStatusTags {
+  display: flex;
+  gap: var(--size-scale-50);
+}
+
+.itemStatusTags > * {
+  padding-block: var(--size-scale-50);
+  padding-inline: var(--size-scale-100);
+}
+
+.discountTag {
+  background-color: var(--color-background-status-tag-green);
+  color: var(--color-text-status-tag-gree);
+}
+
+.itemPrices {
+  display: flex;
+  gap: var(--size-scale-100);
+  font-size: var(--font-prices-size);
+  margin-block: var(--size-scale-100);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: var(--color-brand-neutral-dark);
+}
+
+.quantityInfoWrapper {
+  display: grid;
+  gap: var(--size-scale-75);
+}
+
+.stockValue {
+  font-weight: var(--font-weight-bold);
+}
+
+.quantityInputWrapper {
+  display: grid;
+  grid-template-columns: var(--size-scale-125) var(--size-scale-400) var(--size-scale-125);
+  grid-template-rows: var(--size-scale-250);
+  gap: var(--size-scale-25);
+}
+
+.quantityInputWrapper > button {
+  border: none;
+  cursor: pointer;
+}
+
+.quantityInput {
+  padding: var(--size-scale-75);
+}
+
+.quantityDecrement {
+  background-color: var(--color-background-quantity-decrement);
+}
+
+.quantityIncrement {
+  background-color: var(--color-background-quantity-increment);
+}
+
+:is(.quantityDecrement, .quantityIncrement).quantityChangeInvalid {
+  cursor: not-allowed;
+}
+
+.addToCartError {
+  color: var(--color-text-error);
+}
+
+.callToActionsWrapper {
+  padding-block: var(--size-scale-175);
+  display: flex;
+  gap: var(--size-scale-150);
+}
+
+.callToActionsWrapper > button {
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.addToCart {
+  color: var(--color-text-on-primary);
+  background-color: var(--color-primary);
+}
+
+.addToCart:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.buyItNow {
+  color: var(--color-text-on-secondary);
+  background-color: var(--color-secondary);
+}
+
+.buyItNow:hover {
+  background-color: var(--color-cta-secondary-hover);
+}
+
+.descriptionWrapper {
+  padding-block: var(--size-scale-150);
+  display: grid;
+  gap: var(--size-scale-100);
+  border-block: 1px solid var(--color-brand-neutral-dark);
+}
+
+.descriptionHeader {
+  font-size: var(--font-body-lg-size);
+}
