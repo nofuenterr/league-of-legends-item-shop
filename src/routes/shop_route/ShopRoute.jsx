@@ -264,30 +264,41 @@ function Info({ items, query }) {
 
 function ItemsList({ items }) {
   return (
-    <ul>
-      {items.map(item => {
-        return <Item key={item.id} item={item} />
-      })}
-    </ul>
+    <div>
+      <ul className={styles.shopItemsList}>
+        {items.map(item => {
+          return <Item key={item.id} item={item} />
+        })}
+      </ul>
+    </div>
   )
 }
 
 function Item({ item }) {
   return (
-    <li title={item.name + ': ' + item.buyCost + ' gold'}>
+    <li className={styles.shopItemCard} title={item.name + ': ' + item.buyCost + ' gold'}>
+      <div className={styles.itemStatusWrapper}>
+        <span className={styles.newItemTag}>New</span>
+        {!item.stock && <span>Out of Stock</span>}
+        {item.discountPercent && <span className={styles.discountTag}>-{item.discountPercent}%</span>}
+      </div>
       <Link to={`/shop/${item.id}`}>
-        {!item.stock && <p>Sold Out</p>}
-        <div>
-          <img src={item.image} alt={item.name + ' image'} />
+        <div className={styles.itemImageWrapper}>
+          <img className={styles.itemImage} src={item.image} alt={item.name + ' image'} />
         </div>
-        <p>ID: {item.id}</p>
-        <p>{item.name}</p>
-        <p>{item.description}</p>
-        {item.discountPercent && <p>{item.discountPercent}% Off</p>}
-        {item.oldPrice && <p style={{textDecoration: 'line-through'}}>Old Price: {item.oldPrice} Gold</p>}
-        <p>Price: {item.buyCost} Gold</p>
-        <p>Stock: {item.stock}</p>
       </Link>
+      <div className={styles.itemPanel}>
+        <h2 className={styles.itemName}>{item.name}</h2>
+        <div className={styles.itemPrices}>
+          {item.oldPrice 
+            && <p
+                className={styles.oldPrice} 
+                style={{textDecoration: 'line-through'}}
+                >{item.oldPrice} gold
+              </p>}
+          <p>{item.buyCost} gold</p>
+        </div>
+      </div>
     </li>
   )
 }

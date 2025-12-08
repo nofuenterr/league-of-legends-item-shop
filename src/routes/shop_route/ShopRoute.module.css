@@ -44,3 +44,74 @@
 .breadcrumbsControlsButton:active {
   background-color: var(--color-cta-primary-active);
 }
+
+.shopItemsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-auto-rows: 380px;
+  gap: var(--size-scale-25);
+}
+
+.shopItemCard {
+  display: grid;
+  grid-template-rows: 24px 1fr 60px;
+  padding-block: var(--size-scale-100);
+  background-color: var(--color-brand-off-white);
+}
+
+.itemStatusWrapper {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: var(--size-scale-50);
+  padding-inline: var(--size-scale-100);
+}
+
+.itemStatusWrapper > * {
+  padding-block: var(--size-scale-25);
+  padding-inline: var(--size-scale-50);
+}
+
+.newItemTag, .discountTag {
+  background-color: var(--color-brand-green);
+}
+
+.outOfStockTag {
+  background-color: var(--color-brand-neutral-dark);
+  color: var(--color-text-on-dark);
+}
+
+.itemImageWrapper {
+  display: grid;
+  height: 100%;
+  place-content: center;
+}
+
+.itemImage {
+  width: 225px;
+  border-radius: 50%;
+  transition: scale 0.3s ease-in-out;
+}
+
+.shopItemCard:hover .itemImage {
+  scale: 1.05;
+}
+
+.itemPanel {
+  padding-inline: var(--size-scale-100);
+}
+
+.itemName {
+  font-size: var(--font-heading-xs-size-max);
+  font-weight: var(--font-weight-bold);
+}
+
+.itemPrices {
+  display: flex;
+  gap: var(--size-scale-25);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: var(--color-brand-neutral-dark);
+}
