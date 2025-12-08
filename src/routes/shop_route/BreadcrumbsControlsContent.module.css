@@ -1,0 +1,58 @@
+:is(.sortByList, .tagsFilterList) {
+  display: grid;
+  gap: var(--size-scale-100);
+}
+
+:is(.sortByList, .tagsFilterList) label {
+  display: flex;
+  gap: var(--size-scale-100);
+  align-items: center;
+}
+
+:is(.sortByList, .tagsFilterList) input {
+  --checkbox-size: var(--size-scale-150);
+  appearance: none;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border: 0.625px solid var(--color-filter-border);
+  border-radius: 4px;
+}
+
+:is(.sortByList, .tagsFilterList) input:checked {
+  background-color: var(--color-primary);
+}
+
+.priceFilterWrapper {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: var(--size-scale-25);
+}
+
+.priceFilterWrapper > :is(input, button) {
+  border-radius: 4px;
+}
+
+.priceFilterWrapper input {
+  padding: var(--size-scale-25);
+  border: 0.625px solid var(--color-filter-border);
+  width: 100%;
+}
+
+.priceFilterWrapper span {
+  align-self: center;
+}
+
+.priceFilterWrapper button {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border: none;
+}
+
+.priceFilterWrapper button:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.priceFilterWrapper button:active {
+  background-color: var(--color-cta-primary-active);
+}

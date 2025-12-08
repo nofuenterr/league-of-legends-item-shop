@@ -1,0 +1,116 @@
+:root {
+  --color-filter-border: #d0d0d0;
+}
+
+.breadcrumbsControlsDialogOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 998;
+}
+
+.breadcrumbsControlsDialog {
+  background-color: var(--color-background-light);
+  padding-top: var(--size-scale-250);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  z-index: 999;
+}
+
+.breadcrumbsControlsDialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-200);
+  text-transform: uppercase;
+}
+
+.breadcrumbsControlsDialogHeading {
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+}
+
+.breadcrumbsControlsDialogCloseButton {
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-50);
+}
+
+.breadcrumbsControlsDialogCloseButton:hover {
+  opacity: 0.8;
+}
+
+.filterTagsWrapper {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-100);
+  gap: var(--size-scale-25);
+  overflow-x: scroll;
+}
+
+.filterTagsWrapper button {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-50);
+  padding: var(--size-scale-50);
+  padding-right: var(--size-scale-100);
+  border: 0.625px solid var(--color-filter-border);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  width: max-content;
+}
+
+.filterTagsWrapper > div:first-child button {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-on-dark);
+}
+
+.filterTagsWrapper > div:not(:first-child) button {
+  background-color: var(--color-background-light);
+  color: var(--color-text-on-light);
+}
+
+.breadcrumbsControlsDialogContent {
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-150);
+  overflow: scroll;
+}
+
+.breadcrumbsControlsDialogContent > * {
+  padding-block: var(--size-scale-50);
+}
+
+.breadcrumbsControlsDialogContent > *:first-child {
+  border-top: 1px solid var(--color-filter-border);
+}
+
+.breadcrumbsControlsDialogContent > * {
+  border-bottom: 1px solid var(--color-filter-border);
+}
+
+.breadcrumbsControlsDialogContent h3 {
+  font-size: var(--font-body-lg-size);
+  padding-block: var(--size-scale-100);
+}
+
+.breadcrumbsControlsDialogContent h3 > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.breadcrumbsControlsDialogContent h3 + * {
+  padding-bottom: var(--size-scale-100);
+}
