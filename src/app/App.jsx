@@ -1,18 +1,33 @@
-import Header from '../components/Header'
-import Main from '../components/Main'
-import Footer from '../components/Footer'
-import useItems from '../util/useItems'
+import styles from './App.module.css'
 import { useState } from 'react'
 import { Outlet, useLoaderData, Form, useNavigate, useSubmit } from 'react-router-dom'
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import styles from './App.module.css'
+import useItems from '../util/useItems'
+import Header from '../components/Header'
+import Main from '../components/Main'
+import Footer from '../components/Footer'
 import RemoveSearch from '../../public/X'
 import Search from '../../public/Search'
 
 function App() {
   const { data, error, loading } = useItems()
   const { query, totalQty } = useLoaderData()
+
+  return (
+    <>
+      <Header totalQty={totalQty} >
+        <SearchBar query={query} />
+      </Header>
+      <Main>
+        <Outlet context={{ data, error, loading, query }} />
+      </Main>
+      <Footer />
+    </>
+  )
+}
+
+function SearchBar({ query }) {
   const [searchExpanded, setSearchExpanded] = useState(false)
   const navigate = useNavigate()
   const submit = useSubmit()
@@ -47,68 +62,56 @@ function App() {
   }
 
   return (
-    <>
-      <Header totalQty={totalQty} >
-        <Form method='post' role='search' aria-expanded={searchExpanded}>
-          <motion.div className={styles.searchWrapper}
-            variants={searchWrapper}
-            initial={'initial'}
-            animate={searchExpanded ? "expanded" : "collapsed"}
-          >
-            <button
-              type='button'
-              aria-label='expand search'
-              className={styles.expandSearch}
-              onClick={() => {
-                setSearchExpanded(prev => !prev)
-              }}
-            >
-              <Search 
-                size={22}
-                stroke='#fff'
-              />
-            </button>
-            <motion.input
-              variants={searchElement}
-              initial={'initial'}
-              animate={searchExpanded ? "show" : "hide"}
-              className={styles.searchInput}
-              type='search' 
-              id='search'
-              name='search'
-              placeholder='Search items...'
-              value={query}
-              onChange={(e) => {
-                submit(e.currentTarget.form)
-              }}
-              onClick={() => {
-                navigate('/shop')
-              }}
-              aria-label='search items'
-            />
-            <motion.button 
-              variants={searchElement}
-              initial={'initial'}
-              animate={searchExpanded ? "show" : "hide"}
-              type='submit'
-              name='removeSearch'
-              value={true}
-              className={styles.removeSearch}
-              aria-label='remove search'
-            >
-              <RemoveSearch 
-                size={20}
-                stroke='#7e7e7e'
-              />
-            </motion.button>
-          </motion.div>
-        </Form>
-      </Header>
-      <Main>
-        <Outlet context={{ data, error, loading, query }} />
-      </Main>
-      <Footer />
-    </>
+    <Form method='post' role='search' aria-expanded={searchExpanded}>
+      <motion.div className={styles.searchWrapper}
+        variants={searchWrapper}
+        initial={'initial'}
+        animate={searchExpanded ? "expanded" : "collapsed"}
+      >
+        <button
+          type='button'
+          aria-label='expand search'
+          className={styles.expandSearch}
+          onClick={() => {
+            setSearchExpanded(prev => !prev)
+          }}
+        >
+          <Search size={22} stroke='#fff' />
+        </button>
+
+        <motion.input
+          variants={searchElement}
+          initial={'initial'}
+          animate={searchExpanded ? "show" : "hide"}
+          className={styles.searchInput}
+          type='search' 
+          id='search'
+          name='search'
+          placeholder='Search items...'
+          value={query}
+          onChange={(e) => {
+            submit(e.currentTarget.form)
+          }}
+          onClick={() => {
+            navigate('/shop')
+          }}
+          aria-label='search items'
+        />
+
+        <motion.button 
+          variants={searchElement}
+          initial={'initial'}
+          animate={searchExpanded ? "show" : "hide"}
+          type='submit'
+          name='removeSearch'
+          value={true}
+          className={styles.removeSearch}
+          aria-label='remove search'
+        >
+          <RemoveSearch size={20} stroke='#7e7e7e'/>
+        </motion.button>
+      </motion.div>
+    </Form>
   )
 }
 
