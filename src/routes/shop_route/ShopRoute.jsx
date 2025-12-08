@@ -3,6 +3,7 @@ import items from '../../data/items/items';
 import tags from '../../data/items/tags';
 import { useState } from 'react';
 import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
+import styles from './ShopRoute.module.css'
 
 function ShopRoute() {
   const { data, error, loading } = useOutletContext()
@@ -11,19 +12,97 @@ function ShopRoute() {
   if (loading) return <Loading />
   if (data) {
     return (
-      <div>
-        <Filters />
-        <Items />
-      </div>
+      <Shop />
     )
   }
 }
 
-function Filters() {
+function Shop() {
+  const itemsList = items.getItems()
+
   return (
     <div>
+      <Breadcrumbs items={itemsList} />
+      <Items items={itemsList} />
+    </div>
+  )
+}
+
+function Breadcrumbs({ items }) {
+  const [controls, setControls] = useState(false)
+
+  return (
+    <>
+      <BreadcrumbsList items={items} />
+      <button onClick={() => setControls(prev => !prev)}>Refine</button>
+      {controls && <BreadcrumbsControls />}
+    </>
+  )
+}
+
+function BreadcrumbsList({ items }) {
+  return (
+    <div className={styles.breadcrumbsWrapper}>
+      <nav>
+        <ol className={styles.breadcrumbsList}>
+          <li>
+            <Link to='/'>Home</Link> /
+          </li>
+          <li>
+            <p 
+              aria-live='polite' 
+              aria-label={items.length + ' items'}
+            >
+              Home
+              <sup>
+                <span 
+                  className={styles.shopItemsQuantity}
+                >
+                  ({items.length})
+                </span>
+              </sup>
+            </p>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  )
+}
+
+
+function BreadcrumbsControls() {
+  return (
+    <div>
+      <Sort />
       <Price />
       <Tags />
+    </div>
+  )
+}
+
+function Sort() {
+  const { sortBy } = useLoaderData()
+  const submit = useSubmit()
+
+  return (
+    <div>
+      <Form method="post">
+        <label>
+          Sort by: 
+          <select
+            defaultValue={sortBy}
+            name="sortBy"
+            id="sortBy"
+            onChange={(e) => submit(e.currentTarget.form)}
+          >
+            <option value="default">Default</option>
+            <option value="a-z">Alphabetically: A-Z</option>
+            <option value="z-a">Alphabetically: Z-A</option>
+            <option value="low-high">Price: Low to High </option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </label>
+      </Form>
     </div>
   )
 }
@@ -117,14 +196,13 @@ function Tag({ tag }) {
   )
 }
 
-function Items() {
+function Items({ items }) {
   const { query } = useOutletContext()
-  const itemsList = items.getItems()
 
   return (
     <div>
-      <Info items={itemsList} query={query} />
-      <ItemsList items={itemsList} />
+      <Info items={items} query={query} />
+      <ItemsList items={items} />
     </div>
   )
 }
@@ -136,7 +214,6 @@ function Info({ items, query }) {
   return (
     <div>
       <div>
-        <p aria-live='polite' aria-label={items.length + ' items'}>Items ({items.length})</p>
         <div>
           {query 
             ? (
@@ -175,34 +252,6 @@ function Info({ items, query }) {
           ? <p>No items match the current filters.</p> 
           : null}
       </div>
-      <Sort />
-    </div>
-  )
-}
-
-function Sort() {
-  const { sortBy } = useLoaderData()
-  const submit = useSubmit()
-
-  return (
-    <div>
-      <Form method="post">
-        <label>
-          Sort by: 
-          <select
-            defaultValue={sortBy}
-            name="sortBy"
-            id="sortBy"
-            onChange={(e) => submit(e.currentTarget.form)}
-          >
-            <option value="default">Default</option>
-            <option value="a-z">Alphabetically: A-Z</option>
-            <option value="z-a">Alphabetically: Z-A</option>
-            <option value="low-high">Price: Low to High </option>
-            <option value="high-low">Price: High to Low</option>
-          </select>
-        </label>
-      </Form>
     </div>
   )
 }
