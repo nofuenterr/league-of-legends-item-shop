@@ -1,7 +1,7 @@
 import App from './App/App'
 import { loader as appLoader } from './app/appLoader'
 import { action as appAction } from './app/appAction'
-import Home from './routes/HomeRoute';
+import Home from './routes/home_route/HomeRoute';
 import Shop from './routes/shop_route/ShopRoute';
 import { loader as shopLoader } from './routes/shop_route/shopRouteLoader'
 import { action as shopAction } from './routes/shop_route/shopRouteAction'

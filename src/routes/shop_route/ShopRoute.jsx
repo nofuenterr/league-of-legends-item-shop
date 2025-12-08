@@ -1,10 +1,14 @@
 import Loading from '../../components/Loading';
 import items from '../../data/items/items';
 import tags from '../../data/items/tags';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
 import styles from './ShopRoute.module.css'
 import BreadcrumbsControlsIcon from '../../../public/Settings2'
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import ActiveIndicator from '../../../public/ChevronRight'
+import X from '../../../public/X'
 
 function ShopRoute() {
   const { data, error, loading } = useOutletContext()
@@ -35,14 +39,20 @@ function Breadcrumbs({ items }) {
   return (
     <div className={styles.breadcrumbsWrapper}>
       <BreadcrumbsList items={items} />
-      <button 
+      <button
+        aria-haspopup='dialog'
+        aria-expanded={controls}
+        aria-controls='breadcrumbsControlButton'
         className={styles.breadcrumbsControlsButton} 
         onClick={() => setControls(prev => !prev)}
       >
         <BreadcrumbsControlsIcon size={20} />
         Refine
       </button>
-      {controls && <BreadcrumbsControls />}
+      <BreadcrumbsControls 
+        controls={controls}
+        setControls={setControls}
+      />
     </div>
   )
 }
@@ -76,95 +86,274 @@ function BreadcrumbsList({ items }) {
   )
 }
 
-function BreadcrumbsControls() {
+function BreadcrumbsControls({ controls, setControls }) {
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (controls && dialogRef.current) {
+      dialogRef.current.focus();
+    }
+  }, [controls]);
+
+  useEffect(() => {
+      document.body.style.overflow = controls ? "hidden" : "";
+    }, [controls]);
+
+  useEffect(() => {
+    if (!dialogRef.current) return;
+
+    const handleTab = (e) => {
+      if (e.key !== "Tab") return;
+      const focusable = dialogRef.current.querySelectorAll(
+        "a[href], button, textarea, input, select, [tabindex]:not([tabindex='-1'])"
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setControls(false);
+    };
+
+    document.addEventListener("keydown", handleTab);
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("keydown", handleTab);
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [setControls]);
+
+
+  const controlsDialog = {
+    initial: {
+      x: "100%",
+      width: 0,
+      display: 'none',
+      visibility: 'hidden',
+      ariaHidden: 'true',
+      alignContent: 'start',
+    },
+    expanded: { 
+      x: "0%",
+      width: '28rem',
+      transition: { duration: 0.35, ease: "easeOut" },
+      display: 'grid',
+      visibility: 'visible',
+      ariaHidden: 'false',
+    },
+    collapsed: {
+      x: "100%",
+      width: 0,
+      transition: { duration: 0.35, ease: "easeIn" },
+      display: 'none',
+      visibility: 'hidden',
+      ariaHidden: 'true',
+    }
+  }
+
   return (
-    <div>
-      <Sort />
-      <Price />
-      <Tags />
-    </div>
+    <>
+      {controls && (
+        <div
+          className={styles.breadcrumbsControlsDialogOverlay}
+          aria-hidden="true"
+          onClick={() => setControls(false)}
+        />
+      )}
+      <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
+        variants={controlsDialog}
+        initial={'initial'}
+        animate={controls ? "expanded" : "collapsed"}
+        role='dialog'
+        aria-modal="true"
+        aria-describedby='breadcrumbsControlButton'
+        className={styles.breadcrumbsControlsDialog} 
+      >
+        <div className={styles.breadcrumbsControlsDialogHeader}>
+          <h2 className={styles.breadcrumbsControlsDialogHeading}>Refine</h2>
+          <button
+            className={styles.breadcrumbsControlsDialogCloseButton}
+            aria-label='close dialog'
+            onClick={() => setControls(prev => !prev)}
+          >
+            Close
+            <X size={20} />
+          </button>
+        </div>
+        <div className={styles.breadcrumbsControlsDialogContent}>
+          <Sort />
+          <Price />
+          <Tags />
+        </div>
+      </motion.div>
+    </>
   )
 }
 
 function Sort() {
+  const [activeSort, setActiveSort] = useState(true) 
   const { sortBy } = useLoaderData()
   const submit = useSubmit()
 
   return (
     <div>
-      <Form method="post">
-        <label>
-          Sort by: 
-          <select
-            defaultValue={sortBy}
-            name="sortBy"
-            id="sortBy"
-            onChange={(e) => submit(e.currentTarget.form)}
-          >
-            <option value="default">Default</option>
-            <option value="a-z">Alphabetically: A-Z</option>
-            <option value="z-a">Alphabetically: Z-A</option>
-            <option value="low-high">Price: Low to High </option>
-            <option value="high-low">Price: High to Low</option>
-          </select>
-        </label>
-      </Form>
+      <h3>
+        <button onClick={() => setActiveSort(prev => !prev)} 
+          aria-expanded={activeSort}
+        >
+          <span>Sort By</span>
+          <ActiveIndicator size={20} active={activeSort} />
+        </button>
+      </h3>
+      {activeSort && <Form method="post">
+        <ul className={styles.sortByList}>
+          <li>
+            <label>
+              <input
+                defaultChecked={sortBy === 'default'}
+                type="radio"
+                name='sortBy'
+                value='default'
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
+              Default
+            </label>
+          </li>
+          <li>
+            <label>
+              <input 
+                defaultChecked={sortBy === 'a-z'}
+                type="radio" 
+                name='sortBy' 
+                value='a-z'
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
+              Alphabetically: A-Z
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                defaultChecked={sortBy === 'z-a'}
+                type="radio"
+                name='sortBy'
+                value='z-a'
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
+              Alphabetically: Z-A
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                defaultChecked={sortBy === 'low-high'}
+                type="radio" 
+                name='sortBy' 
+                value='low-high'
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
+              Price: Low to High
+            </label>
+          </li>
+          <li>
+            <label>
+              <input
+                defaultChecked={sortBy === 'high-low'}
+                type="radio"
+                name='sortBy'
+                value='high-low'
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
+              Price: High to Low
+            </label>
+          </li>
+        </ul>
+      </Form>}
     </div>
   )
 }
 
 function Price() {
+  const [activePrice, setActivePrice] = useState(false) 
   const { minPrice, maxPrice } = useLoaderData()
 
   return (
     <div>
-      <p>Price</p>
-      <div>
+      <h3>
+        <button onClick={() => setActivePrice(prev => !prev)} 
+          aria-expanded={activePrice}
+        >
+          <span>Price</span>
+          <ActiveIndicator size={20} active={activePrice} />
+        </button>
+      </h3>
+      {activePrice && <div>
         <Form method="post">
-          <input
-            name='minPrice'
-            defaultValue={minPrice}
-            type='text'
-            inputMode='numeric'
-            pattern='[0-9]*'
-            placeholder="MIN"
-            aria-label='min price'
-          />
-          <span> - </span>
-          <input
-            name='maxPrice'
-            defaultValue={maxPrice}
-            type='text'
-            inputMode='numeric'
-            pattern='[0-9]*'
-            placeholder="MAX"
-            aria-label='max price'
-          />
-          <button 
-            type="submit"
-            name="priceFilter"
-            value={true}
-            onClick={() => {
-              if (maxPrice && minPrice > maxPrice) {
-                alert('Minimum price must be smaller than maximum price!')
-              }
-            }}
-            aria-label='apply price filter'
-          >Apply</button>
+          <div className={styles.priceFilterWrapper}>
+            <input
+              name='minPrice'
+              defaultValue={minPrice}
+              type='text'
+              inputMode='numeric'
+              pattern='[0-9]*'
+              placeholder="MIN"
+              aria-label='min price'
+            />
+            <span> - </span>
+            <input
+              name='maxPrice'
+              defaultValue={maxPrice}
+              type='text'
+              inputMode='numeric'
+              pattern='[0-9]*'
+              placeholder="MAX"
+              aria-label='max price'
+            />
+            <button 
+              type="submit"
+              name="priceFilter"
+              value={true}
+              onClick={() => {
+                if (maxPrice && minPrice > maxPrice) {
+                  alert('Minimum price must be smaller than maximum price!')
+                }
+              }}
+              aria-label='apply price filter'
+            >Apply</button>
+          </div>
         </Form>
-      </div>
+      </div>}
     </div>
   )
 }
 
 function Tags() {
-  const [activeTags, setActiveTags] = useState(true) 
+  const [activeTags, setActiveTags] = useState(false) 
   const tagsList = tags.getTags()
 
   return (
     <div>
-      <p onClick={() => setActiveTags(!activeTags)} aria-expanded={activeTags}>Tags</p>
-      {activeTags && <ul>
+      <h3>
+        <button 
+          onClick={() => setActiveTags(prev => !prev)} 
+          aria-expanded={activeTags}
+        >
+          <span>Tags</span>
+          <ActiveIndicator size={20} active={activeTags} />
+        </button>
+      </h3>
+      {activeTags && <ul className={styles.tagsFilterList}>
         {tagsList.map(tag => {
           return (
             <Tag key={tag} tag={tag} />
