@@ -1,3 +1,4 @@
+import parsePrice from '../../util/parsePrice'
 import styles from './Items.module.css'
 import { Link } from 'react-router-dom'
 
@@ -53,9 +54,9 @@ function Item({ item }) {
           {item.oldPrice 
             && <p
                 className={styles.oldPrice} 
-                >{item.oldPrice} gold
+                >{parsePrice(item.oldPrice)} gold
               </p>}
-          <p>{item.buyCost} gold</p>
+          <p>{parsePrice(item.buyCost)} gold</p>
         </div>
       </div>
     </li>

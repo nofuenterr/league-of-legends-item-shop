@@ -4,6 +4,7 @@ import splitPascalCase from '../../util/splitPascalCase';
 import { useParams, useOutletContext, Link } from 'react-router-dom'
 import styles from './ItemRoute.module.css'
 import ItemForm from './ItemForm';
+import parsePrice from '../../util/parsePrice';
 
 export default function ItemRoute() {
   const {data, error, loading} = useOutletContext()
@@ -107,8 +108,8 @@ function Info({ item }) {
       </div>
 
       <div className={styles.itemPrices}>
-        {item.oldPrice && <p className={styles.oldPrice}>{item.oldPrice} gold</p>}
-        <p>{item.buyCost} gold</p>
+        {item.oldPrice && <p className={styles.oldPrice}>{parsePrice(item.oldPrice)} gold</p>}
+        <p>{parsePrice(item.buyCost)} gold</p>
       </div>
     </div>
   )

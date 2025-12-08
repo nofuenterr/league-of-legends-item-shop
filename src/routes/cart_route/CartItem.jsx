@@ -1,6 +1,38 @@
 import styles from './CartItem.module.css'
 import { Link, Form, useSubmit } from 'react-router-dom'
+import parsePrice from '../../util/parsePrice'
 import RemoveCartItem from '../../../public/Trash'
+
+export default function CartItem({ item }) {
+  return (
+    <li>
+      {!item.stock && <p>Sold Out</p>}
+
+      <div className={styles.cartItemWrapper}>
+        <Link to={`/shop/${item.id}`}>
+          <div>
+            <img
+              title={item.name}
+              src={item.image}
+              alt={item.name + ' image'}
+            />
+          </div>
+        </Link>
+
+        <div className={styles.cartDetailsWrapper}>
+          <CartItemDetails item={item} />
+          <RemoveCartItemButton id={item.id} />
+
+          <p className={styles.cartItemTotal}>
+            Total: {parsePrice(item.qty * item.buyCost)} gold
+          </p>
+
+          <CartItemQuantity item={item} />
+        </div>
+      </div>
+    </li>
+  )
+}
 
 function CartItemDetails({ item }) {
   return (
@@ -9,13 +41,13 @@ function CartItemDetails({ item }) {
 
       <div className={styles.cartItemPrices}>
         {item.oldPrice && (
-          <p className={styles.oldPrice}>{item.oldPrice} gold</p>
+          <p className={styles.oldPrice}>{parsePrice(item.oldPrice)} gold</p>
         )}
-        <p>{item.buyCost} gold</p>
+        <p>{parsePrice(item.buyCost)} gold</p>
       </div>
 
       <p>
-        Stock: <span className={styles.stockValue}>{item.stock}</span>
+        Stock: <span className={styles.stockValue}>{parsePrice(item.stock)}</span>
       </p>
     </div>
   )
@@ -84,36 +116,5 @@ function CartItemQuantity({ item }) {
         <input type='hidden' name='action' value='edit' />
       </p>
     </Form>
-  )
-}
-
-export default function CartItem({ item }) {
-  return (
-    <li>
-      {!item.stock && <p>Sold Out</p>}
-
-      <div className={styles.cartItemWrapper}>
-        <Link to={`/shop/${item.id}`}>
-          <div>
-            <img
-              title={item.name}
-              src={item.image}
-              alt={item.name + ' image'}
-            />
-          </div>
-        </Link>
-
-        <div className={styles.cartDetailsWrapper}>
-          <CartItemDetails item={item} />
-          <RemoveCartItemButton id={item.id} />
-
-          <p className={styles.cartItemTotal}>
-            Total: {item.qty * item.buyCost} gold
-          </p>
-
-          <CartItemQuantity item={item} />
-        </div>
-      </div>
-    </li>
   )
 }
