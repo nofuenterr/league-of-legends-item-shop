@@ -54,7 +54,7 @@
   --color-text-search-on-dark: #f9f9f9;
 
   --color-text-error: #eb0029;
-  
+
   --color-icon-delete: #eb0029;
   
   --ff-default: 'Beaufort for LOL';
@@ -145,6 +145,8 @@
 
   --space-button-padding-block: var(--size-scale-112);
   --space-button-padding-inline: var(--size-scale-200);
+  --space-button-sm-padding-block: var(--size-scale-50);
+  --space-button-sm-padding-inline: var(--size-scale-100);
 
   /* more to appropriate module */
   --font-brand-family: 'League', Helvetica, Arial, sans-serif;

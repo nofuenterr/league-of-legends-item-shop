@@ -4,6 +4,7 @@ import tags from '../../data/items/tags';
 import { useState } from 'react';
 import { Form, useOutletContext, useSubmit, Link, useLoaderData } from 'react-router-dom';
 import styles from './ShopRoute.module.css'
+import BreadcrumbsControlsIcon from '../../../public/Settings2'
 
 function ShopRoute() {
   const { data, error, loading } = useOutletContext()
@@ -32,28 +33,34 @@ function Breadcrumbs({ items }) {
   const [controls, setControls] = useState(false)
 
   return (
-    <>
+    <div className={styles.breadcrumbsWrapper}>
       <BreadcrumbsList items={items} />
-      <button onClick={() => setControls(prev => !prev)}>Refine</button>
+      <button 
+        className={styles.breadcrumbsControlsButton} 
+        onClick={() => setControls(prev => !prev)}
+      >
+        <BreadcrumbsControlsIcon size={20} />
+        Refine
+      </button>
       {controls && <BreadcrumbsControls />}
-    </>
+    </div>
   )
 }
 
 function BreadcrumbsList({ items }) {
   return (
-    <div className={styles.breadcrumbsWrapper}>
+    <div>
       <nav>
         <ol className={styles.breadcrumbsList}>
           <li>
             <Link to='/'>Home</Link> /
           </li>
-          <li>
+          <li className={styles.breadcrumbsCurrent}>
             <p 
               aria-live='polite' 
               aria-label={items.length + ' items'}
             >
-              Home
+              Shop
               <sup>
                 <span 
                   className={styles.shopItemsQuantity}
@@ -68,7 +75,6 @@ function BreadcrumbsList({ items }) {
     </div>
   )
 }
-
 
 function BreadcrumbsControls() {
   return (
