@@ -1,0 +1,82 @@
+.quantityInfoWrapper {
+  display: grid;
+  gap: var(--size-scale-75);
+}
+
+.stockValue {
+  font-weight: var(--font-weight-bold);
+}
+
+.quantityInputWrapper {
+  display: grid;
+  grid-template-columns: var(--size-scale-125) var(--size-scale-400) var(--size-scale-125);
+  grid-template-rows: var(--size-scale-250);
+  gap: var(--size-scale-25);
+}
+
+.quantityInputWrapper > button {
+  border: none;
+  cursor: pointer;
+}
+
+.quantityInput {
+  padding: var(--size-scale-75);
+}
+
+.quantityDecrement {
+  background-color: var(--color-background-quantity-decrement);
+}
+
+.quantityIncrement {
+  background-color: var(--color-background-quantity-increment);
+}
+
+:is(.quantityDecrement, .quantityIncrement).quantityChangeInvalid {
+  cursor: not-allowed;
+}
+
+.addToCartError {
+  color: var(--color-text-error);
+}
+
+.callToActionsWrapper {
+  display: flex;
+  gap: var(--size-scale-150);
+  padding-block: var(--size-scale-175);
+}
+
+.callToActionsWrapper > button {
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+  border: none;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.addToCart {
+  color: var(--color-text-on-primary);
+  background-color: var(--color-primary);
+}
+
+.addToCart:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.addToCart:active {
+  background-color: var(--color-cta-primary-active);
+}
+
+.buyItNow {
+  color: var(--color-text-on-secondary);
+  background-color: var(--color-secondary);
+}
+
+.buyItNow:hover {
+  background-color: var(--color-cta-secondary-hover);
+}
+
+.buyItNow:active {
+  background-color: var(--color-cta-secondary-active);
+}
