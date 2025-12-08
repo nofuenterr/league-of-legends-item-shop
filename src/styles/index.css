@@ -25,6 +25,15 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Beaufort for LOL';
+    src: url('../assets/fonts/BeaufortforLOL-Medium.woff2') format('woff2'),
+        url('../assets/fonts/BeaufortforLOL-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -62,6 +71,7 @@
   --ff-default: 'Beaufort for LOL';
 
   --font-weight-regular: 400;
+  --font-weight-medium: 500;
   --font-weight-bold: 700;
 
   --size-scale-25: 0.25rem;

@@ -198,6 +198,7 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  font-weight: var(--font-weight-medium);
 }
 
 .addToCart {
