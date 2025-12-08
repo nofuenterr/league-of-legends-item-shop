@@ -17,7 +17,9 @@
 .breadcrumbsWrapper {
   position: absolute;
   inset-inline-start: var(--size-scale-200);
-  inset-block-start: var(--size-scale-100);
+  height: 60px;
+  display: grid;
+  align-items: center;
   z-index: 1;
 }
 
