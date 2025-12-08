@@ -1,0 +1,68 @@
+.orderSummaryWrapper {
+  align-self: flex-start;
+  display: grid;
+  gap: var(--size-scale-175);
+  width: 100%;
+  /* width: 400px; */
+  padding: var(--size-scale-300);
+  border: 1px solid var(--color-brand-neutral-dark);
+  border-radius: 8px;
+}
+
+.orderSummaryHeading {
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.orderSummaryDetailWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.orderSummaryTotal {
+  font-weight: var(--font-weight-bold);
+}
+
+h3.orderSummaryTotal {
+  font-size: var(--size-scale-150);
+  text-transform: uppercase;
+}
+
+.orderSummaryWrapper > :is(button, div:has(a[aria-label='continue shopping'])) {
+  width: 100%;
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+  border: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.checkout {
+  color: var(--color-text-on-primary);
+  background-color: var(--color-primary);
+}
+
+.checkout:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.checkout:active {
+  background-color: var(--color-cta-primary-active);
+}
+
+.continueShopping {
+  color: var(--color-text-on-secondary);
+  background-color: var(--color-secondary);
+}
+
+.continueShopping:hover {
+  background-color: var(--color-cta-secondary-hover);
+}
+
+.continueShopping:active {
+  background-color: var(--color-cta-secondary-active);
+}

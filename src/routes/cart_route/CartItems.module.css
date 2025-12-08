@@ -1,0 +1,20 @@
+/* .cartWrapper {
+  max-width: 800px;
+} */
+
+.cartHeading {
+  padding-bottom: var(--size-scale-200);
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+}
+
+.cartItemsQuantity {
+  font-size: 0.8em;
+}
+
+.cartItemsWrapper {
+  display: grid;
+  gap: var(--size-scale-200);
+  padding-block: var(--size-scale-200);
+}
