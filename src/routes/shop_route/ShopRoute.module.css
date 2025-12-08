@@ -165,6 +165,37 @@
   opacity: 0.8;
 }
 
+.filterTagsWrapper {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-100);
+  gap: var(--size-scale-25);
+  overflow-x: scroll;
+}
+
+.filterTagsWrapper button {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-50);
+  padding: var(--size-scale-50);
+  padding-right: var(--size-scale-100);
+  border: 0.625px solid var(--color-filter-border);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  width: max-content;
+}
+
+.filterTagsWrapper > div:first-child button {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-on-dark);
+}
+
+.filterTagsWrapper > div:not(:first-child) button {
+  background-color: var(--color-background-light);
+  color: var(--color-text-on-light);
+}
+
 .breadcrumbsControlsDialogContent {
   padding-inline: var(--size-scale-200);
   padding-bottom: var(--size-scale-150);

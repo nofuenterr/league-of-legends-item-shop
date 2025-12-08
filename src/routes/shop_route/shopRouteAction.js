@@ -7,6 +7,7 @@ export async function action({ request }) {
   const removeQuery = formData.get('removeQuery')
   const tag = formData.get('tag')
   const priceFilter = formData.get('priceFilter')
+  const clearFilters = formData.get('clearFilters')
 
   if (sortBy) sort.setSort(sortBy)
   if (removeQuery) filter.setQuery('')
@@ -15,5 +16,8 @@ export async function action({ request }) {
     const minPrice = parseInt(formData.get('minPrice'))
     const maxPrice = parseInt(formData.get('maxPrice'))
     filter.setPrice(minPrice, maxPrice)
+  }
+  if (clearFilters) {
+    filter.clearFilters()
   }
 }

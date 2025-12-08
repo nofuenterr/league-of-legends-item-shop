@@ -88,6 +88,8 @@ function BreadcrumbsList({ items }) {
 
 function BreadcrumbsControls({ controls, setControls }) {
   const dialogRef = useRef(null);
+  const submit = useSubmit()
+  const { tagFilter } = useLoaderData()
 
   useEffect(() => {
     if (controls && dialogRef.current) {
@@ -131,7 +133,6 @@ function BreadcrumbsControls({ controls, setControls }) {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [setControls]);
-
 
   const controlsDialog = {
     initial: {
@@ -191,6 +192,44 @@ function BreadcrumbsControls({ controls, setControls }) {
             <X size={20} />
           </button>
         </div>
+        {tagFilter.length > 0 
+          ? (
+            <div className={styles.filterTagsWrapper}>
+              <div>
+                <Form method='post'>
+                  <button 
+                    name='clearFilters'
+                    value={true}
+                    onChange={(e) => {
+                      submit(e.currentTarget.form)
+                    }}
+                  >
+                    <X size={20}/>
+                    <span>Clear Filters</span>
+                  </button>
+                </Form>
+              </div>
+              {tagFilter.map(tag => {
+                return (
+                  <div key={tag}>
+                    <Form method='post'>
+                      <button 
+                        name='tag'
+                        value={tag}
+                        onChange={(e) => {
+                          submit(e.currentTarget.form)
+                        }}
+                      >
+                      <X size={20} />
+                      <span>{tag}</span>
+                      </button>
+                    </Form>
+                  </div>
+                )
+              })}
+            </div>
+          )
+          : null}
         <div className={styles.breadcrumbsControlsDialogContent}>
           <Sort />
           <Price />
@@ -403,9 +442,6 @@ function Items({ items }) {
 }
 
 function Info({ items, query }) {
-  const { tagFilter } = useLoaderData()
-  const submit = useSubmit()
-
   return (
     <div>
       <div>
@@ -423,24 +459,6 @@ function Info({ items, query }) {
                 </Form>
               </div>
             ) 
-            : null}
-          {tagFilter.length > 0 
-            ? tagFilter.map(tag => {
-              return (
-                <div key={tag}>
-                  <span>{tag}</span>
-                  <Form method='post'>
-                    <button 
-                      name='tag'
-                      value={tag}
-                      onChange={(e) => {
-                        submit(e.currentTarget.form)
-                      }}
-                    >x</button>
-                  </Form>
-                </div>
-              )
-            })
             : null}
         </div>
         {query && items.length === 0 

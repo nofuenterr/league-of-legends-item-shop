@@ -48,6 +48,11 @@ class Filter {
   getPrice() {
     return [...this.price]
   }
+
+  clearFilters() {
+    this.tags = []
+    this.price = [null, null]
+  }
 }
 
 export const filterItemsByPrice = (items, min, max) => {
