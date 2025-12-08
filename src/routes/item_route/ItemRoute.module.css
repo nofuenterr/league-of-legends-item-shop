@@ -92,7 +92,8 @@
 }
 
 .itemDetails {
-  padding: var(--size-scale-250);
+  padding-block: var(--size-scale-250);
+  padding-inline: var(--size-scale-200);
 }
 
 .tagsList {
