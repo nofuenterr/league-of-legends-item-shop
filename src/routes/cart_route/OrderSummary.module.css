@@ -31,14 +31,24 @@ h3.orderSummaryTotal {
 
 .orderSummaryWrapper > :is(button, div:has(a[aria-label='continue shopping'])) {
   width: 100%;
-  padding-block: var(--space-button-padding-block);
-  padding-inline: var(--space-button-padding-inline);
+  height: var(--size-scale-350);
   border: none;
   text-align: center;
   text-transform: uppercase;
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
+}
+
+.orderSummaryWrapper > button {
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+}
+
+div a[aria-label='continue shopping'] {
+  height: 100%;
+  display: grid;
+  place-content: center;
 }
 
 .checkout {
