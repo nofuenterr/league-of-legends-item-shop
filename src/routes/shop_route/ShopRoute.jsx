@@ -58,6 +58,8 @@ function Breadcrumbs({ items }) {
 }
 
 function BreadcrumbsList({ items }) {
+  const { query } = useOutletContext()
+
   return (
     <div>
       <nav>
@@ -65,12 +67,14 @@ function BreadcrumbsList({ items }) {
           <li>
             <Link to='/'>Home</Link> /
           </li>
-          <li className={styles.breadcrumbsCurrent}>
+          <li>
             <p 
               aria-live='polite' 
               aria-label={items.length + ' items'}
             >
-              Shop
+              <span 
+                className={styles.breadcrumbsCurrent}
+              >{query ? `Search - '${query}' ` : 'Shop '}</span>
               <sup>
                 <span 
                   className={styles.shopItemsQuantity}
@@ -431,40 +435,20 @@ function Tag({ tag }) {
 }
 
 function Items({ items }) {
-  const { query } = useOutletContext()
-
   return (
     <div>
-      <Info items={items} query={query} />
-      <ItemsList items={items} />
+      {items.length > 0
+        ? <ItemsList items={items} />
+        : <Empty />
+      }
     </div>
   )
 }
 
-function Info({ items, query }) {
+function Empty() {
   return (
     <div>
-      <div>
-        <div>
-          {query 
-            ? (
-              <div>
-                <span>"{query}"</span>
-                <Form method="post">
-                  <button 
-                    type="submit"
-                    name="removeQuery"
-                    value={true}
-                  >x</button>
-                </Form>
-              </div>
-            ) 
-            : null}
-        </div>
-        {query && items.length === 0 
-          ? <p>No items match the current filters.</p> 
-          : null}
-      </div>
+      <h2>No items match the current filters.</h2> 
     </div>
   )
 }
