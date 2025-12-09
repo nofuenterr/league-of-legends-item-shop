@@ -34,6 +34,15 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Beaufort for LOL';
+    src: url('../assets/fonts/BeaufortforLOL-BoldItalic.woff2') format('woff2'),
+        url('../assets/fonts/BeaufortforLOL-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -98,6 +107,9 @@
   --size-spacing-section-md-max: var(--size-scale-600);
   --size-spacing-section-lg-min: var(--size-scale-600);
   --size-spacing-section-lg-max: var(--size-scale-800);
+
+  --font-heading-xxl-size-min: 4rem;
+  --font-heading-xxl-size-max: 5rem;
 
   --font-heading-xl-size-min: 3rem;
   --font-heading-xl-size-max: 4rem;
