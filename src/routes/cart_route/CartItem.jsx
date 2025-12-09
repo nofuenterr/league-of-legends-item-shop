@@ -1,6 +1,6 @@
 import styles from './CartItem.module.css'
 import { Link, Form, useSubmit } from 'react-router-dom'
-import parsePrice from '../../util/parsePrice'
+import formatPrice from '../../util/formatPrice'
 import RemoveCartItem from '../../components/icons/Trash'
 
 export default function CartItem({ item }) {
@@ -24,7 +24,7 @@ export default function CartItem({ item }) {
           <RemoveCartItemButton id={item.id} />
 
           <p className={styles.cartItemTotal}>
-            Total: {parsePrice(item.qty * item.buyCost)} gold
+            Total: {formatPrice(item.qty * item.buyCost)} gold
           </p>
 
           <CartItemQuantity item={item} />
@@ -41,13 +41,13 @@ function CartItemDetails({ item }) {
 
       <div className={styles.cartItemPrices}>
         {item.oldPrice && (
-          <p className={styles.oldPrice}>{parsePrice(item.oldPrice)} gold</p>
+          <p className={styles.oldPrice}>{formatPrice(item.oldPrice)} gold</p>
         )}
-        <p>{parsePrice(item.buyCost)} gold</p>
+        <p>{formatPrice(item.buyCost)} gold</p>
       </div>
 
       <p>
-        Stock: <span className={styles.stockValue}>{parsePrice(item.stock)}</span>
+        Stock: <span className={styles.stockValue}>{formatPrice(item.stock)}</span>
       </p>
     </div>
   )

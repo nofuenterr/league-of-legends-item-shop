@@ -1,4 +1,4 @@
-const parsePrice = (price) => {
+const formatPrice = (price) => {
   let counter = 0
   let parsedPrice = []
 
@@ -14,4 +14,4 @@ const parsePrice = (price) => {
   return parsedPrice.reverse().join('')
 }
 
-export default parsePrice
+export default formatPrice

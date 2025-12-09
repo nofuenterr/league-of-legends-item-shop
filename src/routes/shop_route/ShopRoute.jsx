@@ -6,7 +6,7 @@ import Items from './Items';
 import BreadcrumbsControls from './BreadcrumbsControls';
 import items from '../../data/items/items';
 import BreadcrumbsControlsIcon from '../../components/icons/Settings2'
-import parsePrice from '../../util/parsePrice';
+import formatPrice from '../../util/formatPrice';
 
 export default function ShopRoute() {
   const { data, error, loading } = useOutletContext()
@@ -70,7 +70,7 @@ function BreadcrumbsList({ items }) {
               </span>
               <sup>
                 <span className={styles.shopItemsQuantity}>
-                  ({parsePrice(items.length)})
+                  ({formatPrice(items.length)})
                 </span>
               </sup>
             </p>

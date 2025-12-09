@@ -1,7 +1,7 @@
 import styles from './ItemForm.module.css'
 import { useState } from 'react';
 import { Form } from 'react-router-dom'
-import parsePrice from '../../util/parsePrice';
+import formatPrice from '../../util/formatPrice';
 
 
 export default function ItemForm({ item }) {
@@ -19,7 +19,7 @@ function Input({ stock, cartQty }) {
 
   return (
     <div className={styles.quantityInfoWrapper}>
-      <p>Stock: <span className={styles.stockValue}>{parsePrice(stock)}</span></p>
+      <p>Stock: <span className={styles.stockValue}>{formatPrice(stock)}</span></p>
       <p className={styles.quantityInputWrapper}>
         <button 
           className={`${styles.quantityDecrement}` 

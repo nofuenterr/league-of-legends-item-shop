@@ -1,6 +1,6 @@
 import styles from './CartItems.module.css'
 import CartItem from './CartItem'
-import parsePrice from '../../util/parsePrice'
+import formatPrice from '../../util/formatPrice'
 
 function CartItems({ cartItems }) {
   return (
@@ -8,7 +8,7 @@ function CartItems({ cartItems }) {
       <h2 className={styles.cartHeading}>
         Cart
         <sup>
-          <span className={styles.cartItemsQuantity}>({parsePrice(cartItems.length)})</span>
+          <span className={styles.cartItemsQuantity}>({formatPrice(cartItems.length)})</span>
         </sup>
       </h2>
 
