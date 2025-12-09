@@ -1,7 +1,7 @@
 import styles from './CartItem.module.css'
 import { Link, Form, useSubmit } from 'react-router-dom'
 import parsePrice from '../../util/parsePrice'
-import RemoveCartItem from '../../../public/Trash'
+import RemoveCartItem from '../../components/icons/Trash'
 
 export default function CartItem({ item }) {
   return (

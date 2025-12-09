@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 import Items from './Items';
 import BreadcrumbsControls from './BreadcrumbsControls';
 import items from '../../data/items/items';
-import BreadcrumbsControlsIcon from '../../../public/Settings2'
+import BreadcrumbsControlsIcon from '../../components/icons/Settings2'
 import parsePrice from '../../util/parsePrice';
 
 export default function ShopRoute() {

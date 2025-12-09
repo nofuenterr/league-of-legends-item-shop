@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
 import lolIconFlatWhite from '../assets/images/LoL_Icon_Flat_WHITE.png'
-import ShoppingCart from '../../public/ShoppingCart'
+import ShoppingCart from './icons/ShoppingCart'
 
 function Header({ totalQty, children }) {
 

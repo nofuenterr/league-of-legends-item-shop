@@ -7,8 +7,8 @@ import useItems from '../util/useItems'
 import Header from '../components/Header'
 import Main from '../components/Main'
 import Footer from '../components/Footer'
-import RemoveSearch from '../../public/X'
-import Search from '../../public/Search'
+import RemoveSearch from '../components/icons/X'
+import Search from '../components/icons/Search'
 
 function App() {
   const { data, error, loading } = useItems()
