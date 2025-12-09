@@ -1,0 +1,158 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-25);
+  font-family: var(--font-brand-family);
+  font-size: var(--font-brand-size);
+  font-weight: var(--font-brand-weight);
+}
+
+.brandImage {
+  width: var(--image-brand-width);
+}
+
+.footerMain {
+  position: relative;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-on-dark);
+}
+
+.footerMainBackgroundSlash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  background: linear-gradient(to right bottom, var(--color-background-light) 49%, rgba(0, 0, 0, 0) 51%);
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.5fr;
+  align-items: start;
+  gap: var(--size-scale-200);
+  padding-block: var(--size-scale-400);
+  padding-inline: var(--size-scale-250);
+  background: url('../assets/images/footer-top-background.webp') center / cover no-repeat;
+  position: relative;
+}
+
+.footerGroup {
+  display: grid;
+  gap: var(--size-scale-175);
+}
+
+.footerGroup :is(ul, .footerFormBody) {
+  display: grid;
+  gap: var(--size-scale-100);
+}
+
+.footerGroup > *:first-child {
+  color: var(--color-brand-neutral-light);
+}
+
+.footerGroup ul li {
+  width: max-content;
+  text-transform: uppercase;
+}
+
+.footerGroup ul li:hover {
+  text-decoration: underline;
+}
+
+.footerForm {
+  container: footerForm / inline-size;
+}
+
+.footerFormBody {
+  grid-template-columns: 1fr 1fr;
+}
+
+@container footerForm (max-width: 16.25rem) {
+  .footerFormBody {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footerFormBody > *:nth-child(n + 5) {
+  grid-column: 1 / -1;
+}
+
+.footerFormBody label {
+  display: grid;
+  gap: var(--size-scale-25);
+  text-shadow: 5px 5px 5px black;
+}
+
+.footerFormBody :is(input, textarea) {
+  background-color: #5d5858;
+  color: var(--color-text-on-dark);
+  border: none;
+  width: 100%;
+}
+
+.footerFormBody :is(input, textarea):is(:active, :focus-visible) {
+  background-color: var(--color-background-light);
+  color: var(--color-text-on-light);
+  outline: none;
+}
+
+.footerFormBody input {
+  padding: var(--size-scale-100);
+  height: 2.5rem;
+}
+
+.footerFormBody textarea {
+  padding: var(--size-scale-100);
+  resize: none;
+}
+
+.sendForm {
+  display: grid;
+  padding-block: var(--size-scale-100);
+  padding-inline: var(--size-scale-150);
+  border: none;
+  color: var(--color-text-on-primary);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sendForm:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.sendForm:active {
+  background-color: var(--color-cta-primary-active);
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-scale-100);
+  flex-wrap: wrap;
+  padding-block: var(--size-scale-150);
+  padding-inline: var(--size-scale-250);
+  text-transform: uppercase;
+  background-color: var(--color-background-dark-800);
+  color: var(--color-text-on-dark);
+}
+
+.footerCopyright {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--size-scale-50);
+  padding: var(--size-scale-150);
+  background-color: var(--color-background-dark);
+  text-align: center;
+  color: var(--color-text-on-dark);
+}
+
+.footerCopyright > a {
+  display: flex;
+  gap: var(--size-scale-25);
+}
