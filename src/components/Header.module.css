@@ -1,9 +1,13 @@
+:root {
+  --header-height: 80px;
+}
+
 .header {
-  width: 100%;
-  height: 80px;
-  background-color: var(--color-background-dark);
-  color: var(--color-text-on-dark);
   display: grid;
+  width: 100%;
+  height: var(--header-height);
+  color: var(--color-text-on-dark);
+  background-color: var(--color-background-dark);
 }
 
 .nav {
@@ -62,12 +66,12 @@
 .navLinkList a:hover::before {
   content: '';
   position: absolute;
-  height: 4px;
-  width: 100%;
-  background-color: var(--color-secondary);
-  border-radius: 8px;
   inset-inline-start: 0;
   inset-block-end: calc( var(--size-scale-75) * -1);
+  height: 4px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--color-secondary);
 }
 
 .cartWrapper {
@@ -81,12 +85,12 @@
 .cartQuantity {
   --cart-quantity-size: 24px;
   position: absolute;
-  background-color: var(--color-brand-primary);
+  inset-inline-end: calc(var(--cart-quantity-size) * -0.583);
+  inset-block-start: calc(var(--cart-quantity-size) * -0.583);
+  display: grid;
+  place-content: center;
   width: var(--cart-quantity-size);
   height: var(--cart-quantity-size);
   border-radius: 50%;
-  display: grid;
-  place-content: center;
-  inset-inline-end: calc(var(--cart-quantity-size) * -0.583);
-  inset-block-start: calc(var(--cart-quantity-size) * -0.583);
+  background-color: var(--color-brand-primary);
 }
