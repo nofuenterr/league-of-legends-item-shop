@@ -17,24 +17,33 @@
   color: var(--color-text-on-dark);
 }
 
-.footerMainBackgroundSlash {
+.footerMainBackgroundSlash, .footerMainBackground {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.footerMainBackgroundSlash {
+  z-index: -1;
   height: 3rem;
   background: linear-gradient(to right bottom, var(--color-background-light) 49%, rgba(0, 0, 0, 0) 51%);
 }
 
+.footerMainBackground {
+  z-index: -2;
+  height: 100%;
+  background: url('../assets/images/footer-top-background.webp') center / cover no-repeat;
+}
+
 .footerTop {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1.5fr;
   align-items: start;
   gap: var(--size-scale-200);
   padding-block: var(--size-scale-400);
   padding-inline: var(--size-scale-250);
-  background: url('../assets/images/footer-top-background.webp') center / cover no-repeat;
-  position: relative;
 }
 
 .footerGroup {

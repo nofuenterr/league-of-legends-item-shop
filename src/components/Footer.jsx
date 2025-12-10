@@ -110,6 +110,7 @@ function Footer() {
           <a href="#">Privacy Policy</a>
         </div>
         <div className={styles.footerMainBackgroundSlash}></div>
+        <div className={styles.footerMainBackground}></div>
       </div>
       <div className={styles.footerCopyright}>
         <a href="https://github.com/nofuenterr" target='_blank'>
