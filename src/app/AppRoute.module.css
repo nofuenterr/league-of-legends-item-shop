@@ -21,6 +21,7 @@
   padding-inline-end: var(--remove-search-width);
   border-radius: var(--search-border-radius);
   border: none;
+  width: 100%;
 }
 
 .expandSearch {

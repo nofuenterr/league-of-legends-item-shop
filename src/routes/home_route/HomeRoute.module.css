@@ -64,3 +64,28 @@
   padding-inline: var(--space-button-padding-inline);
 }
 
+@media (max-width: 50rem) {
+  .heroHeading {
+    font-size: var(--font-heading-xl-size-max);
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .heroHeading {
+    font-size: var(--font-heading-lg-size-max);
+  }
+
+  .heroSubHeading {
+    font-size: var(--font-body-sm-size);
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .heroHeading {
+    font-size: var(--font-heading-lg-size-min);
+  }
+
+  .heroWrapper {
+    padding-inline: var(--size-scale-100);
+  }
+}
