@@ -1,4 +1,4 @@
-import App from './App/App'
+import App from './app/App'
 import { loader as appLoader } from './app/appLoader'
 import { action as appAction } from './app/appAction'
 import Home from './routes/home_route/HomeRoute';
