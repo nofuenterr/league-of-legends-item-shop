@@ -17,6 +17,13 @@
   right: 0;
   height: 100dvh;
   z-index: 999;
+  width: 28rem;
+}
+
+@media (max-width: 45rem) {
+  .breadcrumbsControlsDialog {
+    width: 100%;
+  }
 }
 
 .breadcrumbsControlsDialogHeader {

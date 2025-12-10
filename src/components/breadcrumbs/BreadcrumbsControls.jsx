@@ -57,7 +57,6 @@ export default function BreadcrumbsControls({ controls, setControls }) {
   const controlsDialog = {
     initial: {
       x: "100%",
-      width: 0,
       display: 'none',
       visibility: 'hidden',
       ariaHidden: 'true',
@@ -65,7 +64,6 @@ export default function BreadcrumbsControls({ controls, setControls }) {
     },
     expanded: { 
       x: "0%",
-      width: '28rem',
       transition: { duration: 0.35, ease: "easeOut" },
       display: 'grid',
       visibility: 'visible',
@@ -73,7 +71,6 @@ export default function BreadcrumbsControls({ controls, setControls }) {
     },
     collapsed: {
       x: "100%",
-      width: 0,
       transition: { duration: 0.35, ease: "easeIn" },
       display: 'none',
       visibility: 'hidden',
