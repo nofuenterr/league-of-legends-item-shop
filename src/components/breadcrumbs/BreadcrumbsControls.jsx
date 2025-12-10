@@ -8,6 +8,7 @@ import BreadcrumbsControlsContent from './BreadcrumbsControlsContent';
 
 export default function BreadcrumbsControls({ controls, setControls }) {
   const dialogRef = useRef(null);
+  const initialFocusRef = useRef(null);
   const submit = useSubmit()
   const { filters } = useLoaderData()
 
@@ -22,8 +23,8 @@ export default function BreadcrumbsControls({ controls, setControls }) {
   }, [controls]);
 
   useEffect(() => {
-    if (controls && dialogRef.current) {
-      dialogRef.current.focus();
+    if (controls && initialFocusRef.current) {
+      initialFocusRef.current.focus();
     }
   }, [controls]);
 
@@ -108,6 +109,12 @@ export default function BreadcrumbsControls({ controls, setControls }) {
         aria-describedby='breadcrumbsControlButton'
         className={styles.breadcrumbsControlsDialog} 
       >
+        <button
+          style={{position: 'absolute', opacity: 0, pointerEvents: 'none'}}
+          aria-hidden
+          tabIndex={0}
+          ref={initialFocusRef}
+        />
         <div className={styles.breadcrumbsControlsDialogHeader}>
           <h2 className={styles.breadcrumbsControlsDialogHeading}>Refine</h2>
           <button

@@ -8,6 +8,7 @@ import ChevronRight from '../icons/ChevronRight';
 
 export default function HeaderMenu({ menu, setMenu, children }) {
   const dialogRef = useRef(null);
+  const initialFocusRef = useRef(null);
 
   useEffect(() => {
     if (menu) {
@@ -20,8 +21,8 @@ export default function HeaderMenu({ menu, setMenu, children }) {
   }, [menu]);
 
   useEffect(() => {
-    if (menu && dialogRef.current) {
-      dialogRef.current.focus();
+    if (menu && initialFocusRef.current) {
+      initialFocusRef.current.focus();
     }
   }, [menu]);
 
@@ -106,6 +107,12 @@ export default function HeaderMenu({ menu, setMenu, children }) {
         aria-describedby='headerMenuButton'
         className={styles.headerMenuDialog} 
       >
+        <button
+          style={{position: 'absolute', opacity: 0, pointerEvents: 'none'}}
+          aria-hidden
+          tabIndex={0}
+          ref={initialFocusRef}
+        />
         <div className={styles.headerMenuDialogHeader}>
           <h2 className={styles.headerMenuDialogHeading}>Menu</h2>
           <button
