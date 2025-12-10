@@ -9,6 +9,7 @@ import Main from '../components/Main'
 import Footer from '../components/Footer'
 import RemoveSearch from '../components/icons/X'
 import Search from '../components/icons/Search'
+import ScrollToTop from '../components/ScrollToTop';
 
 function App() {
   const { data, error, loading } = useItems()
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Header totalQty={totalQty} >
         <SearchBar query={query} />
       </Header>
