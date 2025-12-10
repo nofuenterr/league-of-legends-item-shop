@@ -3,7 +3,7 @@ import { Form, useSubmit, useLoaderData } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import X from '../../components/icons/X'
+import X from '../icons/X'
 import BreadcrumbsControlsContent from './BreadcrumbsControlsContent';
 
 export default function BreadcrumbsControls({ controls, setControls }) {

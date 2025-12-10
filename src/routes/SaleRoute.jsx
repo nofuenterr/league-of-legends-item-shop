@@ -1,8 +1,8 @@
 import { useOutletContext } from 'react-router-dom';
-import LoadingItems from '../../components/Results';
-import Shop from '../../components/Shop';
+import LoadingItems from '../components/Results';
+import Shop from '../components/Shop';
 
-export default function ShopRoute() {
+export default function SaleRoute() {
   const { data, error, loading } = useOutletContext()
 
   if (error) return <>{error}</>
@@ -13,5 +13,6 @@ export default function ShopRoute() {
     >
     </LoadingItems>
   )
-  if (data) return <Shop />
+  if (data) return <Shop category='sale' />
 }
+

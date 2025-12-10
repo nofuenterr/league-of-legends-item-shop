@@ -2,7 +2,7 @@ import styles from './BreadcrumbsControlsContent.module.css'
 import { useState } from 'react';
 import { Form, useSubmit, useLoaderData } from 'react-router-dom';
 import tags from '../../data/items/tags';
-import ActiveIndicator from '../../components/icons/ChevronRight'
+import ActiveIndicator from '../icons/ChevronRight'
 
 export default function BreadcrumbsControlsContent() {
   return (

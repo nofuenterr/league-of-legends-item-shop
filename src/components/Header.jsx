@@ -24,6 +24,7 @@ function Header({ totalQty, children }) {
             <ul className={styles.navLinkList}>
               <li><NavLink to='/' aria-label='home'>Home</NavLink></li>
               <li><NavLink to='/shop' aria-label='shop'>Shop</NavLink></li>
+              <li><NavLink to='/sale' aria-label='sale'>Sale</NavLink></li>
             </ul>
             {children}
           </div>

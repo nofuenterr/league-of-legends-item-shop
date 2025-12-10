@@ -21,6 +21,7 @@
 
 .breadcrumbsCurrent {
   font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
 }
 
 .breadcrumbsControlsButton {

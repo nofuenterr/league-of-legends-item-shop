@@ -5,6 +5,7 @@ import Home from './routes/home_route/HomeRoute';
 import Shop from './routes/shop_route/ShopRoute';
 import { loader as shopLoader } from './routes/shop_route/shopRouteLoader'
 import { action as shopAction } from './routes/shop_route/shopRouteAction'
+import Sale from './routes/SaleRoute'
 import Product from './routes/item_route/ItemRoute';
 import { action as productAction } from './routes/item_route/itemRouteAction'
 import Cart from './routes/cart_route/CartRoute';
@@ -35,9 +36,15 @@ const routes = createRoutesFromElements(
         element={<Shop />}
         loader={shopLoader}
         action={shopAction}
+        />
+      <Route 
+        path='/sale' 
+        element={<Sale />}
+        loader={shopLoader}
+        action={shopAction}
       />
       <Route
-        path='/shop/:itemId'
+        path='/:category/:itemId'
         element={<Product />}
         action={productAction}
       />

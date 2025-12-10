@@ -20,12 +20,15 @@ class Items {
     tags.setTags(items)
   }
 
-  getItems() {
+  getItems(category = '') {
     const query = filter.getQuery()
     const tags = filter.getTags()
     const [min, max] = filter.getPrice()
     const sortBy = sort.getSort()
     let items = [...this.itemsList]
+    if (category === 'sale') {
+      items = items.filter(item => item.discountPercent)
+    }
 
     if (query) items = filterItemsByQuery(items, query)
     if (tags.length > 0) items = filterItemsByTags(items, tags)

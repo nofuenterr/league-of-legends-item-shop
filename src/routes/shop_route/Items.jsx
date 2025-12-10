@@ -1,6 +1,6 @@
 import formatPrice from '../../util/formatPrice'
 import styles from './Items.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Items({ items }) {
   return (
@@ -15,6 +15,8 @@ export default function Items({ items }) {
 }
 
 function Item({ item }) {
+  const { pathname } = useLocation()
+
   return (
     <li className={styles.shopItemCard} title={item.name + ': ' + item.buyCost + ' gold'}>
       <div className={styles.itemStatusWrapper}>
@@ -23,7 +25,7 @@ function Item({ item }) {
         {item.discountPercent && <span className={styles.discountTag}>-{item.discountPercent}%</span>}
       </div>
       
-      <Link to={`/shop/${item.id}`}>
+      <Link to={`${pathname}/${item.id}`}>
         <div className={styles.itemImageWrapper}>
           <img className={styles.itemImage} src={item.image} alt={item.name + ' image'} loading='lazy' />
         </div>

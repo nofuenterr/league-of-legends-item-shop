@@ -1,5 +1,6 @@
 import items from '../../data/items/items';
 import splitPascalCase from '../../util/splitPascalCase';
+import formatPathname from '../../util/formatPathname';
 import { useParams, useOutletContext, Link } from 'react-router-dom'
 import styles from './ItemRoute.module.css'
 import ItemForm from './ItemForm';
@@ -39,7 +40,7 @@ function BreadcrumbsBar() {
             <Link to='/'>Home</Link> /
           </li>
           <li>
-            <Link to='/shop'>Shop</Link> /
+            <Link to={`/${params.category}`}>{formatPathname(params.category)}</Link> /
           </li>
           <li className={styles.breadcrumbsCurrent}>
             {item.name}
