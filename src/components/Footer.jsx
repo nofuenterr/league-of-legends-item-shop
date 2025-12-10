@@ -25,7 +25,8 @@ function Footer() {
             <h4>Shop</h4>
             <nav aria-label='footer nav 1'>
               <ul>
-                <li><a href="#">Items</a></li>
+                <li><NavLink to='/shop'>All Items</NavLink></li>
+                <li><NavLink to='/sale'>On Sale</NavLink></li>
               </ul>
             </nav>
           </div>
