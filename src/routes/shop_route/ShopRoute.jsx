@@ -1,7 +1,6 @@
 import styles from './ShopRoute.module.css'
 import { useState } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
-import Loading from '../../components/Loading';
 import Items from './Items';
 import BreadcrumbsControls from './BreadcrumbsControls';
 import items from '../../data/items/items';

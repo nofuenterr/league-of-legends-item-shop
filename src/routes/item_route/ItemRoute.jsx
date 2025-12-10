@@ -1,16 +1,22 @@
-import Loading from '../../components/Loading';
 import items from '../../data/items/items';
 import splitPascalCase from '../../util/splitPascalCase';
 import { useParams, useOutletContext, Link } from 'react-router-dom'
 import styles from './ItemRoute.module.css'
 import ItemForm from './ItemForm';
 import formatPrice from '../../util/formatPrice';
+import LoadingItem from '../../components/Results';
 
 export default function ItemRoute() {
   const {data, error, loading} = useOutletContext()
 
   if (error) return <>{error}</>
-  if (loading) return <Loading />
+  if (loading) return (
+    <LoadingItem
+      mainHeading='Loading...'
+      mainParagraph='Zaunite channels are stabilizing the shipment.'
+    >
+    </LoadingItem>
+  )
   if (data) {
     return (
       <div className={styles.itemRouteWrapper}>
