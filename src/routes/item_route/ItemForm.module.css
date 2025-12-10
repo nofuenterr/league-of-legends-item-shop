@@ -41,6 +41,7 @@
 
 .callToActionsWrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--size-scale-150);
   padding-block: var(--size-scale-175);
 }
@@ -53,6 +54,7 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  width: 11.25rem;
 }
 
 .addToCart {
