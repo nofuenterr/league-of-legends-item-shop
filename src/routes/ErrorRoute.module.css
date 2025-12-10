@@ -1,0 +1,31 @@
+.errorMessage {
+  margin-top: var(--size-scale-100);
+  font-size: var(--font-body-lg-size);
+}
+
+.returnToHome {
+  display: grid;
+  margin-top: var(--size-scale-200);
+  border: none;
+  outline: 1px solid var(--cta-ornamental-outline-color);
+  outline-offset: 3px;
+  color: var(--color-text-on-primary);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.returnToHome:hover {
+  background-color: var(--color-cta-primary-hover);
+}
+
+.returnToHome:active {
+  background-color: var(--color-cta-primary-active);
+}
+
+.returnToHome {
+  padding-block: var(--space-button-padding-block);
+  padding-inline: var(--space-button-padding-inline);
+}
