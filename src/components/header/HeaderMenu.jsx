@@ -10,6 +10,16 @@ export default function HeaderMenu({ menu, setMenu, children }) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
+    if (menu) {
+      document.documentElement.classList.add("lock-scroll");
+      document.body.classList.add("lock-scroll");
+    } else {
+      document.documentElement.classList.remove("lock-scroll");
+      document.body.classList.remove("lock-scroll");
+    }
+  }, [menu]);
+
+  useEffect(() => {
     if (menu && dialogRef.current) {
       dialogRef.current.focus();
     }

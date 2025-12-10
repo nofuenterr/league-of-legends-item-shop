@@ -90,7 +90,7 @@
 .footerFormBody label {
   display: grid;
   gap: var(--size-scale-25);
-  text-shadow: 5px 5px 5px black;
+  text-shadow: 2px 2px 2px black;
 }
 
 .footerFormBody :is(input, textarea) {

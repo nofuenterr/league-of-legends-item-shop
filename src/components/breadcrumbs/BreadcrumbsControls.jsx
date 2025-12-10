@@ -12,6 +12,16 @@ export default function BreadcrumbsControls({ controls, setControls }) {
   const { filters } = useLoaderData()
 
   useEffect(() => {
+    if (controls) {
+      document.documentElement.classList.add("lock-scroll");
+      document.body.classList.add("lock-scroll");
+    } else {
+      document.documentElement.classList.remove("lock-scroll");
+      document.body.classList.remove("lock-scroll");
+    }
+  }, [controls]);
+
+  useEffect(() => {
     if (controls && dialogRef.current) {
       dialogRef.current.focus();
     }
