@@ -129,6 +129,18 @@
   text-transform: uppercase;
 }
 
+@media (max-width: 26.25rem) {
+  .itemName {
+    font-size: var(--font-heading-lg-size-min);
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .itemName {
+    font-size: var(--font-body-xl-size);
+  }
+}
+
 .itemStatusTags {
   display: flex;
   gap: var(--size-scale-50);

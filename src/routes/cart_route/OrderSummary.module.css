@@ -76,3 +76,13 @@ div a[aria-label='continue shopping'] {
 .continueShopping:active {
   background-color: var(--color-cta-secondary-active);
 }
+
+@media (max-width: 26.25rem) {
+  .orderSummaryWrapper {
+    padding: var(--size-scale-200);
+  }
+
+  .orderSummaryHeading {
+    text-align: center;
+  }
+}
