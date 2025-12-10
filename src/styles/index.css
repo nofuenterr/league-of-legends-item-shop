@@ -100,6 +100,7 @@
   --size-scale-400: 4rem;
   --size-scale-500: 5rem;
   --size-scale-600: 6rem;
+  --size-scale-700: 7.5rem;
   --size-scale-800: 9rem;
 
   --size-spacing-section-sm-min: var(--size-scale-150);

@@ -17,4 +17,5 @@
   display: grid;
   gap: var(--size-scale-200);
   padding-block: var(--size-scale-200);
+  container: cartItems / inline-size;
 }

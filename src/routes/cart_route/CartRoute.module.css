@@ -32,3 +32,9 @@
   padding-block: var(--space-button-padding-block);
   padding-inline: var(--space-button-padding-inline);
 }
+
+@media (max-width: 62.5rem) {
+  .cartRouteWrapper {
+    grid-template-columns: 1fr;
+  }
+}

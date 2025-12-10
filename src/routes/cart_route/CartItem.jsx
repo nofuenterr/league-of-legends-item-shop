@@ -10,7 +10,7 @@ export default function CartItem({ item }) {
         {!item.stock && <p>Sold Out</p>}
 
         <div className={styles.cartItemWrapper}>
-          <Link to={`/shop/${item.id}`}>
+          <Link to={`/shop/${item.id}`} className={styles.cartItemImageWrapper}>
             <div>
               <img
                 title={item.name}
@@ -22,13 +22,13 @@ export default function CartItem({ item }) {
 
           <div className={styles.cartDetailsWrapper}>
             <CartItemDetails item={item} />
-            <RemoveCartItemButton id={item.id} />
 
             <p className={styles.cartItemTotal}>
               Total: {formatPrice(item.qty * item.buyCost)} gold
             </p>
 
             <CartItemQuantity item={item} />
+            <RemoveCartItemButton id={item.id} />
           </div>
         </div>
       </li>
@@ -39,7 +39,7 @@ export default function CartItem({ item }) {
 
 function CartItemDetails({ item }) {
   return (
-    <div>
+    <div className={styles.cartItemDetails}>
       <h3 className={styles.cartItemName}>{item.name}</h3>
 
       <div className={styles.cartItemPrices}>
