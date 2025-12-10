@@ -12,7 +12,7 @@ function CartRoute() {
     return (
       <EmptyCart
         mainHeading='Your cart is empty'
-        bottomText='Did you forget to buy items before heading into lane again?'
+        mainParagraph='Did you forget to buy items before heading into lane again?'
       >
         <div className={styles.shopNowWrapper}>
           <Link className={styles.shopNow} to={'/shop'} aria-label="shop now" role="button">Shop Now</Link>

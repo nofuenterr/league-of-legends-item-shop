@@ -28,6 +28,7 @@
 }
 
 .resultsMainHeading {
+  margin-bottom: var(--size-scale-100);
   font-size: var(--font-heading-lg-size-max);
   font-weight: var(--font-weight-bold);
   font-style: italic;
