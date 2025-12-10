@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
-import lolIconFlatWhite from '../assets/images/LoL_Icon_Flat_WHITE.png'
-import ShoppingCart from './icons/ShoppingCart'
+import lolIconFlatWhite from '../../assets/images/LoL_Icon_Flat_WHITE.png'
+import ShoppingCart from '../icons/ShoppingCart'
+import Menu from '../icons/Menu'
+import HeaderMenu from './HeaderMenu'
 
 function Header({ totalQty, children }) {
+  const [menu, setMenu] = useState(false)
 
   return (
     <header className={`${styles.header}`}>
@@ -26,15 +30,37 @@ function Header({ totalQty, children }) {
               <li><NavLink to='/shop' aria-label='shop'>Shop</NavLink></li>
               <li><NavLink to='/sale' aria-label='sale'>Sale</NavLink></li>
             </ul>
-            {children}
+            <div className={styles.headerSearchStyles}>
+              {children}
+            </div>
           </div>
-          <div>
+          <div className={styles.navWrapperRight}>
             <NavLink to='/cart' aria-label='cart' className={styles.cartWrapper}>
               <ShoppingCart />
               <div className={styles.cartQuantity}>
                 {totalQty}
               </div>
             </NavLink>
+            <div className={styles.headerMenu}>
+              <button
+                aria-haspopup='dialog'
+                aria-expanded={menu}
+                aria-controls='headerMenu'
+                className={styles.headerMenuButton} 
+                onClick={() => setMenu(prev => !prev)}
+              >
+                <Menu />
+              </button>
+
+              <HeaderMenu
+                menu={menu}
+                setMenu={setMenu}
+              >
+                <div className={styles.headerMenuSearchStyles}>
+                  {children}
+                </div>
+              </HeaderMenu>
+            </div>
           </div>
         </div>
       </nav>

@@ -73,6 +73,8 @@
 
   --color-background-search-dark: #2b2a29;
   --color-text-search-on-dark: #f9f9f9;
+  --color-background-search-light: var(--color-brand-off-white);
+  --color-text-search-on-light: var(--color-text-on-light);
 
   --color-text-error: #eb0029;
 
@@ -195,4 +197,8 @@ body {
   font-weight: var(--font-body-rg-weight);
   color: var(--color-text-on-light);
   background-color: var(--color-background-light);
+}
+
+*:is(:focus-visible) {
+  outline: 2px solid var(--color-primary);
 }

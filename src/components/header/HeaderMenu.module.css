@@ -1,0 +1,101 @@
+:root {
+  --color-filter-border: #d0d0d0;
+}
+
+.headerMenuDialogOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 998;
+}
+
+.headerMenuDialog {
+  background-color: var(--color-background-light);
+  color: var(--color-text-on-light);
+  padding-top: var(--size-scale-250);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  z-index: 999;
+  width: 28rem;
+}
+
+@media (max-width: 45rem) {
+  .headerMenuDialog {
+    width: 100%;
+  }
+}
+
+.headerMenuDialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-200);
+  text-transform: uppercase;
+}
+
+.headerMenuDialogHeading {
+  font-size: var(--font-heading-sm-size-max);
+  font-weight: var(--font-weight-bold);
+}
+
+.headerMenuDialogCloseButton {
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-50);
+}
+
+.headerMenuDialogCloseButton:hover {
+  opacity: 0.8;
+}
+
+.headerMenuDialogNavLinkList {
+  display: grid;
+  padding-inline: var(--size-scale-200);
+  padding-bottom: var(--size-scale-150);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  overflow: scroll;
+}
+
+.headerMenuDialogNavLinkList > * {
+  display: grid;
+  padding-block: var(--size-scale-150);
+}
+
+.headerMenuDialogNavLinkList h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerMenuDialogNavLinkList > *:hover {
+  text-decoration: underline;
+}
+
+.headerMenuDialogNavLinkList > *:first-child {
+  border-top: 1px solid var(--color-filter-border);
+}
+
+.headerMenuDialogNavLinkList > * {
+  border-bottom: 1px solid var(--color-filter-border);
+}
+
+.headerMenuDialogNavLinkList h3 > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.headerMenuDialogNavLinkList h3 + * {
+  padding-bottom: var(--size-scale-100);
+}

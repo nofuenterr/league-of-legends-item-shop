@@ -1,11 +1,16 @@
 .searchWrapper {
   --expand-search-width: var(--size-scale-300);
   --remove-search-width: var(--size-scale-375);
-  background-color: var(--color-background-search-dark);
-  color: var(--color-text-search-on-dark);
+  background-color: var(--search-background-color);
+  color: var(--search-text-color);
   position: relative;
-  border-radius: 16px;
+  border-radius: var(--search-border-radius);
   overflow: hidden;
+}
+
+.searchWrapper *:is(:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
 }
 
 .searchInput {
@@ -14,7 +19,7 @@
   padding-block: var(--size-scale-75);
   padding-inline-start: var(--expand-search-width);
   padding-inline-end: var(--remove-search-width);
-  border-radius: 16px;
+  border-radius: var(--search-border-radius);
   border: none;
 }
 
@@ -23,12 +28,13 @@
   background-color: transparent;
   inset-inline-start: 0;
   width: var(--expand-search-width);
-  border-radius: 16px;
+  border-radius: var(--search-border-radius);
   height: 100%;
   cursor: pointer;
   display: grid;
   place-content: center;
   border: none;
+  stroke: var(--search-text-color);
 }
 
 .removeSearch {
@@ -37,7 +43,7 @@
   inset-inline-end: 0;
   inset-block-start: 0;
   width: var(--remove-search-width);
-  border-radius: 16px;
+  border-radius: var(--search-border-radius);
   height: 100%;
   cursor: pointer;
   display: grid;

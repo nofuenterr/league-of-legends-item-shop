@@ -77,6 +77,19 @@
   background-color: var(--color-secondary);
 }
 
+
+.headerSearchStyles {
+  --search-background-color: var(--color-background-search-dark);
+  --search-text-color: var(--color-text-search-on-dark);
+  --search-border-radius: 16px;
+}
+
+.headerMenuSearchStyles {
+  --search-background-color: var(--color-background-search-light);
+  --search-text-color: var(--color-text-search-on-light);
+  --search-border-radius: 0;
+}
+
 .cartWrapper {
   --cart-icon-size: 24px;
   position: relative;
@@ -96,4 +109,37 @@
   height: var(--cart-quantity-size);
   border-radius: 50%;
   background-color: var(--color-brand-primary);
+}
+
+.navWrapperRight {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-200);
+}
+
+.headerMenu {
+  display: none;
+}
+
+.headerMenu > button {
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-on-dark);
+  cursor: pointer;
+}
+
+@media (max-width: 62.5rem) {
+  .navWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navWrapperCenter {
+    display: none;
+  }
+
+  .headerMenu {
+    display: inline-block;
+  }
 }

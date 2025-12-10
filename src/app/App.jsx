@@ -4,7 +4,7 @@ import { Outlet, useLoaderData, Form, useNavigate, useSubmit } from 'react-route
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import useItems from '../util/useItems'
-import Header from '../components/Header'
+import Header from '../components/header/Header'
 import Main from '../components/Main'
 import Footer from '../components/Footer'
 import RemoveSearch from '../components/icons/X'
@@ -78,7 +78,7 @@ function SearchBar({ query }) {
             setSearchExpanded(prev => !prev)
           }}
         >
-          <Search size={22} stroke='#fff' />
+          <Search size={22} />
         </button>
 
         <motion.input
