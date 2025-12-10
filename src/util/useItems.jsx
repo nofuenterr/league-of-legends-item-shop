@@ -30,12 +30,12 @@ const getItems = async (controller, latest) => {
 }
 
 const getCompleteItems = (items) => {
-  const noImageItems = ['3005', '3173', '3174', '3170', '4402', '4004', '4010']
+  const noImageItems = ['3005', '3173', '3174', '3170', '4402', '4003', '4004', '4010']
 
   return Object.entries(items.data)
     .filter(([id, item]) => (
-        (!item.into || item.into.length === 0) 
-        && item.gold.purchasable 
+        /* (!item.into || item.into.length === 0) 
+        && */ item.gold.purchasable 
         && item.plaintext
         && item.gold.total
         && !noImageItems.includes(id)
