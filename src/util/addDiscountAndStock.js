@@ -15,7 +15,7 @@ const addDiscountAndStock = (items) => {
   const DISCOUNT_LOW_MAX = 0.15
   const DISCOUNT_HIGH_MIN = 0.1
   const DISCOUNT_HIGH_MAX = 0.3
-  const STOCK_MIN = 5
+  const STOCK_MIN = 0
   const STOCK_MAX = 50
 
   function addStock(priceNorm) {

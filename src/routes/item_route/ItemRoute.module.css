@@ -124,6 +124,7 @@
 .itemStatusTags {
   display: flex;
   gap: var(--size-scale-50);
+  font-weight: var(--font-weight-medium);
 }
 
 .itemStatusTags > * {
@@ -134,6 +135,11 @@
 .discountTag {
   background-color: var(--color-background-status-tag-green);
   color: var(--color-text-status-tag-gree);
+}
+
+.outOfStockTag {
+  color: var(--color-text-on-dark);
+  background-color: var(--color-brand-neutral-dark);
 }
 
 .itemPrices {

@@ -21,8 +21,8 @@ function Item({ item }) {
     <li className={styles.shopItemCard} title={item.name + ': ' + item.buyCost + ' gold'}>
       <div className={styles.itemStatusWrapper}>
         <span className={styles.newItemTag}>New</span>
-        {!item.stock && <span>Out of Stock</span>}
         {item.discountPercent && <span className={styles.discountTag}>-{item.discountPercent}%</span>}
+        {!item.stock && <span className={styles.outOfStockTag}>Out of Stock</span>}
       </div>
       
       <Link to={`${pathname}/${item.id}`}>

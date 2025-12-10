@@ -106,8 +106,8 @@ function Info({ item }) {
       <h1 className={styles.itemName}>{item.name}</h1>
 
       <div className={styles.itemStatusTags}>
-        {!item.stock && <div>
-          <span>Sold Out</span>
+        {!item.stock && <div className={styles.outOfStockTag}>
+          <span>Out of Stock</span>
         </div>}
         {item.discountPercent && <div className={styles.discountTag}>
           <span>-{item.discountPercent}%</span>
