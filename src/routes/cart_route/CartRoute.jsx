@@ -20,10 +20,16 @@ function CartRoute() {
 function EmptyCart() {
   return (
     <div>
-      Your cart is empty
-      <Link to={'/shop'} aria-label='shop now'>
-        Shop Now
-      </Link>
+      <div className={styles.emptyCartMain}>
+        <h1 className={styles.emptyCartMainHeading}>Your cart is empty</h1>
+        <div className={styles.shopNowWrapper}>
+          <Link className={styles.shopNow} to={'/shop'} aria-label="shop now" role="button">Shop Now</Link>
+        </div>
+        <div className={styles.emptyCartMainBackground}></div>
+      </div>
+      <div className={styles.emptyCartBottom}>
+        <p>Did you forget to buy items before heading into lane again?</p>
+      </div>
     </div>
   )
 }
