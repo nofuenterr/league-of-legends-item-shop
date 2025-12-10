@@ -169,3 +169,15 @@
   display: flex;
   gap: var(--size-scale-25);
 }
+
+@media (max-width: 50rem) {
+  .footerTop {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 30rem) {
+  .footerTop {
+    grid-template-columns: 1fr;
+  }
+}
