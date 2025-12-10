@@ -1,4 +1,4 @@
-import styles from './App.module.css'
+import styles from './AppRoute.module.css'
 import { useState } from 'react'
 import { Outlet, useLoaderData, Form, useNavigate, useSubmit } from 'react-router-dom'
 // eslint-disable-next-line no-unused-vars
