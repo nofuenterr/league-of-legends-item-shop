@@ -176,9 +176,11 @@
   /* more to appropriate module */
   --font-brand-family: 'League', Helvetica, Arial, sans-serif;
   --font-brand-size: 1rem;
+  --font-brand-size-sm: 0.85rem;
   --font-brand-line-height: 1.25;
   --font-brand-weight: var(--font-weight-bold);
   --image-brand-width: 36px;
+  --image-brand-width-sm: 30px;
 
   --font-navlist-weight: var(--font-weight-bold); /* move to appropriate module */
   --color-text-navlist-hover: var(--color-primary); /* move to appropriate module */

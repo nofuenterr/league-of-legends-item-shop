@@ -3,12 +3,12 @@
   align-items: center;
   gap: var(--size-scale-25);
   font-family: var(--font-brand-family);
-  font-size: var(--font-brand-size);
+  font-size: var(--font-brand-size-sm);
   font-weight: var(--font-brand-weight);
 }
 
 .brandImage {
-  width: var(--image-brand-width);
+  width: var(--image-brand-width-sm);
 }
 
 .footerMain {
@@ -43,7 +43,7 @@
   align-items: start;
   gap: var(--size-scale-200);
   padding-block: var(--size-scale-400);
-  padding-inline: var(--size-scale-250);
+  padding-inline: var(--size-scale-200);
 }
 
 .footerGroup {
@@ -148,6 +148,10 @@
   text-transform: uppercase;
   background-color: var(--color-background-dark-800);
   color: var(--color-text-on-dark);
+}
+
+.footerBottom a:hover {
+  text-decoration: underline;
 }
 
 .footerCopyright {
