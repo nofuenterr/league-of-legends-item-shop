@@ -5,42 +5,6 @@
   padding: var(--size-scale-200);
 }
 
-/* .emptyCartWrapper {
-
-} */
-
-.emptyCartMain {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  padding-block: var(--size-scale-400);
-  padding-inline: var(--size-scale-200);
-  background-color: var(--color-background-dark-800);
-  color: var(--color-text-on-dark);
-  overflow: hidden;
-}
-
-.emptyCartMainBackground {
-  position: absolute;
-  top: -314px;
-  height: 982px;
-  width: 100%;
-  opacity: 0.2;
-  z-index: -1;
-  background: url('../../assets/images/RiotPattern-TextHeroWidget.svg') center / cover no-repeat;
-  transform: rotate(20deg);
-  scale: 1.1;
-}
-
-.emptyCartMainHeading {
-  font-size: var(--font-heading-lg-size-max);
-  font-weight: var(--font-weight-bold);
-  font-style: italic;
-  text-transform: uppercase;
-}
-
 .shopNowWrapper {
   justify-self: center;
   display: grid;
@@ -67,11 +31,4 @@
 .shopNow {
   padding-block: var(--space-button-padding-block);
   padding-inline: var(--space-button-padding-inline);
-}
-
-.emptyCartBottom {
-  display: grid;
-  justify-content: center;
-  padding-block: var(--size-scale-200);
-  padding-inline: var(--size-scale-200);
 }
