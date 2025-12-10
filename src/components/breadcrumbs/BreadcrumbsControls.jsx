@@ -9,7 +9,7 @@ import BreadcrumbsControlsContent from './BreadcrumbsControlsContent';
 export default function BreadcrumbsControls({ controls, setControls }) {
   const dialogRef = useRef(null);
   const submit = useSubmit()
-  const { tagFilter } = useLoaderData()
+  const { filters } = useLoaderData()
 
   useEffect(() => {
     if (controls && dialogRef.current) {
@@ -113,7 +113,7 @@ export default function BreadcrumbsControls({ controls, setControls }) {
           </button>
         </div>
 
-        {tagFilter.length > 0 
+        {filters.length > 0 
           ? (
             <div className={styles.filterTagsWrapper}>
               <div>
@@ -131,23 +131,25 @@ export default function BreadcrumbsControls({ controls, setControls }) {
                 </Form>
               </div>
 
-              {tagFilter.map(tag => {
-                return (
-                  <div key={tag}>
-                    <Form method='post'>
-                      <button 
-                        name='tag'
-                        value={tag}
-                        onChange={(e) => {
-                          submit(e.currentTarget.form)
-                        }}
-                      >
-                      <X size={20} />
-                      <span>{tag}</span>
-                      </button>
-                    </Form>
-                  </div>
-                )
+              {filters.map(filter => {
+                for (const [type, value] of Object.entries(filter)) {
+                  return (
+                    <div key={value}>
+                      <Form method='post'>
+                        <button 
+                          name={type}
+                          value={value}
+                          onChange={(e) => {
+                            submit(e.currentTarget.form)
+                          }}
+                        >
+                        <X size={20} />
+                        <span>{value}</span>
+                        </button>
+                      </Form>
+                    </div>
+                  )
+                }
               })}
             </div>
           )

@@ -1,15 +1,15 @@
-:is(.sortByList, .tagsFilterList) {
+.contentList {
   display: grid;
   gap: var(--size-scale-100);
 }
 
-:is(.sortByList, .tagsFilterList) label {
+.contentList label {
   display: flex;
   gap: var(--size-scale-100);
   align-items: center;
 }
 
-:is(.sortByList, .tagsFilterList) input {
+.contentList input {
   --checkbox-size: var(--size-scale-150);
   appearance: none;
   width: var(--checkbox-size);
@@ -18,7 +18,7 @@
   border-radius: 4px;
 }
 
-:is(.sortByList, .tagsFilterList) input:checked {
+.contentList input:checked {
   background-color: var(--color-primary);
 }
 

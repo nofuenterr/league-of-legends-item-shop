@@ -8,6 +8,7 @@ export default function BreadcrumbsControlsContent() {
   return (
     <>
       <Sort />
+      <Avaliability />
       <Price />
       <Tags />
     </>
@@ -30,7 +31,7 @@ function Sort() {
       </h3>
 
       {activeSort && <Form method="post">
-        <ul className={styles.sortByList}>
+        <ul className={styles.contentList}>
           <SortByListItem sortByValue='default' label='Default' />
           <SortByListItem sortByValue='a-z' label='Alphabetically: A-Z' />
           <SortByListItem sortByValue='z-a' label='Alphabetically: Z-A' />
@@ -59,6 +60,61 @@ function SortByListItem({ sortByValue, label }) {
         {label}
       </label>
     </li>
+  )
+}
+
+function Avaliability() {
+  const [activeAvailability, setActiveAvailability] = useState(false) 
+  const { availability } = useLoaderData()
+  const submit = useSubmit()
+
+  return (
+    <div>
+      <h3>
+        <button 
+          onClick={() => setActiveAvailability(prev => !prev)} 
+          aria-expanded={activeAvailability}
+        >
+          <span>Availability</span>
+          <ActiveIndicator size={20} active={activeAvailability} />
+        </button>
+      </h3>
+
+      {activeAvailability && <ul className={styles.contentList}>
+        <li>
+          <Form method='post'>
+            <label>
+              <input 
+                type="checkbox"
+                checked={availability.includes('In Stock')}
+                onChange={(e) => {
+                  submit(e.currentTarget.form)
+                }}
+              />
+              {' '}In Stock
+            </label>
+
+            <input type="hidden" name='availability' value='In Stock'/>
+          </Form>
+        </li>
+        <li>
+          <Form method='post'>
+            <label>
+              <input 
+                type="checkbox"
+                checked={availability.includes('Out of Stock')}
+                onChange={(e) => {
+                  submit(e.currentTarget.form)
+                }}
+              />
+              {' '}Out of Stock
+            </label>
+
+            <input type="hidden" name='availability' value='Out of Stock'/>
+          </Form>
+        </li>
+      </ul>}
+    </div>
   )
 }
 
@@ -140,7 +196,7 @@ function Tags() {
         </button>
       </h3>
 
-      {activeTags && <ul className={styles.tagsFilterList}>
+      {activeTags && <ul className={styles.contentList}>
         {tagsList.map(tag => {
           return (
             <Tag key={tag} tag={tag} />

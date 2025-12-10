@@ -6,7 +6,8 @@ import sort, {
 import filter, { 
   filterItemsByQuery, 
   filterItemsByTags, 
-  filterItemsByPrice 
+  filterItemsByPrice,
+  filterItemsByAvailability
 }  from "./filter";
 
 class Items {
@@ -23,6 +24,7 @@ class Items {
   getItems(category = '') {
     const query = filter.getQuery()
     const tags = filter.getTags()
+    const availability = filter.getAvailability()
     const [min, max] = filter.getPrice()
     const sortBy = sort.getSort()
     let items = [...this.itemsList]
@@ -32,6 +34,7 @@ class Items {
 
     if (query) items = filterItemsByQuery(items, query)
     if (tags.length > 0) items = filterItemsByTags(items, tags)
+    if (availability.length > 0) items = filterItemsByAvailability(items, availability)
     if (min || max) items = filterItemsByPrice(items, min, max)
     items = sortItems(items, sortBy)
 

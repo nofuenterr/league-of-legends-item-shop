@@ -4,6 +4,8 @@ import filter from '../../data/items/filter';
 export async function loader() {
   const sortBy = sort.getSort()
   const tagFilter = filter.getTags()
+  const availability = filter.getAvailability()
+  const filters = filter.getFilters()
   const [minPrice, maxPrice] = filter.getPrice()
-  return { sortBy, tagFilter, minPrice, maxPrice }
+  return { sortBy, tagFilter, availability, filters, minPrice, maxPrice }
 }
