@@ -7,6 +7,7 @@ import BreadcrumbsControls from './BreadcrumbsControls';
 import items from '../../data/items/items';
 import BreadcrumbsControlsIcon from '../../components/icons/Settings2'
 import formatPrice from '../../util/formatPrice';
+import EmptySearchResults from '../../components/Results'
 
 export default function ShopRoute() {
   const { data, error, loading } = useOutletContext()
@@ -22,7 +23,18 @@ function Shop() {
   return (
     <div>
       <BreadcrumbsBar items={itemsList} />
-      <Items items={itemsList} />
+      {itemsList.length > 0
+        ? (
+          <Items items={itemsList} />
+        )
+        : (
+          <EmptySearchResults
+            mainHeading='No items match the current filters'
+            bottomText='Just... what were you looking for, summoner?'
+          >
+          </EmptySearchResults>
+        )
+      }
     </div>
   )
 }

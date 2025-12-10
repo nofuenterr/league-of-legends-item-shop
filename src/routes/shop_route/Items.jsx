@@ -5,25 +5,6 @@ import { Link } from 'react-router-dom'
 export default function Items({ items }) {
   return (
     <div>
-      {items.length > 0
-        ? <ItemsList items={items} />
-        : <Empty />
-      }
-    </div>
-  )
-}
-
-function Empty() {
-  return (
-    <div>
-      <h2>No items match the current filters.</h2> 
-    </div>
-  )
-}
-
-function ItemsList({ items }) {
-  return (
-    <div>
       <ul className={styles.shopItemsList}>
         {items.map(item => {
           return <Item key={item.id} item={item} />
