@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
-import GitHubIcon from './icons/GitHubIcon'
-import lolIconFlatWhite from '../assets/images/LoL_Icon_Flat_WHITE.png'
+import GitHubIcon from '../icons/GitHubIcon'
+import lolIconFlatWhite from '../../assets/images/LoL_Icon_Flat_WHITE.png'
 import styles from './Footer.module.css'
 
 function Footer() {

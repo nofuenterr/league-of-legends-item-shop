@@ -33,7 +33,7 @@
 .footerMainBackground {
   z-index: -2;
   height: 100%;
-  background: url('../assets/images/footer-top-background.webp') center / cover no-repeat;
+  background: url('../../assets/images/footer-top-background.webp') center / cover no-repeat;
 }
 
 .footerTop {

@@ -2,7 +2,7 @@ import styles from './CartRoute.module.css'
 import { useLoaderData, Link } from 'react-router-dom'
 import CartItems from './CartItems'
 import OrderSummary from './OrderSummary'
-import EmptyCart from '../../components/Results'
+import EmptyCart from '../../components/results/Results'
 
 function CartRoute() {
   const [orderSummary, cartItems] = useLoaderData()

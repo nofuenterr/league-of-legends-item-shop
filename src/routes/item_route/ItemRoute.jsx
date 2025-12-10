@@ -5,7 +5,7 @@ import { useParams, useOutletContext, Link } from 'react-router-dom'
 import styles from './ItemRoute.module.css'
 import ItemForm from './ItemForm';
 import formatPrice from '../../util/formatPrice';
-import LoadingItem from '../../components/Results';
+import LoadingItem from '../../components/results/Results';
 
 export default function ItemRoute() {
   const {data, error, loading} = useOutletContext()

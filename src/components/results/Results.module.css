@@ -19,7 +19,7 @@
   width: 100%;
   opacity: 0.2;
   z-index: -1;
-  background: url('../assets/images/RiotPattern-TextHeroWidget.svg') center / cover no-repeat;
+  background: url('../../assets/images/RiotPattern-TextHeroWidget.svg') center / cover no-repeat;
   transform: rotate(20deg);
   scale: 1.1;
 }

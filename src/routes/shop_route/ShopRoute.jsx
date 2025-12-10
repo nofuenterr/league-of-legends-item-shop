@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
-import LoadingItems from '../../components/Results';
+import LoadingItems from '../../components/results/Results';
 import Shop from '../../components/Shop';
 
 export default function ShopRoute() {

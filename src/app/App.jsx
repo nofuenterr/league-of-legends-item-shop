@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import useItems from '../util/useItems'
 import Header from '../components/header/Header'
 import Main from '../components/Main'
-import Footer from '../components/Footer'
+import Footer from '../components/footer/Footer'
 import RemoveSearch from '../components/icons/X'
 import Search from '../components/icons/Search'
 import ScrollToTop from '../components/ScrollToTop';
