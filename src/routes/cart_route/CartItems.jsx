@@ -17,10 +17,7 @@ function CartItems({ cartItems }) {
       <ul className={styles.cartItemsWrapper}>
         {cartItems.map((item) => {
           return (
-            <>
-              <CartItem item={item} key={item.id} />
-              <hr />
-            </>
+            <CartItem item={item} key={item.id} />
           )
         })}
       </ul>

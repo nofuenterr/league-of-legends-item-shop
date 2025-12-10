@@ -5,32 +5,35 @@ import RemoveCartItem from '../../components/icons/Trash'
 
 export default function CartItem({ item }) {
   return (
-    <li>
-      {!item.stock && <p>Sold Out</p>}
+    <>
+      <li>
+        {!item.stock && <p>Sold Out</p>}
 
-      <div className={styles.cartItemWrapper}>
-        <Link to={`/shop/${item.id}`}>
-          <div>
-            <img
-              title={item.name}
-              src={item.image}
-              alt={item.name + ' image'}
-            />
+        <div className={styles.cartItemWrapper}>
+          <Link to={`/shop/${item.id}`}>
+            <div>
+              <img
+                title={item.name}
+                src={item.image}
+                alt={item.name + ' image'}
+              />
+            </div>
+          </Link>
+
+          <div className={styles.cartDetailsWrapper}>
+            <CartItemDetails item={item} />
+            <RemoveCartItemButton id={item.id} />
+
+            <p className={styles.cartItemTotal}>
+              Total: {formatPrice(item.qty * item.buyCost)} gold
+            </p>
+
+            <CartItemQuantity item={item} />
           </div>
-        </Link>
-
-        <div className={styles.cartDetailsWrapper}>
-          <CartItemDetails item={item} />
-          <RemoveCartItemButton id={item.id} />
-
-          <p className={styles.cartItemTotal}>
-            Total: {formatPrice(item.qty * item.buyCost)} gold
-          </p>
-
-          <CartItemQuantity item={item} />
         </div>
-      </div>
-    </li>
+      </li>
+      <hr />
+    </>
   )
 }
 
