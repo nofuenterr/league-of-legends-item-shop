@@ -15,7 +15,9 @@ export default function Items({ items }) {
 }
 
 function Item({ item }) {
-  const { pathname } = useLocation()
+  const { path } = useLocation()
+  let pathname = path
+  if (!pathname) pathname = '/shop'
 
   return (
     <li className={styles.shopItemCard} title={item.name + ': ' + item.buyCost + ' gold'}>
